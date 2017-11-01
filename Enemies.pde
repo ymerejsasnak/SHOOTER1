@@ -46,7 +46,7 @@ class Enemies {
       // (eventually find a better way to allow better framerates w/ lots onscreen
       for (Bullet b: bullets.bullets){
         if (dist(enemy.x, enemy.y, b.x, b.y) <= (enemy.enemySize/2 + b.bulletSize/2)) {
-          enemy.hit(b.power); // go to submethod to subtract bullet power from enemy
+          enemy.hit(b.power, b.bulletType); // go to submethod to subtract bullet power from enemy
           b.hit(); // also deal with bullet 'hit' condition
         }
       }        
@@ -75,6 +75,7 @@ class Enemy {
   float oscilTimer, oscilDuration; // for OSCIL enemies
   
   boolean dead = false;
+  boolean frozen = false;
     
   float speed; // pixels per second
   float hp;
@@ -87,10 +88,10 @@ class Enemy {
   int moveDuration; // in ms
     
   // define color based on movement type, with variation based on power/speed/hp/etc
-  color fill = color(100, 100, 0);
-  color outerStroke = color(200, 100, 50);
+  color fill = color(200, 50, 0);
+  color outerStroke = color(100, 100, 0);
   int outerWeight = 5;
-  color innerStroke = color (100, 200, 50);
+  color innerStroke = color (200, 100, 50);
   int innerWeight = 10;
   
   Enemy(EnemyDefinition enemyDef) {
@@ -148,6 +149,8 @@ class Enemy {
   // update position, check if off screen(??), check for collision w/ player(??)
   void update() {
     
+    if (frozen) { return; } //no movement if frozen
+    
     if (movementType == MovementType.RANDOM  && millis() - moveTimer > moveDuration){
       // chance to move directly toward player
       if (random(100) > 80) {
@@ -191,10 +194,14 @@ class Enemy {
   }
   
   // enemy hit by bullet, lower its hp by bullet power
-  void hit(float bPower) {
-    hp -= bPower;
-    if (hp <= 0) {
-      dead = true;
+  void hit(float bPower, BulletType bulletType) {
+    if (bulletType == BulletType.FREEZE) {
+      frozen = true;
+    } else {
+      hp -= bPower;
+      if (hp <= 0) {
+        dead = true;
+      }
     }
   }
   
@@ -212,6 +219,13 @@ class Enemy {
     stroke(innerStroke, ENEMY_ALPHA);
     fill((float)hp / (float)maxHP * 255);
     ellipse(x, y, enemySize/2, enemySize/2);
+    
+    // blue circle overlaid if frozen
+    if (frozen) {
+      fill(0, 0, 255, 100);
+      noStroke();
+      ellipse(x, y, enemySize, enemySize);
+    }
     
   }
 }

@@ -1,5 +1,5 @@
 enum BulletType {
-  STANDARD, FREEZE, BOMB, GAS
+  STANDARD, FREEZE, GAS
 }
 
 enum BulletDefinition {
@@ -8,7 +8,11 @@ enum BulletDefinition {
   PEA ( BulletType.STANDARD,     2,          400,          1,        20),
   POWER(BulletType.STANDARD,     10,         150,          10,        2),
   
+  //need to time this, (currently based on frames)
   GAS(BulletType.GAS,       50,            50,             .05,         1),
+  
+  //add timer to this so enemies eventually unfreeze?
+  FREEZE (BulletType.FREEZE,    10,    300,      0,          5),
   
   
   ;

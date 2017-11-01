@@ -49,7 +49,7 @@ void setup() {
 
   // put in game class?
   
-  player = new Player(BulletDefinition.POWER); //this is not where bullets should ultimately be loaded
+  player = new Player(); //this is not where bullets should ultimately be loaded
 }
 
 

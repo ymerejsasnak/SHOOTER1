@@ -11,12 +11,14 @@ class Player {
   float angle;
   float gunX, gunY;
   
+  BulletDefinition[] turrets = new BulletDefinition[] {null, null, null, null};
+  
   int hp = 20;
   int maxHP = 20;
   boolean dead = false;
   
-  int fireRate; // bullets per second
-  int lastFireTime;
+  //int[] fireRatesfireRate_main, fireRate_back, fireRate_left, fireRate_right; // bullets per second
+  int[] lastFireTime = {0, 0, 0, 0};
   
   color fill = color(50, 100, 200);
   color stroke = color(40, 50, 250);
@@ -24,9 +26,16 @@ class Player {
   
   BulletDefinition bulletDefinition;
   
-  Player(BulletDefinition bulletDefinition) {
-    this.bulletDefinition = bulletDefinition; // to send to bullets class
-    fireRate = bulletDefinition.rate;
+  Player() {
+    turrets[0] = BulletDefinition.BASIC;
+   turrets[1] = BulletDefinition.PEA;
+   turrets[2] = BulletDefinition.FREEZE;
+   turrets[3] = BulletDefinition.GAS;
+    
+    //fireRate_main = turret_main.rate;
+    //fireRate_back = turret_back.rate;
+    //fireRate_left = turret_left.rate;
+    //fireRate_right = turret_right.rate;
   }
   
   // get aiming angle and gun drawing coordinates
@@ -41,13 +50,39 @@ class Player {
   // shoot a bullet at given angle, timed based on millisecs
   void shoot() {
     
-    // convert 'bullets per second' to 'milliseconds between bullets'  
-    int wait = 1000 / fireRate;
-    
-    if (wait <= millis() - lastFireTime) {
-      bullets.addBullet(angle, gunX, gunY);
-      lastFireTime = millis();
+    for(int i = 0; i < turrets.length; i++){
+       if (turrets[i] != null) {
+         // convert 'bullets per second' to 'milliseconds between bullets'  
+        int wait = 1000 / turrets[i].rate;
+        
+        
+        if (wait <= millis() - lastFireTime[i]) {
+          float turretAngle = angle;
+          float turretX = gunX;
+          float turretY = gunY;
+          switch(i) {
+            case 1:
+              turretAngle += PI; // 1 is back turret
+              break;
+            case 2:
+              turretAngle -= PI/2; // left
+              break;
+            case 3:
+              turretAngle += PI/2; //right
+              break;
+          }
+          
+          turretX = x + cos(turretAngle) * (radius + GUN_LENGTH);
+          turretY = y + sin(turretAngle) * (radius + GUN_LENGTH);
+          
+          bullets.addBullet(turretAngle, turretX, turretY, turrets[i]);
+          lastFireTime[i] = millis();
+        }
+      }
+       
     }
+    
+    
     
   }
   
@@ -68,7 +103,29 @@ class Player {
     strokeWeight(weight);
     stroke(stroke);
     
-    line(x, y, gunX, gunY);
+    float turretAngle = angle;
+     float turretX = gunX;
+     float turretY = gunY;
+    for(int i = 0; i < turrets.length; i++){ //major code repetition here, same as above
+       if (turrets[i] != null) {
+           
+          switch(i) {
+            case 1:
+              turretAngle += PI; // 1 is back turret
+              break;
+            case 2:
+              turretAngle += PI/2; // left
+              break;
+            case 3:
+              turretAngle += PI; //right
+              break;
+          }
+        }
+        
+        turretX = x + cos(turretAngle) * (radius + GUN_LENGTH);
+        turretY = y + sin(turretAngle) * (radius + GUN_LENGTH);
+        line(x, y, turretX, turretY);
+    }
     ellipse(x, y, size, size);
     
     // show life circle (same code as in enemy class....not very DRY....)

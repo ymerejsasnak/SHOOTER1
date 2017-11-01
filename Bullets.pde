@@ -4,18 +4,18 @@
 class Bullets {
 
   ArrayList<Bullet> bullets;
-  BulletDefinition bulletDefinition;
+  BulletDefinition bulletMain, bulletBack, bulletLeft, bulletRight;
 
   Bullets() {
 
     bullets = new ArrayList<Bullet>();
-    bulletDefinition = player.bulletDefinition;
+   
   }
 
   // create a new bullet
-  void addBullet(float angle, float x, float y) {
+  void addBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
 
-    bullets.add(new Bullet(angle, x, y, bulletDefinition.bulletType, bulletDefinition.size, bulletDefinition.speed, bulletDefinition.power));
+    bullets.add(new Bullet(angle, x, y, bulletDefinition));
   }
 
   // 'run' the bullets, ie update their position, remove if dead, display if not
@@ -56,16 +56,16 @@ class Bullet {
   color bStroke = color(255, 255, 200);
   int bWeight = 2;
 
-  Bullet(float _angle, float _x, float _y, BulletType bulletType, int bulletSize, int speed, float power) {
+  Bullet(float _angle, float _x, float _y, BulletDefinition bulletDefinition) {
 
     angle = _angle;
     x = _x;
     y = _y;
     
-    this.bulletType = bulletType;
-    this.bulletSize = bulletSize;
-    this.speed = speed;
-    this.power = power;
+    this.bulletType = bulletDefinition.bulletType;
+    this.bulletSize = bulletDefinition.size;
+    this.speed = bulletDefinition.speed;
+    this.power = bulletDefinition.power;
     
     if (bulletType == BulletType.GAS) {
       bFill = color(100, 200, 100, 50);

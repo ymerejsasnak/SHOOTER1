@@ -18,9 +18,9 @@ class Enemies {
   // should this be broken up a bit more????
   void run() {
     
-    // temporary values, will eventually load these from enemy definitions
-    int temp_rate = 3; // enemies per second
-    int temp_max_count = 35;
+    // temporary values, will eventually load these from level definitions
+    int temp_rate = LEVEL_THREE_SPAWN_RATE; // enemies per second
+    int temp_max_count = LEVEL_THREE_MAX_ENEMIES;
     
     // generate new enemy if enough time has passed (convert to millisecs between)
     // and if max number is not reached
@@ -166,13 +166,13 @@ class Enemy {
       x = player.x + cos(angle) * distance;
       y = player.y + sin(angle) * distance;
       if (!clockwise) {rotation = -1;} else { rotation = 1; }
-      angle += .5 * rotation * time.getDelta();
-      distance -= speed * time.getDelta();
+      angle += .5 * rotation * deltaTime.getDelta();
+      distance -= speed * deltaTime.getDelta();
       
     }     
     else {
-      x += cos(direction) * speed * time.getDelta();
-      y += sin(direction) * speed * time.getDelta();
+      x += cos(direction) * speed * deltaTime.getDelta();
+      y += sin(direction) * speed * deltaTime.getDelta();
     }  
     
     if (movementType == MovementType.OSCIL && millis() - oscilTimer > oscilDuration) {

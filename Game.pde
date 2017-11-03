@@ -1,12 +1,3 @@
-final int BUTTON_SIZE = 70;
-
-ArrayList<Button> titleButtons;
-ArrayList<Button> selectButtons;
-ArrayList<Button> levelButtons;
-ArrayList<Button> pauseButtons;
-
-ArrayList<Button> activeButtons;
-
 // define possible game states: title screen, weapon/level select, actual level, pause
 enum GameState {
   TITLE, SELECT, LEVEL, PAUSE;
@@ -16,13 +7,26 @@ enum GameState {
   CLASS TO RUN GAME (HANDLE EVENTS AND SWITCH BETWEEN GAME STATES)
 */
 class Game {
-  GameState state = GameState.TITLE;
-  EnemyDefinition[] currentLevel;
+  GameState state;
+  EnemyDefinition[] currentLevel; // to store array of possible enemies for the current level
+  
+  ArrayList<Button> titleButtons;
+  ArrayList<Button> selectButtons;
+  ArrayList<Button> levelButtons;
+  ArrayList<Button> pauseButtons;
+  
+  ArrayList<Button> activeButtons;
   
   Game() {
-    // load stuff in here rather than main shooter file?  
     
-    // define/load possible buttons for each gamestate (bad way to do this or what??)
+    // initialize stuff
+    state = GameState.TITLE;
+    player = new Player(); 
+    
+    //TEMP for now hard coded level loading but will eventually have to set this in select screen
+    currentLevel = LEVEL_THREE; 
+    
+    // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();
     titleButtons.add(new Button(ButtonID.PLAY, "PLAY", width/3, height * 2/3, BUTTON_SIZE));
     titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 2/3, height * 2/3, BUTTON_SIZE));
@@ -42,11 +46,7 @@ class Game {
                                 width/3, height/2, BUTTON_SIZE));
     pauseButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
                                 width * 2/3, height/2, BUTTON_SIZE));
-    
-    
-    
-    
-    
+        
     // by default title screen buttons are active
     activeButtons = titleButtons;
   }
@@ -57,11 +57,11 @@ class Game {
     ButtonID pressed = ButtonID.NONE;
     for (Button b: activeButtons) {
       if (b.clickCheck(_mouseX, _mouseY)) {
-        pressed = b.id; 
+        pressed = b.id; // store button ID to switch on below
       };
     }
     
-    
+    // button press actions
     switch (pressed) {
       case NONE:
         break;
@@ -73,7 +73,6 @@ class Game {
       case START: // intentionally no break statement - both go to level state with level buttons
         bullets = new Bullets();
         enemies = new Enemies();
-        currentLevel = LEVEL_TEST; // for now hard coded level loading
       case RESUME:
         activeButtons = levelButtons;
         state = GameState.LEVEL;
@@ -112,9 +111,9 @@ class Game {
     }
   
     if (state != GameState.TITLE) {
-      game.displayHUD();
+      displayHUD();
     }
-    game.displayButtons();
+    displayButtons();
     
     
       

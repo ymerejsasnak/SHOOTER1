@@ -1,11 +1,15 @@
+final color BULLET_WHITE = color(200);
+final color GAS_GREEN = color(0, 100, 0, 50);
+final color FREEZE_BLUE = color(100, 100, 250, 200);
+
+
 /*
   CLASS TO STORE AND CONTROL BULLET OBJECTS AS A WHOLE
  */
 class Bullets {
 
   ArrayList<Bullet> bullets;
-  BulletDefinition bulletMain, bulletBack, bulletLeft, bulletRight;
-
+  
   Bullets() {
 
     bullets = new ArrayList<Bullet>();
@@ -52,13 +56,12 @@ class Bullet {
   BulletType bulletType;
   
   // ...and also colors
-  color bFill = color(200, 200, 180);
-  color bStroke = color(255, 255, 200);
-  int bWeight = 2;
+  color bFill;
 
   Bullet(float _angle, float _x, float _y, BulletDefinition bulletDefinition) {
 
     angle = _angle;
+    
     x = _x;
     y = _y;
     
@@ -67,17 +70,27 @@ class Bullet {
     this.speed = bulletDefinition.speed;
     this.power = bulletDefinition.power;
     
-    if (bulletType == BulletType.GAS) {
-      bFill = color(100, 200, 100, 50);
-      bWeight = 0;
+    // and set color based on type (also add a bit of randomness to gas angle/size)
+    switch (bulletType) {
+      case STANDARD:
+        this.bFill = BULLET_WHITE;
+        break;
+      case GAS:
+        this.bFill = GAS_GREEN;
+        this.angle += randomGaussian() * 0.5;
+        this.bulletSize += randomGaussian() * 5;
+        break;
+      case FREEZE:
+        this.bFill = FREEZE_BLUE;
+        break;
     }
   }
 
   // update position of bullet and check if it goes off screen
   void update() {
-
-    x += cos(angle) * speed * time.getDelta();
-    y += sin(angle) * speed * time.getDelta();
+    
+    x += cos(angle) * speed * deltaTime.getDelta();
+    y += sin(angle) * speed * deltaTime.getDelta();
 
     if (!dead) {
       dead = (x > width + bulletSize || x < 0 - bulletSize ||
@@ -94,9 +107,9 @@ class Bullet {
 
   // draw the bullet
   void display() {
+    
     fill(bFill);
-    strokeWeight(bWeight);
-    stroke(bStroke);
+    noStroke();
 
     ellipse(x, y, bulletSize, bulletSize);
   }

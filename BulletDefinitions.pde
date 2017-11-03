@@ -2,16 +2,17 @@ enum BulletType {
   STANDARD, FREEZE, GAS
 }
 
+
 enum BulletDefinition {
-                      //type        size       speed        power    rate (bullets/sec)
-  BASIC(BulletType.STANDARD,     5,          250,          1,        7),
-  PEA ( BulletType.STANDARD,     2,          400,          1,        20),
+                      //type        size       speed        power    rate (bullets/sec)   
+  BASIC(BulletType.STANDARD,     6,          200,          1,        7),
+  PEA ( BulletType.STANDARD,     2,          300,          1,        50),
   POWER(BulletType.STANDARD,     10,         150,          10,        2),
   
   //need to time this, (currently based on frames)
   GAS(BulletType.GAS,       50,            50,             .05,         1),
   
-  //add timer to this so enemies eventually unfreeze?
+  //add timer to this so enemies eventually unfreeze
   FREEZE (BulletType.FREEZE,    10,    300,      0,          5),
   
   
@@ -29,5 +30,7 @@ enum BulletDefinition {
     this.speed = speed;
     this.power = power;
     this.rate = rate;
+    
+    
   }
 }

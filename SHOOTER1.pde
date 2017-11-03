@@ -1,17 +1,21 @@
 /*
-NOTES AND TO DO:
+NEXT TO DO:
+-refactoring of new stuff (turrets/bullets/player/enemies/etc)
+-finish level defs (redo as enum?), add level progression, enemies killed, currency
+-more work on enemy defs and bullet defs (distinct colors for all too)
+-selection screen
+-player status and player load/save
+-change timing of various things to something from time class (create instance
+ with defined time, reset method, etc.) for everywhere that something is timed (freeze, etc)
+
+EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
  if (player.dead) there
  -refactoring: make getters/setters, private/public stuff,
- load more stuff into Game rather than global, 
- REFACTOR ENEMIES/ENEMY CLASS!!!! (and level loading, etc), bullets player etc
- -work on enemy definitions
- -work on level definitions/loading and running levels (just array of enemy definitions to use and choose from randomly)
- -work on bullet types (freeze, bombs, gas?, big/slow bullets) and extra turrets
- -work on select screen
- -add drones! (miner, defender, freeze, kamikaze
+ -add drones or no???? (miner, defender, freeze, kamikaze
  -ANOTHER POSSIBLE ENEMY TYPE? -- SPLITS INTO TWO OTHER SMALLER ONES (OF DEFINED TYPE) WHEN KILLED)
+
  */
 
 
@@ -19,6 +23,7 @@ NOTES AND TO DO:
 final int BG_COLOR = 10; // almost black
 final int TEXT_COLOR = 200; // kind of white
 final int ENEMY_ALPHA = 150; // how transparent are enemies?
+final int BUTTON_SIZE = 70;
 final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
 final int GUN_LENGTH = 10;
@@ -27,8 +32,7 @@ final int GUN_LENGTH = 10;
 
 // DECLARATIONS //
 Game game;
-// declare these V inside game class? 
-Time time;
+DeltaTime deltaTime;
 Player player;
 Bullets bullets;
 Enemies enemies;
@@ -44,12 +48,9 @@ void setup() {
   textAlign(CENTER);
   frameRate(60);
 
-  time = new Time();
+  deltaTime = new DeltaTime();
   game = new Game();
 
-  // put in game class?
-  
-  player = new Player(); //this is not where bullets should ultimately be loaded
 }
 
 
@@ -58,12 +59,14 @@ void draw() {
   background(BG_COLOR);
 
   //calculate time (in seconds) since last loop
-  time.calcDelta();
+  deltaTime.calcDelta();
 
+  //run the game (takes care of states, running player/enemies/bullets, etc.)
   game.run();
 
   // temp thing to show framerate
   text("Framerate: " + (int) frameRate, 100, height - 20);
+  
 }
 
 

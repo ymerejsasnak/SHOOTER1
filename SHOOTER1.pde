@@ -1,12 +1,11 @@
 /*
 NEXT TO DO:
--refactoring of new stuff (turrets/bullets/player/enemies/etc)
--finish level defs (redo as enum?), add level progression, enemies killed, currency
--more work on enemy defs and bullet defs (distinct colors for all too)
+-finish level defs (redo as enum?)
+-add level progression
+-more work on enemy defs and bullet defs
 -selection screen
 -player status and player load/save
--change timing of various things to something from time class (create instance
- with defined time, reset method, etc.) for everywhere that something is timed (freeze, etc)
+-endless refactoring (player and enemy stuff, etc)
 
 EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 
@@ -15,7 +14,8 @@ EVENTUALLY:
  -refactoring: make getters/setters, private/public stuff,
  -add drones or no???? (miner, defender, freeze, kamikaze
  -ANOTHER POSSIBLE ENEMY TYPE? -- SPLITS INTO TWO OTHER SMALLER ONES (OF DEFINED TYPE) WHEN KILLED)
-
+ -ANOTHER POSSIBLE BULLET TYPE -- spread?  generates 3 bullets at turret, 1 straight 2 others at opposite angles
+ -fluff stuff (sfx, music, graphics tweaks, etc)
  */
 
 

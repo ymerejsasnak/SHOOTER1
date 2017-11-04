@@ -100,7 +100,7 @@ class Bullet {
 
   // called from enemy class if bullet and enemy collide
   void hit() {
-    if (bulletType != BulletType.GAS) {  // gas doesn't 'die' upon hitting enemy (should probably make a timer for damage)
+    if (bulletType != BulletType.GAS) {  // gas doesn't 'die' upon hitting enemy
       dead = true;
     }
   }

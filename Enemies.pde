@@ -232,12 +232,18 @@ class Enemy {
   }
   
   // enemy hit by bullet, lower its hp by bullet power
+  //need to implement gas damage timer here (could just use delta for this)
   void hit(float bPower, BulletType bulletType) {
     if (bulletType == BulletType.FREEZE) {
       frozen = true;
       freezeTimer = new Timer(FREEZE_DURATION);
     } else {
-      hp -= bPower;
+      if (bulletType == BulletType.GAS) {
+        hp -= bPower * deltaTime.getDelta();
+      }
+      else {
+        hp -= bPower;
+      }
       if (hp <= 0) {
         dead = true;
         player.currency += reward; // kill enemy, get some currency

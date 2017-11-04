@@ -81,7 +81,7 @@ class Enemy {
   int power;
   int enemySize;
   MovementType movementType;
-  
+  int reward;
   
     
   // define color based on movement type, with variation based on power/speed/hp/etc
@@ -99,6 +99,7 @@ class Enemy {
     power = enemyDef.power;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
+    reward = enemyDef.reward;
     
     randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
     oscilTimer = new Timer((int) random(400, 700));   //here too!
@@ -164,7 +165,7 @@ class Enemy {
         outerStroke = color(0, 200, 50); 
         outerWeight = 1;
         innerStroke = color(100, 50, 50);
-        innerWeight = 25;
+        innerWeight = 5;
         break;
       case ASTEROID:
       fill = color(200, 100, 0);
@@ -239,6 +240,8 @@ class Enemy {
       hp -= bPower;
       if (hp <= 0) {
         dead = true;
+        player.currency += reward; // kill enemy, get some currency
+        game.enemiesKilled += 1;
       }
     }
   }

@@ -9,6 +9,7 @@ enum GameState {
 class Game {
   GameState state;
   EnemyDefinition[] currentLevel; // to store array of possible enemies for the current level
+  int enemiesKilled;
   
   ArrayList<Button> titleButtons;
   ArrayList<Button> selectButtons;
@@ -71,6 +72,7 @@ class Game {
         state = GameState.SELECT;
         break;
       case START: // intentionally no break statement - both go to level state with level buttons
+        enemiesKilled = 0;
         bullets = new Bullets();
         enemies = new Enemies();
       case RESUME:
@@ -172,10 +174,10 @@ class Game {
     textSize(20);
     fill(TEXT_COLOR);
     
-    text("currency: xxxx", width/4, 25);
+    text("currency: " + player.currency, width/4, 25);
     text("hp: " + player.hp + "/" + player.maxHP, width/2, 25);
     if (state == GameState.LEVEL || state == GameState.PAUSE) {
-      text("enemies killed: xxx", width * 3/4, 25);
+      text("enemies killed: " + enemiesKilled, width * 3/4, 25);
     }
     
   }

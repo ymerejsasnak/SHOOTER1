@@ -11,6 +11,7 @@ class Player {
   float angle;
   float gunX, gunY;
   
+  int currency;
   BulletDefinition[] turrets = new BulletDefinition[] {null, null, null, null};
   
   int hp = 20;
@@ -27,10 +28,11 @@ class Player {
   BulletDefinition bulletDefinition;
   
   Player() {
+    currency = 0;
     turrets[0] = BulletDefinition.BASIC;
-   turrets[1] = BulletDefinition.PEA;
-   turrets[2] = BulletDefinition.FREEZE;
-   turrets[3] = BulletDefinition.GAS;
+    //turrets[1] = BulletDefinition.PEA;
+    //turrets[2] = BulletDefinition.FREEZE;
+    //turrets[3] = BulletDefinition.GAS;
     
     //fireRate_main = turret_main.rate;
     //fireRate_back = turret_back.rate;

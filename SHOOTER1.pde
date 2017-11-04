@@ -22,10 +22,13 @@ EVENTUALLY:
 // GAME CONSTANTS //
 final int BG_COLOR = 10; // almost black
 final int TEXT_COLOR = 200; // kind of white
+
 final int ENEMY_ALPHA = 150; // how transparent are enemies?
+
 final int BUTTON_SIZE = 70;
 final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
+
 final int GUN_LENGTH = 10;
 ////////////////////
 

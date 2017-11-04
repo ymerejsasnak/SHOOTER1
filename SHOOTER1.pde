@@ -1,11 +1,10 @@
 /*
 NEXT TO DO:
--finish level defs (redo as enum?)
--add level progression
--more work on enemy defs and bullet defs
--selection screen
--player status and player load/save
--endless refactoring (player and enemy stuff, etc)
+-work on adding to, and toward finalizing, bullet defs, enemy defs, and level defs
+-add level progression (ie, gets harder as it goes on)
+-selection screen (first levels, then player stuff)
+-player status, upgrades, and load/save
+-endless refactoring
 
 EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 

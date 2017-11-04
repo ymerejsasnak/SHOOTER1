@@ -1,26 +1,22 @@
 //currently all are temporary definitions for testing purposes
 
-final int LEVEL_ONE_SPAWN_RATE = 2; 
-final int LEVEL_ONE_MAX_ENEMIES = 20; // maximum allowable enemies 'on screen'
-final EnemyDefinition[] LEVEL_ONE = new EnemyDefinition[]{
-  EnemyDefinition.EASY, 
-  EnemyDefinition.RANDOM
-};
+enum Level {
+  // ms between spawns, max enemies, enemy list
+  ONE(1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY, EnemyDefinition.RANDOM}),
+  TWO(500, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.RANDOM, EnemyDefinition.CIRCLES}),
+  THREE(200, 20, new EnemyDefinition[] {EnemyDefinition.BIGGIE, EnemyDefinition.ASTEROID, EnemyDefinition.OSCIL}),
 
-final int LEVEL_TWO_SPAWN_RATE = 1; 
-final int LEVEL_TWO_MAX_ENEMIES = 20; // maximum allowable enemies 'on screen'
-final EnemyDefinition[] LEVEL_TWO = new EnemyDefinition[]{
-  EnemyDefinition.EASY, 
-  EnemyDefinition.REGULAR, 
-  EnemyDefinition.RANDOM,
-  EnemyDefinition.OSCIL,
-  EnemyDefinition.CIRCLES,
-  EnemyDefinition.BIGGIE,
-  EnemyDefinition.ASTEROID
-};
 
-final int LEVEL_THREE_SPAWN_RATE = 2000; 
-final int LEVEL_THREE_MAX_ENEMIES = 30; // maximum allowable enemies 'on screen'
-final EnemyDefinition[] LEVEL_THREE = new EnemyDefinition[]{
-  EnemyDefinition.ASTEROID
-};
+  ;
+  
+  
+  int spawnWait;
+  int maxEnemies;
+  EnemyDefinition[] spawnableEnemies;
+  
+  private Level(int spawnWait, int maxEnemies, EnemyDefinition[] spawnableEnemies) {
+    this.spawnWait = spawnWait;
+    this.maxEnemies = maxEnemies;
+    this.spawnableEnemies = spawnableEnemies;
+  }
+}

@@ -38,8 +38,8 @@ class Player {
     turretTypes[2] = BulletDefinition.POWER;
     turretTimers.add(new Timer(turretTypes[2].rate));
     
-    //turrets[3] = BulletDefinition.POWER;
-    //turretTimers.add(new Timer(turrets[3].rate));
+    turretTypes[3] = BulletDefinition.POWER;
+    turretTimers.add(new Timer(turretTypes[3].rate));
     
   }
   

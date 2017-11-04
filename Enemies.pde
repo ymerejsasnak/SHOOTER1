@@ -5,11 +5,13 @@ class Enemies {
   
   ArrayList<Enemy> enemies;
   Timer spawnTimer;
+  int maxEnemies;
     
   Enemies() {
     
     enemies = new ArrayList<Enemy>();
-    spawnTimer = new Timer(LEVEL_THREE_SPAWN_RATE);
+    spawnTimer = new Timer(game.currentLevel.spawnWait);
+    maxEnemies = game.currentLevel.maxEnemies;
     
   }
   
@@ -18,15 +20,12 @@ class Enemies {
   // should this be broken up a bit more????
   void run() {
     
-    // temporary values, will eventually load these from level definitions
-    int temp_max_count = LEVEL_THREE_MAX_ENEMIES;
-    
     // generate new enemy if enough time has passed 
     // and if max number is not reached
-    if (spawnTimer.check() && enemies.size() < temp_max_count) {  
+    if (spawnTimer.check() && enemies.size() < maxEnemies) {  
       
-      int choice = (int) random(0, game.currentLevel.length);
-      EnemyDefinition typeToSpawn = game.currentLevel[choice];
+      int choice = (int) random(0, game.currentLevel.spawnableEnemies.length);
+      EnemyDefinition typeToSpawn = game.currentLevel.spawnableEnemies[choice];
       
       enemies.add(new Enemy(typeToSpawn));   
     }

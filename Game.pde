@@ -24,7 +24,7 @@ class Game {
     player = new Player(); 
     
     //TEMP for now hard coded level loading but will eventually have to set this in select screen
-    currentLevel = LEVEL_THREE; 
+    currentLevel = LEVEL_TWO; 
     
     // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();

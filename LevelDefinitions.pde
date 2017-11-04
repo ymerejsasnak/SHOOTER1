@@ -15,10 +15,11 @@ final EnemyDefinition[] LEVEL_TWO = new EnemyDefinition[]{
   EnemyDefinition.RANDOM,
   EnemyDefinition.OSCIL,
   EnemyDefinition.CIRCLES,
-  EnemyDefinition.BIGGIE
+  EnemyDefinition.BIGGIE,
+  EnemyDefinition.ASTEROID
 };
 
-final int LEVEL_THREE_SPAWN_RATE = 5; // enemies spawned per second
+final int LEVEL_THREE_SPAWN_RATE = 200; // ms wait between spawns
 final int LEVEL_THREE_MAX_ENEMIES = 30; // maximum allowable enemies 'on screen'
 final EnemyDefinition[] LEVEL_THREE = new EnemyDefinition[]{
   EnemyDefinition.ASTEROID

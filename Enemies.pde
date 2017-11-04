@@ -4,12 +4,12 @@
 class Enemies {
   
   ArrayList<Enemy> enemies;
-  int lastSpawnTime;
+  Timer spawnTimer;
     
   Enemies() {
     
     enemies = new ArrayList<Enemy>();
-    lastSpawnTime = 0;
+    spawnTimer = new Timer(LEVEL_THREE_SPAWN_RATE);
     
   }
   
@@ -19,24 +19,19 @@ class Enemies {
   void run() {
     
     // temporary values, will eventually load these from level definitions
-    int temp_rate = LEVEL_THREE_SPAWN_RATE; // enemies per second
     int temp_max_count = LEVEL_THREE_MAX_ENEMIES;
     
-    // generate new enemy if enough time has passed (convert to millisecs between)
+    // generate new enemy if enough time has passed 
     // and if max number is not reached
-    
-    int wait = 1000 / temp_rate;
-    
-    if (wait <= millis() - lastSpawnTime && enemies.size() < temp_max_count) {  
+    if (spawnTimer.check() && enemies.size() < temp_max_count) {  
       
       int choice = (int) random(0, game.currentLevel.length);
       EnemyDefinition typeToSpawn = game.currentLevel[choice];
       
       enemies.add(new Enemy(typeToSpawn));   
-      lastSpawnTime = millis();
     }
   
-    // iterate through all enemies (backwards to allow non-issue deletion)
+    // iterate through all enemies (backwards to allow deletion)
     for (int e = enemies.size() - 1; e >= 0; e--) {
       
       Enemy enemy = enemies.get(e);
@@ -72,7 +67,10 @@ class Enemy {
   float direction; // for enemies that move in straight lines
   float distance, angle; //  for enemies that move along curves (dist from player, angle, rot direction)
   boolean clockwise;
-  float oscilTimer, oscilDuration; // for OSCIL enemies
+  
+  Timer oscilTimer; // for OSCIL enemies
+  Timer randomTimer; // for timing direction change on 'RANDOM' movement enemies
+  Timer freezeTimer;
   
   boolean dead = false;
   boolean frozen = false;
@@ -84,15 +82,14 @@ class Enemy {
   int enemySize;
   MovementType movementType;
   
-  int moveTimer; // for timing direction change on 'RANDOM' movement enemies
-  int moveDuration; // in ms
+  
     
   // define color based on movement type, with variation based on power/speed/hp/etc
-  color fill = color(200, 50, 0);
-  color outerStroke = color(100, 100, 0);
-  int outerWeight = 5;
-  color innerStroke = color (200, 100, 50);
-  int innerWeight = 10;
+  color fill;
+  color outerStroke;
+  int outerWeight;
+  color innerStroke;
+  int innerWeight;
   
   Enemy(EnemyDefinition enemyDef) {
     
@@ -103,11 +100,8 @@ class Enemy {
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
     
-    moveTimer = 0;
-    moveDuration = (int) random(300, 1000);
-    
-    oscilTimer = 0;
-    oscilDuration = (int) random(400, 700);
+    randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
+    oscilTimer = new Timer((int) random(400, 700));   //here too!
     
     // randomly choose between the four screen sides to generate enemy
     int choice = (int) random(0, 4);
@@ -142,23 +136,66 @@ class Enemy {
       angle = atan2(y - player.y, x - player.x);
     }
     
-    
+    // set colors
+    switch (movementType) {
+      case STANDARD:
+        fill = color(enemySize);
+        outerStroke = color(50); 
+        outerWeight = 2;
+        innerStroke = color(enemySize, 0, 0);
+        innerWeight = 5;
+        break;
+      case RANDOM:
+        fill = color(150, 10, 30);
+        outerStroke = color(200, 125, 125); 
+        outerWeight = 1;
+        innerStroke = color(0, 50, 50);
+        innerWeight = 2;
+        break;
+      case CIRCLES:
+      fill = color(20);
+        outerStroke = color(50, 50, 220); 
+        outerWeight = 4;
+        innerStroke = color(20, 20, 100);
+        innerWeight = 1;
+        break;
+      case OSCIL:
+      fill = color(50, 150, 0);
+        outerStroke = color(0, 200, 50); 
+        outerWeight = 1;
+        innerStroke = color(100, 50, 50);
+        innerWeight = 25;
+        break;
+      case ASTEROID:
+      fill = color(200, 100, 0);
+        outerStroke = color(250, 150, 0); 
+        outerWeight = 4;
+        innerStroke = color(100, 50, 50);
+        innerWeight = 1;
+        break;      
+    }
     
   }
   
   // update position, check if off screen(??), check for collision w/ player(??)
   void update() {
     
-    if (frozen) { return; } //no movement if frozen
-    
-    if (movementType == MovementType.RANDOM  && millis() - moveTimer > moveDuration){
+    if (frozen) {
+      if (freezeTimer.check()) {
+        frozen = false;
+      } else {
+        return; 
+      } //no movement if frozen
+    }
+      
+    if (movementType == MovementType.RANDOM  && randomTimer.check()){
       // chance to move directly toward player
-      if (random(100) > 80) {
+      if (random(100) > 80) { // magic numbers
         direction = atan2(player.y - y, player.x - x);
       } else {
         direction = random(0, 2 * PI); 
       }
-      moveTimer = millis();
+
     } 
     
     if (movementType == MovementType.CIRCLES || movementType == MovementType.OSCIL) {
@@ -175,11 +212,11 @@ class Enemy {
       y += sin(direction) * speed * deltaTime.getDelta();
     }  
     
-    if (movementType == MovementType.OSCIL && millis() - oscilTimer > oscilDuration) {
+    if (movementType == MovementType.OSCIL && oscilTimer.check()) {
       clockwise = !clockwise;
-      oscilTimer = millis();
     }
     
+    // asteroid is only enemy that will go significantly off-screen and not come back, so set to dead if it does
     if (movementType == MovementType.ASTEROID) {
       dead = (x > width + enemySize || x < 0 - enemySize ||
               y > height + enemySize || y < 0 - enemySize);
@@ -197,6 +234,7 @@ class Enemy {
   void hit(float bPower, BulletType bulletType) {
     if (bulletType == BulletType.FREEZE) {
       frozen = true;
+      freezeTimer = new Timer(FREEZE_DURATION);
     } else {
       hp -= bPower;
       if (hp <= 0) {

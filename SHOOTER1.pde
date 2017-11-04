@@ -30,6 +30,7 @@ final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
 
 final int GUN_LENGTH = 10;
+final int FREEZE_DURATION = 2000;  //ms
 ////////////////////
 
 

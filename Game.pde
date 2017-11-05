@@ -85,6 +85,7 @@ class Game {
         break;
       case PLAY:
       case QUIT_LEVEL:
+        
         activeButtons = selectButtons;
         state = GameState.SELECT;
         break;
@@ -186,7 +187,7 @@ class Game {
   
   // run the level/upgrade selection screen
   void runSelect() {
-    
+    player.hp = player.maxHP; // just make sure player's hp is full if quit or died
   }
   
   
@@ -199,7 +200,6 @@ class Game {
     if (player.dead) {
       game.state = GameState.SELECT;
       activeButtons = selectButtons;
-      player.hp = player.maxHP;
       player.dead = false;
       return;
     } 

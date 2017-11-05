@@ -1,12 +1,13 @@
 /*
 NEXT TO DO:
--?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
--?fix rotation for OSCIL/CIRCLES enemies
--?better way to manage/load buttons?
+
 -work on adding to, and toward finalizing, bullet defs, enemy defs, and level defs
--selection screen (first levels, then player stuff) [will need selector object, like button -- or figure out way to use button]
+----(at least 2 types of each bullet, each enemy....ie gas: bubbles and spray
 -player status, upgrades, and load/save
 -endless refactoring/code cleanup and game balance
+----?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
+----?fix rotation for OSCIL/CIRCLES enemies
+----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
 
 EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 

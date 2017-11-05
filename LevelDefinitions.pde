@@ -3,15 +3,13 @@
 enum Level {
   // text description,ms between spawns, max enemies, enemy list
   ONE("Level 1", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  TWO("Level 2", 500, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.BIGGIE, EnemyDefinition.CIRCLES}),
-  THREE("Level 3", 20, 50, new EnemyDefinition[] {EnemyDefinition.RANDOM, EnemyDefinition.ASTEROID, EnemyDefinition.OSCIL}),
-
-  //DUMMY COPIES OF ONE FOR NOW
-  FOUR("Level poop", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  FIVE("Level x", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  SIX("Level xx", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  SEVEN("Level werwer", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  EIGHT("Level :)", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
+  TWO("Level 2", 900, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.REGULAR, EnemyDefinition.CIRCLES1}),
+  THREE("Level 3", 900, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.REGULAR, EnemyDefinition.BIGGIE, EnemyDefinition.OSCIL1}),
+  FOUR("Level 4", 800, 30, new EnemyDefinition[] {EnemyDefinition.CIRCLES2, EnemyDefinition.CIRCLES1}),
+  FIVE("Level 5", 800, 30, new EnemyDefinition[] {EnemyDefinition.CIRCLES2, EnemyDefinition.OSCIL2, EnemyDefinition.RANDOM1, EnemyDefinition.BIGGEROID}),
+  SIX("Level 6", 700, 10, new EnemyDefinition[] {EnemyDefinition.HUGE, EnemyDefinition.HUGE, EnemyDefinition.ASTEROID}),
+  SEVEN("Level 7", 600, 40, new EnemyDefinition[] {EnemyDefinition.RANDOM2, EnemyDefinition.FAST}),
+  EIGHT("Level 8", 500, 50, new EnemyDefinition[] {EnemyDefinition.FAST, EnemyDefinition.ASTEROID, EnemyDefinition.OSCIL2}),
   ;
   
   

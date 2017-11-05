@@ -62,6 +62,11 @@ class Game {
     selectors = new ArrayList<Selector>();
     selectors.add(new Selector(SelectorID.LEVEL, width/4, height/4));
     
+    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/5, height/2));
+    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 2/5, height/2));
+    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 3/5, height/2));
+    selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 4/5, height/2));
+    
   }
   
   // process mouse clicks (for title, select, pause, etc  )
@@ -104,20 +109,34 @@ class Game {
         exit();     
     }
     
-    SelectorID clickedSelector = SelectorID.NONE;
-    for (Selector s: selectors) {
-      if (s.clickCheck(_mouseX, _mouseY)) {
-        clickedSelector = s.id; // store selector ID to switch on below
-      };
-    }
-    
-    switch (clickedSelector) {
-      case NONE:
-        break;
-      case LEVEL:
-        selectors.get(0).cycle();
-        break;
+      if (state == GameState.SELECT) {
+      SelectorID clickedSelector = SelectorID.NONE;
+      for (Selector s: selectors) {
+        if (s.clickCheck(_mouseX, _mouseY)) {
+          clickedSelector = s.id; // store selector ID to switch on below
+        };
+      }
       
+      switch (clickedSelector) {
+        case NONE:
+          break;
+        case LEVEL:
+          selectors.get(0).cycle();
+          break;
+        case TURRET_ONE:
+          selectors.get(1).cycle();
+          break;
+        case TURRET_TWO:
+          selectors.get(2).cycle();
+          break;
+        case TURRET_THREE:
+          selectors.get(3).cycle();
+          break;
+        case TURRET_FOUR:
+          selectors.get(4).cycle();
+          break;
+        
+      }
     }
   }
   
@@ -167,7 +186,7 @@ class Game {
   
   // run the level/upgrade selection screen
   void runSelect() {
-    text("TEMP - SELECTION SCREEN", width/2, height/2);
+    
   }
   
   

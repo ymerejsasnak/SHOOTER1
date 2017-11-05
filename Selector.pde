@@ -22,7 +22,7 @@ class Selector {
   int currentIndex = 0;
   int totalOptions;
   
-  ArrayList<Level> levelSelections = new ArrayList<Level>(); //= new ArrayList<Level>(Arrays.asList(Level.ONE, Level.TWO, Level.THREE, Level.FOUR, Level.FIVE, Level.SIX, Level.SEVEN, Level.EIGHT));
+  ArrayList<Level> levelSelections = new ArrayList<Level>();
   ArrayList<BulletDefinition> bulletSelections = new ArrayList<BulletDefinition>();
   
   Selector(SelectorID _id, int x, int y) {
@@ -37,23 +37,64 @@ class Selector {
         levelSelections.add(level);
       }
       totalOptions = levelSelections.size();
+    } else {
+      for (BulletDefinition bullet: BulletDefinition.values()) {
+        bulletSelections.add(bullet);
+      }
+      totalOptions = bulletSelections.size();
+    }
+    
+    if (id == SelectorID.LEVEL) {
+      selectorText = levelSelections.get(currentIndex).text;
+    } else {
+      selectorText = bulletSelections.get(currentIndex).text;
     }
   
   }
   
   void cycle() {
     currentIndex = (currentIndex + 1) % totalOptions;
-    if (id == SelectorID.LEVEL) {
-      game.currentLevel = levelSelections.get(currentIndex);
+    switch(id) {
+      case NONE:
+        break;
+      case LEVEL:
+        game.currentLevel = levelSelections.get(currentIndex);
+        break;
+      case TURRET_ONE:
+        player.turretTypes[0] = bulletSelections.get(currentIndex);
+        player.turretTimers.set(0, new Timer(player.turretTypes[0].rate));
+        break;
+      case TURRET_TWO:
+        player.turretTypes[1] = bulletSelections.get(currentIndex);
+        player.turretTimers.set(1, new Timer(player.turretTypes[1].rate));
+        break;
+      case TURRET_THREE:
+        player.turretTypes[2] = bulletSelections.get(currentIndex);
+        player.turretTimers.set(2, new Timer(player.turretTypes[2].rate));
+        break;
+      case TURRET_FOUR:
+        player.turretTypes[3] = bulletSelections.get(currentIndex);
+        player.turretTimers.set(3, new Timer(player.turretTypes[3].rate));
+        break;
     }
+    
+    if (id == SelectorID.LEVEL) {
+      selectorText = levelSelections.get(currentIndex).text;
+    } else {
+      selectorText = bulletSelections.get(currentIndex).text;
+    }
+      
       
   }
   
   void display() {
     fill(TEXT_COLOR);
-    String text = levelSelections.get(currentIndex).text;
     textSize(SELECTOR_TEXT_SIZE);
-    text(text, selectorX, selectorY + SELECTOR_TEXT_OFFSET);
+    noFill();
+    stroke(255);
+    strokeWeight(2);
+    rect(selectorX, selectorY, SELECTOR_SIZE, SELECTOR_SIZE, 10);
+    text(selectorText, selectorX, selectorY + SELECTOR_TEXT_OFFSET);
   }
 
   // determine if touch/click was in the bounds of the selector

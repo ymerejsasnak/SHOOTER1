@@ -1,7 +1,5 @@
 /*
 NEXT TO DO:
--REMOVE CHANGES TO BUTTON CLASS AND MAKE A SELECTOR CLASS INSTEAD (single 'button', click to cycle options)
-
 -?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
 -?fix rotation for OSCIL/CIRCLES enemies
 -?better way to manage/load buttons?

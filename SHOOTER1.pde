@@ -1,9 +1,12 @@
 /*
 NEXT TO DO:
+-REMOVE CHANGES TO BUTTON CLASS AND MAKE A SELECTOR CLASS INSTEAD (single 'button', click to cycle options)
+
 -?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
 -?fix rotation for OSCIL/CIRCLES enemies
+-?better way to manage/load buttons?
 -work on adding to, and toward finalizing, bullet defs, enemy defs, and level defs
--selection screen (first levels, then player stuff) [will need selector object, like button]
+-selection screen (first levels, then player stuff) [will need selector object, like button -- or figure out way to use button]
 -player status, upgrades, and load/save
 -endless refactoring/code cleanup and game balance
 
@@ -22,12 +25,17 @@ EVENTUALLY:
 // GAME CONSTANTS //
 final int BG_COLOR = 10; // almost black
 final int TEXT_COLOR = 200; // kind of white
+final int LOCKED_TEXT_COLOR = 100;
 
 final int ENEMY_ALPHA = 150; // how transparent are enemies?
 
 final int BUTTON_SIZE = 70;
 final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
+
+final int SELECTOR_SIZE = 100;
+final int SELECTOR_TEXT_SIZE = BUTTON_TEXT_SIZE;
+final int SELECTOR_TEXT_OFFSET = BUTTON_TEXT_OFFSET;
 
 final int GUN_LENGTH = 10;
 final int FREEZE_DURATION = 2000;  //ms

@@ -21,26 +21,30 @@ class Game {
   
   ArrayList<Button> activeButtons;
   
+  ArrayList<Selector> selectors;
+  
   Game() {
     
     // initialize stuff
     state = GameState.TITLE;
     player = new Player(); 
     
+    
     //TEMP for now hard coded level loading but will eventually have to set this in select screen
     currentLevel = Level.ONE; 
+    
     
     // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();
     titleButtons.add(new Button(ButtonID.PLAY, "PLAY", width/3, height * 2/3, BUTTON_SIZE));
     titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 2/3, height * 2/3, BUTTON_SIZE));
-  
+
     selectButtons = new ArrayList<Button>();
     selectButtons.add(new Button(ButtonID.START, "START", 
                                 width * 3/4, height * 3/4, BUTTON_SIZE));
     selectButtons.add(new Button(ButtonID.TO_TITLE, "TITLE",
                                 width * 3/4, height * 3/4 + BUTTON_SIZE, BUTTON_SIZE));
-                                
+                                           
     levelButtons = new ArrayList<Button>();
     levelButtons.add(new Button(ButtonID.PAUSE, "PAUSE",
                                 width - BUTTON_SIZE - 1, height - BUTTON_SIZE/2 - 1, BUTTON_SIZE));
@@ -53,20 +57,25 @@ class Game {
         
     // by default title screen buttons are active
     activeButtons = titleButtons;
+    
+    // selector boxes for selection screen
+    selectors = new ArrayList<Selector>();
+    selectors.add(new Selector(SelectorID.LEVEL, width/4, height/4));
+    
   }
   
   // process mouse clicks (for title, select, pause, etc  )
   void processClick(int _mouseX, int _mouseY) {
     
-    ButtonID pressed = ButtonID.NONE;
+    ButtonID pressedButton = ButtonID.NONE;
     for (Button b: activeButtons) {
       if (b.clickCheck(_mouseX, _mouseY)) {
-        pressed = b.id; // store button ID to switch on below
+        pressedButton = b.id; // store button ID to switch on below
       };
     }
     
     // button press actions
-    switch (pressed) {
+    switch (pressedButton) {
       case NONE:
         break;
       case PLAY:
@@ -92,8 +101,22 @@ class Game {
         state = GameState.TITLE;
         break;
       case QUIT:
-        exit();
-      
+        exit();     
+    }
+    
+    SelectorID clickedSelector = SelectorID.NONE;
+    for (Selector s: selectors) {
+      if (s.clickCheck(_mouseX, _mouseY)) {
+        clickedSelector = s.id; // store selector ID to switch on below
+      };
+    }
+    
+    switch (clickedSelector) {
+      case NONE:
+        break;
+      case LEVEL:
+        selectors.get(0).cycle();
+        break;
       
     }
   }
@@ -120,6 +143,9 @@ class Game {
       displayHUD();
     }
     displayButtons();
+    if (state == GameState.SELECT) {
+      displaySelectors();
+    }
     
     
       
@@ -194,6 +220,12 @@ class Game {
   void displayButtons() {
     for (Button b: activeButtons) {
       b.display();
+    }
+  }
+  
+  void displaySelectors() {
+    for (Selector s: selectors) {
+      s.display();
     }
   }
   

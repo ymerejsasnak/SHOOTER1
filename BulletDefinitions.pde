@@ -10,7 +10,7 @@ enum BulletDefinition {
   POWER(BulletType.STANDARD,     10,         150,          10,        500),
   
   // for gas type, power is DPS since it doesn't 'die' upon hitting enemy
-  GAS(BulletType.GAS,       50,            50,             1,         1000),
+  GAS(BulletType.GAS,       50,            50,             5,         1000),
   
   //add timer to this so enemies eventually unfreeze
   FREEZE (BulletType.FREEZE,    10,    300,      0,          200),

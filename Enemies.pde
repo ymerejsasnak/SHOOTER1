@@ -18,7 +18,7 @@ class Enemies {
   // 'run' the enemies, ie add enemies according to rate/max amount,
   // then update positions, check for collision with bullets, remove dead, display rest
   // should this be broken up a bit more????
-  void run() {
+  void run(int levelProgression) {
     
     // generate new enemy if enough time has passed 
     // and if max number is not reached
@@ -27,7 +27,7 @@ class Enemies {
       int choice = (int) random(0, game.currentLevel.spawnableEnemies.length);
       EnemyDefinition typeToSpawn = game.currentLevel.spawnableEnemies[choice];
       
-      enemies.add(new Enemy(typeToSpawn));   
+      enemies.add(new Enemy(typeToSpawn, levelProgression));   
     }
   
     // iterate through all enemies (backwards to allow deletion)
@@ -90,15 +90,15 @@ class Enemy {
   color innerStroke;
   int innerWeight;
   
-  Enemy(EnemyDefinition enemyDef) {
+  Enemy(EnemyDefinition enemyDef, int levelProgression) {
     
-    speed = enemyDef.speed; // pixels per second
-    hp = enemyDef.hp;
-    maxHP = enemyDef.hp;
-    power = enemyDef.power;
+    speed = enemyDef.speed + levelProgression * 10; // pixels per second
+    hp = enemyDef.hp + levelProgression;
+    maxHP = enemyDef.hp + levelProgression;
+    power = enemyDef.power + levelProgression / 2;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
-    reward = enemyDef.reward;
+    reward = enemyDef.reward + levelProgression;
     
     randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
     oscilTimer = new Timer((int) random(400, 700));   //here too!

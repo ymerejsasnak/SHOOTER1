@@ -9,6 +9,8 @@ enum GameState {
 class Game {
   GameState state;
   Level currentLevel;
+  int levelProgression = 0; //used to scale up difficulty as level goes on
+  Timer progressionTimer = new Timer(10000);  // increase every 10 seconds
   
   int enemiesKilled;
   
@@ -26,7 +28,7 @@ class Game {
     player = new Player(); 
     
     //TEMP for now hard coded level loading but will eventually have to set this in select screen
-    currentLevel = Level.THREE; 
+    currentLevel = Level.ONE; 
     
     // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();
@@ -74,6 +76,7 @@ class Game {
         break;
       case START: // intentionally no break statement - both go to level state with level buttons
         enemiesKilled = 0;
+        levelProgression = 0;
         bullets = new Bullets();
         enemies = new Enemies();
       case RESUME:
@@ -157,7 +160,11 @@ class Game {
     } 
     
     bullets.run();
-    enemies.run();
+    
+    if (progressionTimer.check()) {
+      levelProgression += 1;
+    }
+    enemies.run(levelProgression);
     
     player.shoot();
     
@@ -175,10 +182,11 @@ class Game {
     textSize(20);
     fill(TEXT_COLOR);
     
-    text("currency: " + player.currency, width/4, 25);
-    text("hp: " + player.hp + "/" + player.maxHP, width/2, 25);
+    text("currency: " + player.currency, width/5, 25);
+    text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, 25);
     if (state == GameState.LEVEL || state == GameState.PAUSE) {
-      text("enemies killed: " + enemiesKilled, width * 3/4, 25);
+      text("enemies killed: " + enemiesKilled, width * 3/5, 25);
+      text("danger level: " + levelProgression, width * 4/5, 25);
     }
     
   }

@@ -7,7 +7,7 @@ enum EnemyDefinition {
             //movement type,    speed(pps), hp,  attack  size,  reward
   EASY   (MovementType.STANDARD,    75,     2,    1,    80,    1),
   REGULAR(MovementType.STANDARD,    100,    3,    2,    50,    2),
-  BIGGIE (MovementType.STANDARD,    25,    10,    4,   150,    5),
+  BIGGIE (MovementType.STANDARD,    25,    50,    4,   150,    5),
   
   // basic versions for writing movement code
   RANDOM (MovementType.RANDOM,      200,    1,    1,    30,    3),

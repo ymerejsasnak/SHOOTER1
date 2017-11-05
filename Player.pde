@@ -29,17 +29,17 @@ class Player {
     currency = 0;
     
     //hard coded loading for testing
-    turretTypes[0] = BulletDefinition.POWER;
+    turretTypes[0] = BulletDefinition.PEA;
     turretTimers.add(new Timer(turretTypes[0].rate));
     
-    turretTypes[1] = BulletDefinition.POWER;
+    turretTypes[1] = BulletDefinition.FREEZE;
     turretTimers.add(new Timer(turretTypes[1].rate));
     
-    turretTypes[2] = BulletDefinition.POWER;
+    turretTypes[2] = BulletDefinition.GAS;
     turretTimers.add(new Timer(turretTypes[2].rate));
     
-    turretTypes[3] = BulletDefinition.POWER;
-    turretTimers.add(new Timer(turretTypes[3].rate));
+    //turretTypes[3] = BulletDefinition.POWER;
+   // turretTimers.add(new Timer(turretTypes[3].rate));
     
   }
   

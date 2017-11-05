@@ -1,10 +1,11 @@
 /*
 NEXT TO DO:
+-?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
+-?fix rotation for OSCIL/CIRCLES enemies
 -work on adding to, and toward finalizing, bullet defs, enemy defs, and level defs
--add level progression (ie, gets harder as it goes on)
--selection screen (first levels, then player stuff)
+-selection screen (first levels, then player stuff) [will need selector object, like button]
 -player status, upgrades, and load/save
--endless refactoring
+-endless refactoring/code cleanup and game balance
 
 EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 

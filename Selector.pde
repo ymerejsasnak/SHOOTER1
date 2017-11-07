@@ -3,10 +3,8 @@ enum SelectorID {
   // default value
   NONE, 
   LEVEL,
-  TURRET_ONE,
-  TURRET_TWO,
-  TURRET_THREE,
-  TURRET_FOUR 
+  TURRET_ONE, TURRET_TWO, TURRET_THREE, TURRET_FOUR,
+  DRONE_ONE, DRONE_TWO,
   ;
 }
 
@@ -24,6 +22,7 @@ class Selector {
   
   ArrayList<Level> levelSelections = new ArrayList<Level>();
   ArrayList<BulletDefinition> bulletSelections = new ArrayList<BulletDefinition>();
+  ArrayList<DroneDefinition> droneSelections = new ArrayList<DroneDefinition>();
   
   Selector(SelectorID _id, int x, int y) {
     
@@ -37,18 +36,24 @@ class Selector {
         levelSelections.add(level);
       }
       totalOptions = levelSelections.size();
-    } else {
+      selectorText = levelSelections.get(currentIndex).text;
+    
+    } else if (id == SelectorID.TURRET_ONE || id == SelectorID.TURRET_TWO || 
+               id == SelectorID.TURRET_THREE || id == SelectorID.TURRET_FOUR){
       for (BulletDefinition bullet: BulletDefinition.values()) {
         bulletSelections.add(bullet);
       }
       totalOptions = bulletSelections.size();
+      selectorText = bulletSelections.get(currentIndex).text;
+    
+    } else {
+      for (DroneDefinition drone: DroneDefinition.values()) {
+        droneSelections.add(drone); 
+      }
+      totalOptions = droneSelections.size();
+      selectorText = droneSelections.get(currentIndex).text;
     }
     
-    if (id == SelectorID.LEVEL) {
-      selectorText = levelSelections.get(currentIndex).text;
-    } else {
-      selectorText = bulletSelections.get(currentIndex).text;
-    }
   
   }
   
@@ -59,31 +64,38 @@ class Selector {
         break;
       case LEVEL:
         game.currentLevel = levelSelections.get(currentIndex);
+        selectorText = levelSelections.get(currentIndex).text;
         break;
       case TURRET_ONE:
         player.turretTypes[0] = bulletSelections.get(currentIndex);
         player.turretTimers.set(0, new Timer(player.turretTypes[0].rate));
+        selectorText = bulletSelections.get(currentIndex).text;
         break;
       case TURRET_TWO:
         player.turretTypes[1] = bulletSelections.get(currentIndex);
         player.turretTimers.set(1, new Timer(player.turretTypes[1].rate));
+        selectorText = bulletSelections.get(currentIndex).text;
         break;
       case TURRET_THREE:
         player.turretTypes[2] = bulletSelections.get(currentIndex);
         player.turretTimers.set(2, new Timer(player.turretTypes[2].rate));
+        selectorText = bulletSelections.get(currentIndex).text;
         break;
       case TURRET_FOUR:
         player.turretTypes[3] = bulletSelections.get(currentIndex);
         player.turretTimers.set(3, new Timer(player.turretTypes[3].rate));
+        selectorText = bulletSelections.get(currentIndex).text;
+        break;
+      case DRONE_ONE:
+        drones.setDroneOne(droneSelections.get(currentIndex));
+        selectorText = droneSelections.get(currentIndex).text;
+        break;
+      case DRONE_TWO:
+      //sameish
         break;
     }
     
-    if (id == SelectorID.LEVEL) {
-      selectorText = levelSelections.get(currentIndex).text;
-    } else {
-      selectorText = bulletSelections.get(currentIndex).text;
-    }
-      
+          
       
   }
   

@@ -13,6 +13,7 @@ class Player {
   float[] turretX = new float[4];
   float[] turretY = new float[4];
   ArrayList<Timer> turretTimers = new ArrayList<Timer>();
+      
   
   int currency;
   int hp = 20;
@@ -40,6 +41,8 @@ class Player {
     
     turretTypes[3] = BulletDefinition.BASIC;
     turretTimers.add(new Timer(turretTypes[3].rate));
+    
+    drones.setDroneOne(DroneDefinition.DRAIN);
     
   }
   

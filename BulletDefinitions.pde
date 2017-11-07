@@ -4,16 +4,18 @@ enum BulletType {
 
 
 enum BulletDefinition {
-          //text desc,     type        size       speed        power    rate (ms between bullets) 
-  BASIC("BASIC",      BulletType.STANDARD,     6,          200,          1,        150),
-  PEA ("PEA",          BulletType.STANDARD,     2,          300,          1,        20),
-  POWER("POWER",        BulletType.STANDARD,     10,         150,          10,        500),
+          //text desc,     type               size       speed        power         rate (ms between bullets)                   (for balancing, calc possible DPS)
+  BASIC("BASIC SHOT",      BulletType.STANDARD,     6,          200,          1,        200),                                    // 1000 / 200 * 1 = 5
+  PEA ("PEA SHOT",          BulletType.STANDARD,     2,          300,          .5,        40),                                    // 1000 / 40 * .5  = 12.5
+  POWER("POWER SHOT",        BulletType.STANDARD,     10,         150,          10,        400),                                 // 1000 / 400 * 10 = 25
+  BOMB("BOMB SHOT",        BulletType.STANDARD,       20,          75,         100,         2000),                                // 1000 / 2000 * 100 = 50
   
-  // for gas type, power is DPS since it doesn't 'die' upon hitting enemy
-  GAS("GAS", BulletType.GAS,       50,            50,             5,         1000),
+  // for gas type, power is DPS since it doesn't 'die' upon hitting enemy                                                          (these harder to calc - dont die, speed matters)
+  BUBBLE("GAS BUBBLE", BulletType.GAS,       50,            50,             10,         1000),                                    // 1000 / 1000 * 10 = 10 / 50 = .25
+  SPRAY("GAS SPRAY",  BulletType.GAS,         15,            75,            5,          200),                                    // 1000 / 200  * 5 = 25 / 75 =   .33
   
-  //add timer to this so enemies eventually unfreeze
-  FREEZE ("FREEZE", BulletType.FREEZE,    10,    300,      0,          200),
+  
+  FREEZE ("FREEZE", BulletType.FREEZE,      10,               300,        0,          200),
   
   
   ;

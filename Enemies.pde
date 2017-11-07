@@ -95,10 +95,10 @@ class Enemy {
     speed = enemyDef.speed + levelProgression * 10; // pixels per second
     hp = enemyDef.hp + levelProgression;
     maxHP = enemyDef.hp + levelProgression;
-    power = enemyDef.power + levelProgression / 2;
+    power = enemyDef.power + levelProgression / 10;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
-    reward = enemyDef.reward + levelProgression;
+    reward = enemyDef.reward * levelProgression;
     
     randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
     oscilTimer = new Timer((int) random(400, 700));   //here too!

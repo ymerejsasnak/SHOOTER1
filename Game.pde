@@ -27,6 +27,7 @@ class Game {
     
     // initialize stuff
     state = GameState.TITLE;
+    drones = new Drones(); 
     player = new Player(); 
     
     
@@ -66,6 +67,9 @@ class Game {
     selectors.add(new Selector(SelectorID.TURRET_TWO, width * 2/5, height/2));
     selectors.add(new Selector(SelectorID.TURRET_THREE, width * 3/5, height/2));
     selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 4/5, height/2));
+    
+    selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/5, height * 3/4));
+    //selectors.add(new Selector(SelectorID.DRONE_FAR, width * 2/5, height * 3/4);
     
   }
   
@@ -136,6 +140,9 @@ class Game {
         case TURRET_FOUR:
           selectors.get(4).cycle();
           break;
+        case DRONE_ONE:
+          selectors.get(5).cycle();
+          break;
         
       }
     }
@@ -205,6 +212,7 @@ class Game {
     } 
     
     bullets.run();
+    drones.run();
     
     if (progressionTimer.check()) {
       levelProgression += 1;
@@ -212,6 +220,7 @@ class Game {
     enemies.run(levelProgression);
     
     player.shoot();
+    
     
   }
   

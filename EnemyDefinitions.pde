@@ -13,6 +13,7 @@ enum EnemyDefinition {
   
   RANDOM1(MovementType.RANDOM,      100,    1,    1,    30,    3),
   RANDOM2(MovementType.RANDOM,      200,    2,    2,    40,    4),
+  BIGRAND(MovementType.RANDOM,      100,    10,   5,    100,   5),
   
   ASTEROID(MovementType.ASTEROID,   500,    2,    3,    30,    10),
   BIGGEROID(MovementType.ASTEROID,  400,    5,    5,    80,   10),

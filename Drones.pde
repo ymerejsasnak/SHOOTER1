@@ -41,6 +41,7 @@ class Drone {
   int size;
   float rotSpeed;
   DroneType type;
+  color fill;
   
   
   Drone(float angle, DroneDefinition droneDefinition) {
@@ -49,6 +50,18 @@ class Drone {
     size = droneDefinition.size;
     rotSpeed = droneDefinition.rotSpeed;
     type = droneDefinition.type;
+    
+    switch(type){
+      case DAMAGE:
+        fill = color(100, 10, 10);
+        break;      
+      case FREEZE:
+        fill = color(150, 150, 220);
+        break;
+      case VAPORIZE:
+        fill = color(240, 230, 210);
+        break;      
+    }
   }
   
   void update() {
@@ -61,10 +74,12 @@ class Drone {
   
   
   void display() {
-    stroke(255);
+    stroke(100);
     strokeWeight(2);
-    fill(100,100,250);
+    fill(fill);
     ellipse(x, y, size, size);
+    fill(0);
+    ellipse(x, y, size/2, size/2);
   }
   
 }

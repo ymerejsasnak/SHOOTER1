@@ -1,7 +1,5 @@
 /*
 NEXT TO DO:
--add more variations on drones?
--add more variations on enemies ('big/huge' versions of other ones like rand/oscil, etc)
  -lockable/unlockable levels, lockable/unlockable turrets/bullets/drones
  player status, with upgrades:  HP, power multiplier (affects attacker drone too?)
                               , bullet size multiplier(?), drone size(???), freeze time(??????)

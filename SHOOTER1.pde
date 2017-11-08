@@ -1,10 +1,25 @@
 /*
 NEXT TO DO:
  -lockable/unlockable levels, lockable/unlockable turrets/bullets/drones
- player status, with upgrades:  HP, power multiplier (affects attacker drone too?)
-                              , bullet size multiplier(?), drone size(???), freeze time(??????)
+ player status/upgrades
  and load/save of 3 players
  
+ easier to have a shop screen with buttons to buy turrets, buy bullets, drones upgrades
+ 
+ info to save per player:
+ name?
+ saveslot?
+ currency
+ high scores per level (enemies killed and danger level reached)
+ power multiplier upgrade, bullet size mult, drone size mult, freeze time mult
+ maxHP
+ levels unlocked (first is default)
+ turret unlocks (first unlocked bye default)
+ bullet unlocks (basic shot unlocked for each turret by default)
+ drone unlocks (attacker is default)
+ 
+ 
+ EVENTUALLY:
  
 -change select boxes so they show representative picture with labelling beneath it?
  
@@ -16,8 +31,8 @@ NEXT TO DO:
 ----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
 ----?do all timers need to be reset upon starting level???? (issues w/ bullet timing, etc?)
       (add method to start/restart timer and maybe method to stop/pause timer)
-      ?buttons clicked affect buttons on next state/screen?
-EVENTUALLY:
+ 
+
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
  if (player.dead) there

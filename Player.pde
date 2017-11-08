@@ -20,6 +20,8 @@ class Player {
   int maxHP = 20;
   boolean dead = false;
   
+  int levelsUnlocked = 7;
+  
   color fill = color(50, 100, 200);
   color stroke = color(40, 50, 250);
   int weight = 5;

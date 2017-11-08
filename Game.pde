@@ -76,6 +76,42 @@ class Game {
   // process mouse clicks (for title, select, pause, etc  )
   void processClick(int _mouseX, int _mouseY) {
     
+    if (state == GameState.SELECT) {
+      SelectorID clickedSelector = SelectorID.NONE;
+      for (Selector s: selectors) {
+        if (s.clickCheck(_mouseX, _mouseY)) {
+          clickedSelector = s.id; // store selector ID to switch on below
+        };
+      }
+      
+      switch (clickedSelector) {
+        case NONE:
+          break;
+        case LEVEL:
+          selectors.get(0).cycle();
+          break;
+        case TURRET_ONE:
+          selectors.get(1).cycle();
+          break;
+        case TURRET_TWO:
+          selectors.get(2).cycle();
+          break;
+        case TURRET_THREE:
+          selectors.get(3).cycle();
+          break;
+        case TURRET_FOUR:
+          selectors.get(4).cycle();
+          break;
+        case DRONE_ONE:
+          selectors.get(5).cycle();
+          break;
+        case DRONE_TWO:
+          selectors.get(6).cycle();
+          break;
+        
+      }
+    }
+    
     ButtonID pressedButton = ButtonID.NONE;
     for (Button b: activeButtons) {
       if (b.clickCheck(_mouseX, _mouseY)) {
@@ -113,43 +149,11 @@ class Game {
         break;
       case QUIT:
         exit();     
+        
     }
     
-      if (state == GameState.SELECT) {
-      SelectorID clickedSelector = SelectorID.NONE;
-      for (Selector s: selectors) {
-        if (s.clickCheck(_mouseX, _mouseY)) {
-          clickedSelector = s.id; // store selector ID to switch on below
-        };
-      }
       
-      switch (clickedSelector) {
-        case NONE:
-          break;
-        case LEVEL:
-          selectors.get(0).cycle();
-          break;
-        case TURRET_ONE:
-          selectors.get(1).cycle();
-          break;
-        case TURRET_TWO:
-          selectors.get(2).cycle();
-          break;
-        case TURRET_THREE:
-          selectors.get(3).cycle();
-          break;
-        case TURRET_FOUR:
-          selectors.get(4).cycle();
-          break;
-        case DRONE_ONE:
-          selectors.get(5).cycle();
-          break;
-        case DRONE_TWO:
-          selectors.get(6).cycle();
-          break;
-        
-      }
-    }
+    
   }
   
   // main 'run' method to choose which state to run
@@ -187,7 +191,7 @@ class Game {
   void runTitle() {
     
     fill(TEXT_COLOR);
-    textSize(50);
+    textSize(120);
     
     // need to set fonts and stuff, right now just default
     text("CIRCLE SHOOTER", width/2, height/3);

@@ -33,7 +33,9 @@ class Selector {
     
     if (id == SelectorID.LEVEL) {
       for (Level level: Level.values()) {
+         
         levelSelections.add(level);
+        
       }
       totalOptions = levelSelections.size();
       selectorText = levelSelections.get(currentIndex).text;
@@ -41,14 +43,18 @@ class Selector {
     } else if (id == SelectorID.TURRET_ONE || id == SelectorID.TURRET_TWO || 
                id == SelectorID.TURRET_THREE || id == SelectorID.TURRET_FOUR){
       for (BulletDefinition bullet: BulletDefinition.values()) {
-        bulletSelections.add(bullet);
+        
+          bulletSelections.add(bullet);
+        
       }
       totalOptions = bulletSelections.size();
       selectorText = bulletSelections.get(currentIndex).text;
     
     } else {
       for (DroneDefinition drone: DroneDefinition.values()) {
-        droneSelections.add(drone); 
+        
+          droneSelections.add(drone); 
+        
       }
       totalOptions = droneSelections.size();
       selectorText = droneSelections.get(currentIndex).text;
@@ -63,6 +69,9 @@ class Selector {
       case NONE:
         break;
       case LEVEL:
+        if (currentIndex > player.levelsUnlocked) {
+          currentIndex = 0; 
+        }
         game.currentLevel = levelSelections.get(currentIndex);
         selectorText = levelSelections.get(currentIndex).text;
         break;

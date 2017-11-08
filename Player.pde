@@ -16,8 +16,8 @@ class Player {
       
   
   int currency;
-  int hp = 20;
-  int maxHP = 20;
+  int hp = 50;
+  int maxHP = 50;
   boolean dead = false;
   
   int levelsUnlocked = 7;
@@ -70,7 +70,7 @@ class Player {
        if (turretTypes[i] != null && turretTimers.get(i).check()) {
           
           bullets.addBullet(turretAngle[i], turretX[i], turretY[i], turretTypes[i]);
-          
+                    
        }      
     } 
   }
@@ -81,6 +81,13 @@ class Player {
     hp -= ePower;
     if (hp <= 0) {
       dead = true;
+    }
+    
+  }
+  
+  void restartTurretTimers() {
+    for (Timer t: turretTimers) {
+      t.restart();
     }
     
   }

@@ -21,29 +21,38 @@ NEXT TO DO:
  
  EVENTUALLY:
  
+ -hunt magic numbers!
+ -overload enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, etc.)
+ 
 -change select boxes so they show representative picture with labelling beneath it?
  
 -endless refactoring/code cleanup and game balance and bug hunting
----refactor selector class - selector is parent class, with level/turret/drone as subclasses for cleaner/better code?
-----?levelprogress/danger seems to have some issue resetting self or something???
-----?fix enemy spawn so it doesn't reset timer if there is no spawn due to max enemies? (if no noticable difference, don't worry about it?)
-----?fix rotation for OSCIL/CIRCLES enemies
-----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
-----?do all timers need to be reset upon starting level???? (issues w/ bullet timing, etc?)
-      (add method to start/restart timer and maybe method to stop/pause timer)
- 
 
- -make death state/screen (simple: you died, currency earned, enemies killed, 
+---refactor selector class - selector is parent class, with level/turret/drone as subclasses for cleaner/better code?
+----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
+ (also these are probably important to make shop/upgrades/player loading easier to implement in long run)
+
+
+
+  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
  if (player.dead) there
  
  -refactoring: make getters/setters, private/public stuff,
  
  -ANOTHER POSSIBLE ENEMY TYPE? -- SPLITS INTO TWO OTHER SMALLER ONES (OF DEFINED TYPE) WHEN KILLED)
- -ANOTHER POSSIBLE BULLET TYPE -- spread?  generates 3 bullets at turret, 1 straight 2 others at opposite angles
  -ANOTHER POSSIBLE ENEMY TYPE? -- teleporting enemy!
+ (and more defs in general?)
+ 
  
  -fluff stuff (sfx, music, graphics tweaks, etc)
+ 
+ FUTURE:
+ -bonus modes? preset weapons and enemies with diff goals
+   -all freeze weapons, how long can you survive?
+   -bomb shots?, how much damage can you take before you kill X enemies?
+   -license to kill mode (basic shot but 1 hit kill, you also 1 hit kill...how long/how many kills?)
+ 
  */
 
 

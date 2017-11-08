@@ -7,6 +7,7 @@ class Timer {
   //all time in millis
   int timerStart = millis();
   int waitTime;
+  int elapsed; // save elapsed time when pausing
   
   Timer(int waitTime) {
     this.waitTime = waitTime; //millis to wait
@@ -21,4 +22,9 @@ class Timer {
     }
   }
   
+  void restart() {
+    timerStart = millis();
+  }
+  
+ 
 }

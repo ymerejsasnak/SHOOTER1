@@ -1,6 +1,6 @@
-// define possible game states: title screen, weapon/level select, actual level, pause
+// define possible game states: title screen, weapon/level select, actual level, 
 enum GameState {
-  TITLE, SELECT, LEVEL, PAUSE;
+  TITLE, SELECT, LEVEL;
 }
 
 /*
@@ -17,8 +17,7 @@ class Game {
   ArrayList<Button> titleButtons;
   ArrayList<Button> selectButtons;
   ArrayList<Button> levelButtons;
-  ArrayList<Button> pauseButtons;
-  
+   
   ArrayList<Button> activeButtons;
   
   ArrayList<Selector> selectors;
@@ -47,14 +46,10 @@ class Game {
                                 width * 3/4, height * 3/4 + BUTTON_SIZE, BUTTON_SIZE));
                                            
     levelButtons = new ArrayList<Button>();
-    levelButtons.add(new Button(ButtonID.PAUSE, "PAUSE",
+    levelButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
                                 width - BUTTON_SIZE - 1, height - BUTTON_SIZE/2 - 1, BUTTON_SIZE));
                                 
-    pauseButtons = new ArrayList<Button>();
-    pauseButtons.add(new Button(ButtonID.RESUME, "RESUME",
-                                width/3, height/2, BUTTON_SIZE));
-    pauseButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
-                                width * 2/3, height/2, BUTTON_SIZE));
+   
         
     // by default title screen buttons are active
     activeButtons = titleButtons;
@@ -129,19 +124,16 @@ class Game {
         activeButtons = selectButtons;
         state = GameState.SELECT;
         break;
-      case START: // intentionally no break statement - both go to level state with level buttons
+      case START: 
         drones.resetAngles();
+        progressionTimer.restart();
+        player.restartTurretTimers();
         enemiesKilled = 0;
         levelProgression = 0;
         bullets = new Bullets();
         enemies = new Enemies();
-      case RESUME:
         activeButtons = levelButtons;
         state = GameState.LEVEL;
-        break;
-      case PAUSE:
-        activeButtons = pauseButtons;
-        state = GameState.PAUSE;
         break;
       case TO_TITLE:
         activeButtons = titleButtons;
@@ -168,9 +160,6 @@ class Game {
         break;
       case LEVEL:
         runLevel();
-        break;
-      case PAUSE:
-        runPause();
         break;
     }
   
@@ -246,7 +235,7 @@ class Game {
     
     text("currency: " + player.currency, width/5, 25);
     text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, 25);
-    if (state == GameState.LEVEL || state == GameState.PAUSE) {
+    if (state == GameState.LEVEL) {
       text("enemies killed: " + enemiesKilled, width * 3/5, 25);
       text("danger level: " + levelProgression, width * 4/5, 25);
     }

@@ -20,6 +20,10 @@ class Bullets {
   void addBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
 
     bullets.add(new Bullet(angle, x, y, bulletDefinition));
+    if (bulletDefinition.bulletType == BulletType.SPREAD) {
+      bullets.add(new Bullet(angle + SPREAD_ANGLE, x, y, bulletDefinition));
+      bullets.add(new Bullet(angle - SPREAD_ANGLE, x, y, bulletDefinition));
+    }
   }
 
   // 'run' the bullets, ie update their position, remove if dead, display if not
@@ -73,6 +77,7 @@ class Bullet {
     // and set color based on type (also add a bit of randomness to gas angle/size)
     switch (bulletType) {
       case STANDARD:
+      case SPREAD:
         this.bFill = BULLET_WHITE;
         break;
       case GAS:

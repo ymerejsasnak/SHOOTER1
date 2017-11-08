@@ -21,7 +21,7 @@ class Enemies {
   void run(int levelProgression) {
     
     // generate new enemy if enough time has passed 
-    // and if max number is not reached
+    // and if max number is not reached (note, timer will reset itself, so even if total goes below max, will  still have to wait out next time cycle)
     if (spawnTimer.check() && enemies.size() < maxEnemies) {  
       
       int choice = (int) random(0, game.currentLevel.spawnableEnemies.length);
@@ -216,11 +216,14 @@ class Enemy {
     } 
     
     if (movementType == MovementType.CIRCLES || movementType == MovementType.OSCIL) {
-      int rotation = 1;
+      int rotation;
+      
       x = player.x + cos(angle) * distance;
       y = player.y + sin(angle) * distance;
-      if (!clockwise) {rotation = -1;} else { rotation = 1; }
-      angle += .5 * rotation * deltaTime.getDelta();
+      
+      if (clockwise) { rotation = 1; } else { rotation = -1; }
+      
+      angle += 200/distance * rotation * deltaTime.getDelta();
       distance -= speed * deltaTime.getDelta();
       
     }     

@@ -7,9 +7,7 @@ enum ButtonID {
   // select screen buttons
   START, TO_TITLE, 
   // level screen buttons
-  PAUSE, 
-  // pause screen buttons
-  RESUME, QUIT_LEVEL 
+  QUIT_LEVEL 
   ;
 }
 

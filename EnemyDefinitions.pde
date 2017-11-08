@@ -9,7 +9,7 @@ enum EnemyDefinition {
   REGULAR(MovementType.STANDARD,    100,    3,    2,    50,    2),
   BIGGIE (MovementType.STANDARD,    25,    20,    4,   150,    5),
   HUGE   (MovementType.STANDARD,    20,    50,   10,   200,   10),
-  FAST   (MovementType.STANDARD,    300,    1,    2,    75,     5),
+  FAST   (MovementType.STANDARD,    300,    1,    2,    30,     5),
   
   RANDOM1(MovementType.RANDOM,      100,    1,    1,    30,    3),
   RANDOM2(MovementType.RANDOM,      200,    2,    2,    40,    4),

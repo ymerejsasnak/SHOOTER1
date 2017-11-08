@@ -69,7 +69,7 @@ class Game {
     selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 4/5, height/2));
     
     selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/5, height * 3/4));
-    //selectors.add(new Selector(SelectorID.DRONE_FAR, width * 2/5, height * 3/4);
+    selectors.add(new Selector(SelectorID.DRONE_TWO, width * 2/5, height * 3/4));
     
   }
   
@@ -94,6 +94,7 @@ class Game {
         state = GameState.SELECT;
         break;
       case START: // intentionally no break statement - both go to level state with level buttons
+        drones.resetAngles();
         enemiesKilled = 0;
         levelProgression = 0;
         bullets = new Bullets();
@@ -142,6 +143,9 @@ class Game {
           break;
         case DRONE_ONE:
           selectors.get(5).cycle();
+          break;
+        case DRONE_TWO:
+          selectors.get(6).cycle();
           break;
         
       }

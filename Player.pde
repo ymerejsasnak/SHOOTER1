@@ -42,7 +42,8 @@ class Player {
     turretTypes[3] = BulletDefinition.BASIC;
     turretTimers.add(new Timer(turretTypes[3].rate));
     
-    drones.setDroneOne(DroneDefinition.DRAIN);
+    drones.setDroneOne(DroneDefinition.ATTACKER);
+    drones.setDroneTwo(DroneDefinition.ATTACKER);
     
   }
   

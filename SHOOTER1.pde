@@ -1,12 +1,13 @@
 /*
 NEXT TO DO:
+-add more variations on drones?
 -add more variations on enemies ('big/huge' versions of other ones like rand/oscil, etc)
--add two possible drones (upgradable speed/size?)
- one is 'far' one is 'close' rotation
- 3 attack types(?): drain hp (like gas, but gives to player), freeze, vaporize(instakill))
--lockable/unlockable levels, lockable/unlockable turrets/bullets/drones
- player status, with upgrades:  HP, power multiplier, bullet size multiplier(?), drone speed(???), drone size(???)
+ -lockable/unlockable levels, lockable/unlockable turrets/bullets/drones
+ player status, with upgrades:  HP, power multiplier (affects attacker drone too?)
+                              , bullet size multiplier(?), drone size(???), freeze time(??????)
  and load/save of 3 players
+ 
+ 
 -change select boxes so they show representative picture with labelling beneath it?
  
 -endless refactoring/code cleanup and game balance and bug hunting
@@ -17,6 +18,7 @@ NEXT TO DO:
 ----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
 ----?do all timers need to be reset upon starting level???? (issues w/ bullet timing, etc?)
       (add method to start/restart timer and maybe method to stop/pause timer)
+      ?buttons clicked affect buttons on next state/screen?
 EVENTUALLY:
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
@@ -78,7 +80,7 @@ void setup() {
 
 void draw() {
 
-  //background(BG_COLOR);
+  background(BG_COLOR);
 
   //calculate time (in seconds) since last loop
   deltaTime.calcDelta();
@@ -90,10 +92,7 @@ void draw() {
   text("Framerate: " + (int) frameRate, 100, height - 20);
   
   
-  //just rough idea for now of making smoother looking graphics
-  noStroke();
-  fill(0, 50);
-  rect(width/2, height/2, width, height);
+  
   
 }
 

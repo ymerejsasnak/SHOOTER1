@@ -91,7 +91,8 @@ class Selector {
         selectorText = droneSelections.get(currentIndex).text;
         break;
       case DRONE_TWO:
-      //sameish
+        drones.setDroneTwo(droneSelections.get(currentIndex));
+        selectorText = droneSelections.get(currentIndex).text;
         break;
     }
     

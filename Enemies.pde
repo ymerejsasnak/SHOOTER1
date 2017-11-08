@@ -40,10 +40,27 @@ class Enemies {
       // (eventually find a better way to allow better framerates w/ lots onscreen
       for (Bullet b: bullets.bullets){
         if (dist(enemy.x, enemy.y, b.x, b.y) <= (enemy.enemySize/2 + b.bulletSize/2)) {
-          enemy.hit(b.power, b.bulletType); // go to submethod to subtract bullet power from enemy
+          enemy.hitByBullet(b.power, b.bulletType); // go to submethod to subtract bullet power from enemy
           b.hit(); // also deal with bullet 'hit' condition
         }
-      }        
+      }
+      
+      
+      // also check if hit drones:
+      Drone drone = drones.drones[0];
+      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size/2 + enemy.enemySize/2) {
+        enemy.hitByDrone(drone.type);
+      }
+      drone = drones.drones[1];
+      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size/2 + enemy.enemySize/2) {
+        enemy.hitByDrone(drone.type);
+      }
+      
+      if (enemy.hp <= 0) {
+        enemy.dead = true;
+        player.currency += enemy.reward; // kill enemy, get some currency
+        game.enemiesKilled += 1;
+      }
       
       if (enemy.dead) {
         enemies.remove(e);
@@ -92,10 +109,10 @@ class Enemy {
   
   Enemy(EnemyDefinition enemyDef, int levelProgression) {
     
-    speed = enemyDef.speed + levelProgression * 10; // pixels per second
+    speed = enemyDef.speed + levelProgression * 5; // pixels per second
     hp = enemyDef.hp + levelProgression;
     maxHP = enemyDef.hp + levelProgression;
-    power = enemyDef.power + levelProgression / 10;
+    power = enemyDef.power + levelProgression / 5;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
     reward = enemyDef.reward * levelProgression;
@@ -231,8 +248,7 @@ class Enemy {
   }
   
   // enemy hit by bullet, lower its hp by bullet power
-  //need to implement gas damage timer here (could just use delta for this)
-  void hit(float bPower, BulletType bulletType) {
+  void hitByBullet(float bPower, BulletType bulletType) {
     if (bulletType == BulletType.FREEZE) {
       frozen = true;
       freezeTimer = new Timer(FREEZE_DURATION);
@@ -243,11 +259,25 @@ class Enemy {
       else {
         hp -= bPower;
       }
-      if (hp <= 0) {
-        dead = true;
-        player.currency += reward; // kill enemy, get some currency
+      
+    }
+  }
+  
+  //enemy hit by drone, act accordingly
+  void hitByDrone(DroneType type) {
+    switch(type) {
+      case DAMAGE:
+        hp -= DRONE_DPS * deltaTime.getDelta();
+        break;
+      case FREEZE:
+        frozen = true;
+        freezeTimer = new Timer(FREEZE_DURATION);
+        break;
+      case VAPORIZE:
+        hp = 0;
+        player.currency += reward;
         game.enemiesKilled += 1;
-      }
+        break;
     }
   }
   

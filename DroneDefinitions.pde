@@ -1,16 +1,18 @@
 enum DroneType {
- DRAIN, FREEZE, VAPORIZE 
+ DAMAGE, FREEZE, VAPORIZE 
 }
 
 
-
+final int DRONE_DPS = 10;
 
 
 enum DroneDefinition {
            //text,       attack type,       size,     rotation speed, radius to use as distance      
-  DRAIN   ("DRAIN",    DroneType.DRAIN,       20,            .01,              200),
-  FREEZE  ("FREEZE",   DroneType.FREEZE,      15,            .015,              300),
-  VAPORIZE("VAPORIZE", DroneType.VAPORIZE,     5,            .016,             400 )
+  ATTACKER  ("ATTACKER",    DroneType.DAMAGE,    40,            .02,              200),
+  DEFENDER  ("DEFENDER",  DroneType.DAMAGE,     50,             .01,               90),
+  FREEZER  ("FREEZER",   DroneType.FREEZE,      25,            .04,              200),
+  MOON     ("COLD MOON",  DroneType.FREEZE,     75,             .005,             325),
+  VAPORIZER("VAPORIZER", DroneType.VAPORIZE,    15,            .016,             350 )
   ;
   
   String text;

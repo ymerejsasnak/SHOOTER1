@@ -46,9 +46,7 @@ NEXT TO DO:
  if (player.dead) there
  
  -refactoring: make getters/setters, private/public stuff,
- 
- -ANOTHER BULLET - DRAIN type (+ player hp per damage to enemy)
- 
+
  -ANOTHER POSSIBLE ENEMY TYPE? -- SPLITS INTO TWO OTHER SMALLER ONES (OF DEFINED TYPE) WHEN KILLED)
  -ANOTHER POSSIBLE ENEMY TYPE? -- teleporting enemy!
  (and more defs in general?)
@@ -118,12 +116,16 @@ final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add t
 final int RANDOM_TIMER_MIN = 300;
 final int RANDOM_TIMER_MAX = 1000;
 
+final int CHANCE_TARGET_PLAYER = 30; // the percent chance a random type will actually move toward the player
+
+final int TELEPORT_TIMER_MIN = 100;
+final int TELEPORT_TIMER_MAX = 500;
+
 // possible time range in ms for 'oscil' enemies to time rotation direction switch
 final int OSCIL_TIMER_MIN = 400;
 final int OSCIL_TIMER_MAX = 700;
 final int ARC_LENGTH = 200; //how far it travels back and forth (maybe not mathematically accurate but it works well enough)
 
-final int CHANCE_TARGET_PLAYER = 30; // the percent chance a random type will actually move toward the player
 
 final color FREEZE_COLOR = color(0, 0, 255, 100);
 

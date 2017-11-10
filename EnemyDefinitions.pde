@@ -1,5 +1,5 @@
 enum MovementType {
-  STANDARD, RANDOM, ASTEROID, CIRCLES, OSCIL;
+  STANDARD, RANDOM, ASTEROID, CIRCLES, OSCIL, TELEPORT;
 }
 
 enum EnemyDefinition {
@@ -23,6 +23,8 @@ enum EnemyDefinition {
   
   OSCIL1( MovementType.OSCIL,    50,   1,   1,   50,           4),
   OSCIL2(MovementType.OSCIL,     100,  2,   2,   30,           7),
+  
+  TELEPORT(MovementType.TELEPORT,  50,  5,   5,  100,  7);
   ;
   
   

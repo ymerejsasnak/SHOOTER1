@@ -84,9 +84,10 @@ class Enemy {
   float distance, angle; //  for enemies that move along curves (dist from player, angle, rot direction)
   boolean clockwise;
   
-  Timer oscilTimer; // for OSCIL enemies
+  Timer oscilTimer; // for OSCIL enemies, timing of switching direction
   Timer randomTimer; // for timing direction change on 'RANDOM' movement enemies
   Timer freezeTimer;
+  Timer teleportTimer; //for TELEPORT ENEMIES
   
   boolean dead = false;
   boolean frozen = false;
@@ -119,6 +120,7 @@ class Enemy {
     
     randomTimer = new Timer((int)random(RANDOM_TIMER_MIN, RANDOM_TIMER_MAX));
     oscilTimer = new Timer((int) random(OSCIL_TIMER_MIN, OSCIL_TIMER_MAX));
+    teleportTimer = new Timer((int) random(TELEPORT_TIMER_MIN, TELEPORT_TIMER_MAX));
     
     // randomly choose between the four screen sides to generate enemy
     int choice = (int) random(0, 4);

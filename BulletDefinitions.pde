@@ -3,8 +3,6 @@ enum BulletType {
 }
 
 
-final float SPREAD_ANGLE = .2;
-
 enum BulletDefinition {
           //text desc,     type               size       speed        power         rate (ms between bullets)                   (for balancing, calc possible DPS)
   BASIC("BASIC SHOT",      BulletType.STANDARD,     6,          200,          1,        200),                                    // 1000 / 200 * 1 = 5

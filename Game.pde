@@ -185,10 +185,10 @@ class Game {
   void runTitle() {
     
     fill(TEXT_COLOR);
-    textSize(120);
+    textSize(TITLE_TEXT_SIZE);
     
     // need to set fonts and stuff, right now just default
-    text("CIRCLE SHOOTER", width/2, height/3);
+    text("CIRCLE SHOOTER", width / 2, height / 3);
     
     
   }
@@ -235,13 +235,13 @@ class Game {
   
   // basic info on top bar
   void displayHUD() {
-    textSize(20);
+    textSize(HUD_TEXT_SIZE);
     fill(TEXT_COLOR);
     
-    text("currency: " + player.currency, width/5, 25);
-    text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, 25);
-    text("enemies killed: " + enemiesKilled, width * 3/5, 25);
-    text("danger level: " + levelProgression, width * 4/5, 25);
+    text("currency: " + player.currency, width * 1/5, HUD_VERTICAL_POS);
+    text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, HUD_VERTICAL_POS);
+    text("enemies killed: " + enemiesKilled, width * 3/5, HUD_VERTICAL_POS);
+    text("danger level: " + levelProgression, width * 4/5, HUD_VERTICAL_POS);
     
     
   }

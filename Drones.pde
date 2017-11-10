@@ -1,3 +1,6 @@
+final int LEFT_DRONE = 0;
+final int RIGHT_DRONE = 1;
+
 class Drones {
   
   Drone[] drones; 
@@ -9,22 +12,22 @@ class Drones {
   
   //first argument makes both start opposite each other
   void setDroneOne(DroneDefinition droneDefinition) {
-    drones[0] = new Drone(0, droneDefinition);
+    drones[LEFT_DRONE] = new Drone(0, droneDefinition);
   }
   void setDroneTwo(DroneDefinition droneDefinition) {
-    drones[1] = new Drone(PI, droneDefinition);
+    drones[RIGHT_DRONE] = new Drone(PI, droneDefinition);
   }
   
   void resetAngles() {
-    drones[0].angle = 0;
-    drones[1].angle = PI;
+    drones[LEFT_DRONE].angle = 0;
+    drones[RIGHT_DRONE].angle = PI;
   }
   
   void run() {
-     drones[0].update();
-     drones[0].display();
-     drones[1].update();
-     drones[1].display();
+     drones[LEFT_DRONE].update();
+     drones[LEFT_DRONE].display();
+     drones[RIGHT_DRONE].update();
+     drones[RIGHT_DRONE].display();
   }
     
 }
@@ -53,13 +56,13 @@ class Drone {
     
     switch(type){
       case DAMAGE:
-        fill = color(100, 10, 10);
+        fill = DAMAGE_FILL;
         break;      
       case FREEZE:
-        fill = color(150, 150, 220);
+        fill = FREEZE_FILL;
         break;
       case VAPORIZE:
-        fill = color(240, 230, 210);
+        fill = VAPORIZE_FILL;
         break;      
     }
   }
@@ -74,12 +77,12 @@ class Drone {
   
   
   void display() {
-    stroke(100);
-    strokeWeight(2);
+    stroke(DRONE_STROKE);
+    strokeWeight(DRONE_WEIGHT);
     fill(fill);
     ellipse(x, y, size, size);
-    fill(0);
-    ellipse(x, y, size/2, size/2);
+    fill(BLACK);
+    ellipse(x, y, size / 2, size / 2);  // half size black circle in center
   }
   
 }

@@ -13,7 +13,7 @@ class DeltaTime {
   // calculate delta time, but divide by 1000 to return it as seconds decimal
   // so all 'speeds' and whatnot can be PER SECOND;
   void calcDelta() {
-    delta = (millis() - last) / 1000;
+    delta = (millis() - last) / MILLIS_PER_SECOND;
     last = millis();
   }
   

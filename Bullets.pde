@@ -1,8 +1,3 @@
-final color BULLET_WHITE = color(200);
-final color GAS_GREEN = color(0, 100, 0, 50);
-final color FREEZE_BLUE = color(100, 100, 250, 200);
-
-
 /*
   CLASS TO STORE AND CONTROL BULLET OBJECTS AS A WHOLE
  */
@@ -82,8 +77,8 @@ class Bullet {
         break;
       case GAS:
         this.bFill = GAS_GREEN;
-        this.angle += randomGaussian() * 0.5;
-        this.bulletSize += randomGaussian() * 5;
+        this.angle += randomGaussian() * GAS_ANGLE_RANDOMNESS;
+        this.bulletSize += randomGaussian() * GAS_SIZE_RANDOMNESS;
         break;
       case FREEZE:
         this.bFill = FREEZE_BLUE;

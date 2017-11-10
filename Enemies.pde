@@ -39,7 +39,7 @@ class Enemies {
       // brute force collision detection between enemy and bullets 
       // (eventually find a better way to allow better framerates w/ lots onscreen
       for (Bullet b: bullets.bullets){
-        if (dist(enemy.x, enemy.y, b.x, b.y) <= (enemy.enemySize/2 + b.bulletSize/2)) {
+        if (dist(enemy.x, enemy.y, b.x, b.y) <= (enemy.enemySize / 2 + b.bulletSize / 2)) {   // divide by 2 to get radius
           enemy.hitByBullet(b.power, b.bulletType); // go to submethod to subtract bullet power from enemy
           b.hit(); // also deal with bullet 'hit' condition
         }
@@ -48,17 +48,16 @@ class Enemies {
       
       // also check if hit drones:
       Drone drone = drones.drones[0];
-      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size/2 + enemy.enemySize/2) {
+      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
       drone = drones.drones[1];
-      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size/2 + enemy.enemySize/2) {
+      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
       
       if (enemy.hp <= 0) {
         enemy.dead = true;
-        
         game.enemiesKilled += 1;
       }
       
@@ -118,8 +117,8 @@ class Enemy {
     movementType = enemyDef.movementType;
     reward = enemyDef.reward * (levelProgression + 1);
     
-    randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
-    oscilTimer = new Timer((int) random(400, 700));   //here too!
+    randomTimer = new Timer((int)random(RANDOM_TIMER_MIN, RANDOM_TIMER_MAX));
+    oscilTimer = new Timer((int) random(OSCIL_TIMER_MIN, OSCIL_TIMER_MAX));
     
     // randomly choose between the four screen sides to generate enemy
     int choice = (int) random(0, 4);
@@ -149,12 +148,12 @@ class Enemy {
     }
     
     if (movementType == MovementType.CIRCLES || movementType == MovementType.OSCIL) {
-      clockwise = random(10) > 5;
+      clockwise = random(10) > 5;  // 50% chance to be clockwise or counter
       distance = dist(player.x, player.y, x, y);
       angle = atan2(y - player.y, x - player.x);
     }
     
-    // set colors
+    // set colors (should I move these to the top as constants or does it really matter?????)
     switch (movementType) {
       case STANDARD:
         fill = color(enemySize);
@@ -208,7 +207,7 @@ class Enemy {
       
     if (movementType == MovementType.RANDOM  && randomTimer.check()){
       // chance to move directly toward player
-      if (random(100) > 80) { // magic numbers
+      if (random(100) < CHANCE_TARGET_PLAYER) { 
         direction = atan2(player.y - y, player.x - x);
       } else {
         direction = random(0, 2 * PI); 
@@ -223,8 +222,9 @@ class Enemy {
       y = player.y + sin(angle) * distance;
       
       if (clockwise) { rotation = 1; } else { rotation = -1; }
-      
-      angle += 200/distance * rotation * deltaTime.getDelta();
+       
+       //increase angle as distance gets smaller
+      angle += ARC_LENGTH / distance * rotation * deltaTime.getDelta();
       distance -= speed * deltaTime.getDelta();
       
     }     
@@ -244,7 +244,7 @@ class Enemy {
     }
     
     //CHECK FOR COLLISION WITH PLAYER HERE(?)
-    if (dist(x, y, player.x, player.y) < enemySize/2 + player.size/2) {
+    if (dist(x, y, player.x, player.y) < enemySize / 2 + player.size / 2) {
       player.hit(power);
       dead = true;
     }
@@ -256,14 +256,10 @@ class Enemy {
     if (bulletType == BulletType.FREEZE) {
       frozen = true;
       freezeTimer = new Timer(FREEZE_DURATION);
+    } else if (bulletType == BulletType.GAS) {
+      hp -= bPower * deltaTime.getDelta();
     } else {
-      if (bulletType == BulletType.GAS) {
-        hp -= bPower * deltaTime.getDelta();
-      }
-      else {
-        hp -= bPower;
-      }
-      
+      hp -= bPower;
     }
   }
   
@@ -279,8 +275,6 @@ class Enemy {
         break;
       case VAPORIZE:
         hp = 0;
-        //player.currency += reward;
-        //game.enemiesKilled += 1;
         break;
     }
   }
@@ -297,12 +291,12 @@ class Enemy {
     // inner 'life' circle
     strokeWeight(innerWeight * 2);
     stroke(innerStroke, ENEMY_ALPHA);
-    fill((float)hp / (float)maxHP * 255);
-    ellipse(x, y, enemySize/2, enemySize/2);
+    fill((float)hp / (float)maxHP * WHITE);
+    ellipse(x, y, enemySize / 2, enemySize / 2);
     
     // blue circle overlaid if frozen
     if (frozen) {
-      fill(0, 0, 255, 100);
+      fill(FREEZE_COLOR);
       noStroke();
       ellipse(x, y, enemySize, enemySize);
     }

@@ -108,8 +108,8 @@ class Player {
     ellipse(x, y, size, size);
     
     // show life circle 
-    fill((float)hp / (float)maxHP * 255);
-    ellipse(x, y, size/2, size/2);
+    fill((float)hp / (float)maxHP * WHITE);
+    ellipse(x, y, size / 2, size / 2);
        
     
   }

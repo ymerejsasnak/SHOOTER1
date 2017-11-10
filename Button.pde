@@ -31,9 +31,9 @@ class Button {
   }
   
   void display() {
-    fill(200, 5);
+    fill(BUTTON_BG);
     noStroke();
-    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, 20);
+    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, BUTTON_CURVE);
     
     fill(TEXT_COLOR);
     textSize(BUTTON_TEXT_SIZE);

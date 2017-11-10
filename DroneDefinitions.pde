@@ -3,9 +3,6 @@ enum DroneType {
 }
 
 
-final int DRONE_DPS = 10;
-
-
 enum DroneDefinition {
            //text,       attack type,       size,     rotation speed, radius to use as distance      
   ATTACKER  ("ATTACKER",    DroneType.DAMAGE,    40,            .02,              200),

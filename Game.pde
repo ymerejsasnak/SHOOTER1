@@ -41,13 +41,15 @@ class Game {
 
     selectButtons = new ArrayList<Button>();
     selectButtons.add(new Button(ButtonID.START, "START", 
-                                width * 3/4, height * 3/4, BUTTON_SIZE));
+                                width * 1/4, height * 7/8, BUTTON_SIZE));
+    selectButtons.add(new Button(ButtonID.SHOP, "SHOP",
+                                width * 2/4, height * 7/8, BUTTON_SIZE));
     selectButtons.add(new Button(ButtonID.TO_TITLE, "TITLE",
-                                width * 3/4, height * 3/4 + BUTTON_SIZE, BUTTON_SIZE));
+                                width * 3/4, height * 7/8, BUTTON_SIZE));
                                            
     levelButtons = new ArrayList<Button>();
     levelButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
-                                width - BUTTON_SIZE - 1, height - BUTTON_SIZE/2 - 1, BUTTON_SIZE));
+                                width - BUTTON_SIZE, height - BUTTON_SIZE, BUTTON_SIZE));
                                 
    
         
@@ -56,15 +58,15 @@ class Game {
     
     // selector boxes for selection screen
     selectors = new ArrayList<Selector>();
-    selectors.add(new Selector(SelectorID.LEVEL, width/4, height/4));
+    selectors.add(new Selector(SelectorID.LEVEL, SELECTOR_SIZE * 3/2, height - SELECTOR_SIZE * 2));
+       
+    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/2, SELECTOR_SIZE));
+    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 1/2, SELECTOR_SIZE * 2));
+    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 1/2 - SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
+    selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 1/2 + SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
     
-    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/5, height/2));
-    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 2/5, height/2));
-    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 3/5, height/2));
-    selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 4/5, height/2));
-    
-    selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/5, height * 3/4));
-    selectors.add(new Selector(SelectorID.DRONE_TWO, width * 2/5, height * 3/4));
+    selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/2 - SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
+    selectors.add(new Selector(SelectorID.DRONE_TWO, width * 1/2 + SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
     
   }
   
@@ -134,6 +136,9 @@ class Game {
         enemies = new Enemies();
         activeButtons = levelButtons;
         state = GameState.LEVEL;
+        break;
+      case SHOP:
+      
         break;
       case TO_TITLE:
         activeButtons = titleButtons;
@@ -235,10 +240,9 @@ class Game {
     
     text("currency: " + player.currency, width/5, 25);
     text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, 25);
-    if (state == GameState.LEVEL) {
-      text("enemies killed: " + enemiesKilled, width * 3/5, 25);
-      text("danger level: " + levelProgression, width * 4/5, 25);
-    }
+    text("enemies killed: " + enemiesKilled, width * 3/5, 25);
+    text("danger level: " + levelProgression, width * 4/5, 25);
+    
     
   }
   

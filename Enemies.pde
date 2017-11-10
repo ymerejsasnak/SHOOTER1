@@ -58,11 +58,12 @@ class Enemies {
       
       if (enemy.hp <= 0) {
         enemy.dead = true;
-        player.currency += enemy.reward; // kill enemy, get some currency
+        
         game.enemiesKilled += 1;
       }
       
       if (enemy.dead) {
+        player.currency += enemy.reward; // kill enemy, get some currency
         enemies.remove(e);
       } else {
         enemy.display();
@@ -115,7 +116,7 @@ class Enemy {
     power = enemyDef.power + levelProgression / 5;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
-    reward = enemyDef.reward * levelProgression;
+    reward = enemyDef.reward * (levelProgression + 1);
     
     randomTimer = new Timer((int)random(300, 1000));  //magic numbers!
     oscilTimer = new Timer((int) random(400, 700));   //here too!
@@ -278,8 +279,8 @@ class Enemy {
         break;
       case VAPORIZE:
         hp = 0;
-        player.currency += reward;
-        game.enemiesKilled += 1;
+        //player.currency += reward;
+        //game.enemiesKilled += 1;
         break;
     }
   }

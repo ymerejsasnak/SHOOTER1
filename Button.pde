@@ -5,7 +5,7 @@ enum ButtonID {
   // title screen buttons
   PLAY, QUIT, 
   // select screen buttons
-  START, TO_TITLE, 
+  START, SHOP, TO_TITLE, 
   // level screen buttons
   QUIT_LEVEL 
   ;
@@ -31,6 +31,10 @@ class Button {
   }
   
   void display() {
+    fill(200, 5);
+    noStroke();
+    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, 20);
+    
     fill(TEXT_COLOR);
     textSize(BUTTON_TEXT_SIZE);
     text(buttonText, buttonX, buttonY + BUTTON_TEXT_OFFSET);

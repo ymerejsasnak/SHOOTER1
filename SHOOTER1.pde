@@ -1,12 +1,12 @@
 /*
 NEXT TO DO:
- -lockable/unlockable levels, lockable/unlockable turrets/bullets/drones
- player status/upgrades
- and load/save of 3 players
+ -shop screen (button on select screen) to buy upgrades:  (not seperate state, more like pop-up window)
+   bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
+   (easiest to make all seperate buttons?)
  
- easier to have a shop screen with buttons to buy turrets, buy bullets, drones upgrades
+ -start with only level 1, others unlocked upon meeting danger level req in prev level
  
- info to save per player:
+ -player status/upgrades and load/save of 3 separate player files:
  name?
  saveslot?
  currency
@@ -39,6 +39,8 @@ NEXT TO DO:
  if (player.dead) there
  
  -refactoring: make getters/setters, private/public stuff,
+ 
+ -ANOTHER BULLET - DRAIN type (+ player hp per damage to enemy)
  
  -ANOTHER POSSIBLE ENEMY TYPE? -- SPLITS INTO TWO OTHER SMALLER ONES (OF DEFINED TYPE) WHEN KILLED)
  -ANOTHER POSSIBLE ENEMY TYPE? -- teleporting enemy!

@@ -1,5 +1,5 @@
 enum MovementType {
-  STANDARD, RANDOM, ASTEROID, CIRCLES, OSCIL, TELEPORT;
+  STANDARD, RANDOM, ASTEROID, CIRCLES, OSCIL, TELEPORT, CARRIER;
 }
 
 enum EnemyDefinition {
@@ -24,7 +24,11 @@ enum EnemyDefinition {
   OSCIL1( MovementType.OSCIL,    50,   1,   1,   50,           4),
   OSCIL2(MovementType.OSCIL,     100,  2,   2,   30,           7),
   
-  TELEPORT(MovementType.TELEPORT,  50,  5,   5,  100,  7);
+  TELEPORT(MovementType.TELEPORT,  150,  5,   5,  50,  7),
+                                                                      // type carried,       number carried
+  REGULAR_CARRIER(MovementType.CARRIER,  50,  10,    10,   150,   5, EnemyDefinition.REGULAR, 4),
+  CIRCLES_CARRIER(MovementType.CARRIER,  50,  10,    10,   150,   5, EnemyDefinition.CIRCLES1, 7),
+  OSCIL_CARRIER(MovementType.CARRIER,  25,  10,    10,   150,   5, EnemyDefinition.OSCIL1,     5),
   ;
   
   
@@ -36,6 +40,9 @@ enum EnemyDefinition {
   int power;
   int size;
   int reward;
+  
+  EnemyDefinition carriedType;
+  int numberCarried;
    
   private EnemyDefinition(MovementType movementType, float speed, int hp, int power, int size, int reward) {
     this.movementType = movementType;
@@ -44,6 +51,18 @@ enum EnemyDefinition {
     this.power = power;
     this.size = size;
     this.reward = reward;
+  }
+  
+  // constructor for carrier types (extra last parameter for enemy type that spawns when it dies
+  private EnemyDefinition(MovementType movementType, float speed, int hp, int power, int size, int reward, EnemyDefinition carriedType, int numberCarried) {
+    this.movementType = movementType;
+    this.speed = speed;
+    this.hp = hp;
+    this.power = power;
+    this.size = size;
+    this.reward = reward;
+    this.carriedType = carriedType;
+    this.numberCarried = numberCarried;
   }
   
 }

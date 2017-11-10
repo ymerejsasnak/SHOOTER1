@@ -10,6 +10,8 @@ enum Level {
   SIX("Level 6", 1000, 10, new EnemyDefinition[] {EnemyDefinition.HUGE, EnemyDefinition.HUGE, EnemyDefinition.ASTEROID}),
   SEVEN("Level 7", 600, 40, new EnemyDefinition[] {EnemyDefinition.RANDOM2, EnemyDefinition.FAST}),
   EIGHT("Level 8", 500, 50, new EnemyDefinition[] {EnemyDefinition.FAST, EnemyDefinition.ASTEROID, EnemyDefinition.OSCIL2}),
+  NINE("Level 9", 700, 20, new EnemyDefinition[] {EnemyDefinition.TELEPORT}),
+  TEN("Level 10", 1000, 10, new EnemyDefinition[] {EnemyDefinition.REGULAR_CARRIER, EnemyDefinition.CIRCLES_CARRIER, EnemyDefinition.OSCIL_CARRIER}),
   ;
   
   

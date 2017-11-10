@@ -27,8 +27,31 @@ class Enemies {
       int choice = (int) random(0, game.currentLevel.spawnableEnemies.length);
       EnemyDefinition typeToSpawn = game.currentLevel.spawnableEnemies[choice];
       
-      enemies.add(new Enemy(typeToSpawn, levelProgression));   
+      // randomly choose between the four screen sides to generate enemy
+      int choice2 = (int) random(0, 4);
+      float x = 0, y = 0;
+      switch(choice2) {
+        case 0:
+          x = 0 - typeToSpawn.size;
+          y = random(height);
+          break;
+        case 1:
+          x = width + typeToSpawn.size;
+          y = random(height);
+          break;
+        case 2:
+          x = random(width);
+          y = 0 - typeToSpawn.size;      
+          break;
+        case 3:
+          x = random(width);
+          y = height + typeToSpawn.size;      
+          break;
+      }
+      enemies.add(new Enemy(x, y, typeToSpawn, levelProgression));   
     }
+  
+  
   
     // iterate through all enemies (backwards to allow deletion)
     for (int e = enemies.size() - 1; e >= 0; e--) {
@@ -44,6 +67,7 @@ class Enemies {
           b.hit(); // also deal with bullet 'hit' condition
         }
       }
+    
       
       
       // also check if hit drones:
@@ -63,14 +87,22 @@ class Enemies {
       }
       
       if (enemy.dead) {
+        if (enemy.movementType == MovementType.CARRIER) {
+          for (int i = 0; i < enemy.numberCarried; i++) {
+            enemies.add(new Enemy(enemy.x + random(-enemy.enemySize / 2, enemy.enemySize / 2), 
+                                  enemy.y + random(-enemy.enemySize / 2, enemy.enemySize / 2),
+                                  enemy.carriedType, levelProgression));              
+          }
+        }
         enemies.remove(e);
       } else {
         enemy.display();
-      }
-      
-    }   
-  } 
-}
+      } 
+    }
+        
+  }   
+} 
+
 
 
 /*
@@ -100,6 +132,8 @@ class Enemy {
   MovementType movementType;
   int reward;
   
+  int numberCarried;
+  EnemyDefinition carriedType;
     
   // define color based on movement type, with variation based on power/speed/hp/etc
   color fill;
@@ -108,7 +142,7 @@ class Enemy {
   color innerStroke;
   int innerWeight;
   
-  Enemy(EnemyDefinition enemyDef, int levelProgression) {
+  Enemy(float x, float y, EnemyDefinition enemyDef, int levelProgression) {
     
     speed = enemyDef.speed + levelProgression * 5; // pixels per second
     hp = enemyDef.hp + levelProgression;
@@ -118,30 +152,18 @@ class Enemy {
     movementType = enemyDef.movementType;
     reward = enemyDef.reward * (levelProgression + 1);
     
+    numberCarried = enemyDef.numberCarried;
+    carriedType = enemyDef.carriedType;
+    
     randomTimer = new Timer((int)random(RANDOM_TIMER_MIN, RANDOM_TIMER_MAX));
     oscilTimer = new Timer((int) random(OSCIL_TIMER_MIN, OSCIL_TIMER_MAX));
     teleportTimer = new Timer((int) random(TELEPORT_TIMER_MIN, TELEPORT_TIMER_MAX));
     
-    // randomly choose between the four screen sides to generate enemy
-    int choice = (int) random(0, 4);
-    switch(choice) {
-      case 0:
-        x = 0 - enemySize;
-        y = random(height);
-        break;
-      case 1:
-        x = width + enemySize;
-        y = random(height);
-        break;
-      case 2:
-        x = random(width);
-        y = 0 - enemySize;      
-        break;
-      case 3:
-        x = random(width);
-        y = height + enemySize;      
-        break;
-    }
+    this.x = x;
+    this.y = y;
+    
+    
+    
     
     //xxx all start aimed at playerxxxxx
     direction = atan2(player.y - y, player.x - x);
@@ -150,8 +172,8 @@ class Enemy {
     }
     
     if (movementType == MovementType.CIRCLES || movementType == MovementType.OSCIL) {
-      clockwise = random(10) > 5;  // 50% chance to be clockwise or counter
       distance = dist(player.x, player.y, x, y);
+      clockwise = random(10) > 5;  // 50% chance to be clockwise or counter
       angle = atan2(y - player.y, x - player.x);
     }
     
@@ -172,24 +194,36 @@ class Enemy {
         innerWeight = 2;
         break;
       case CIRCLES:
-      fill = color(20);
+        fill = color(20);
         outerStroke = color(50, 50, 220); 
         outerWeight = 4;
         innerStroke = color(20, 20, 100);
         innerWeight = 1;
         break;
       case OSCIL:
-      fill = color(50, 150, 0);
+        fill = color(50, 150, 0);
         outerStroke = color(0, 200, 50); 
         outerWeight = 1;
         innerStroke = color(100, 50, 50);
         innerWeight = 5;
         break;
       case ASTEROID:
-      fill = color(200, 100, 0);
+        fill = color(200, 100, 0);
         outerStroke = color(250, 150, 0); 
         outerWeight = 4;
         innerStroke = color(100, 50, 50);
+        innerWeight = 1;
+      case TELEPORT:
+        fill = color(50, 20, 60);
+        outerWeight = 2;
+        outerStroke = color(20, 50, 60);
+        innerStroke = color(10, 30, 50);
+        innerWeight = 2;
+      case CARRIER:
+        fill = color(100, 100, 50);
+        outerStroke = color(250, 0, 0);
+        innerStroke = color(250, 0, 0);
+        outerWeight = 1;
         innerWeight = 1;
         break;      
     }
@@ -216,6 +250,20 @@ class Enemy {
       }
 
     } 
+    
+    if (movementType == MovementType.TELEPORT && teleportTimer.check()) {
+      float oldx, oldy;
+      oldx = x;
+      oldy = y;
+      x = random(width / 2 + 100, width);
+      if (random(10) > 5) { x = width - x; }
+      y = random(height / 2 + 100, height);
+      if (random(10) > 5) { y = height - y; }
+      strokeWeight(15);
+      line(oldx, oldy, x, y); // draw a line to help indicate teleportation
+      direction = atan2(player.y - y, player.x - x); //recalc direction from new pos
+      speed += 10; // gets faster each teleport (so will more likely reach player eventually)
+    }
     
     if (movementType == MovementType.CIRCLES || movementType == MovementType.OSCIL) {
       int rotation;

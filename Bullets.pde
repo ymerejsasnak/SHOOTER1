@@ -96,8 +96,8 @@ class Bullet {
     y += sin(angle) * speed * deltaTime.getDelta();
 
     if (!dead) {
-      dead = (x > width + bulletSize || x < 0 - bulletSize ||
-        y > height + bulletSize || y < 0 - bulletSize);
+      dead = (x > width + bulletSize/2 || x < 0 - bulletSize/2 ||
+        y > height + bulletSize/2 || y < 0 - bulletSize/2);
     }
   }
 

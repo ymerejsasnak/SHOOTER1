@@ -58,11 +58,11 @@ class Enemies {
       
       if (enemy.hp <= 0) {
         enemy.dead = true;
+        player.currency += enemy.reward; // kill enemy, get some currency
         game.enemiesKilled += 1;
       }
       
       if (enemy.dead) {
-        player.currency += enemy.reward; // kill enemy, get some currency
         enemies.remove(e);
       } else {
         enemy.display();

@@ -75,6 +75,9 @@ class Bullet {
       case SPREAD:
         this.bFill = BULLET_WHITE;
         break;
+      case DRAIN:
+        this.bFill = DRAIN_YELLOW;
+        break;
       case GAS:
         this.bFill = GAS_GREEN;
         this.angle += randomGaussian() * GAS_ANGLE_RANDOMNESS;
@@ -102,6 +105,10 @@ class Bullet {
   void hit() {
     if (bulletType != BulletType.GAS) {  // gas doesn't 'die' upon hitting enemy
       dead = true;
+    }
+    if (bulletType == BulletType.DRAIN) {
+      player.hp += power;
+      player.hp = min(player.hp, player.maxHP);
     }
   }
 

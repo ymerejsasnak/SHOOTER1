@@ -72,6 +72,7 @@ final color WHITE = 255;
 final color BULLET_WHITE = 200;
 final color GAS_GREEN = color(0, 100, 0, 50);
 final color FREEZE_BLUE = color(100, 100, 250, 200);
+final color DRAIN_YELLOW = color(50, 50, 0);
 
 final int ENEMY_ALPHA = 150; // how transparent are enemies?
 

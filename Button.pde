@@ -3,7 +3,7 @@ enum ButtonID {
   // default value
   NONE, 
   // title screen buttons
-  PLAY, QUIT, 
+  QUIT, NEW, LOAD,
   // select screen buttons
   START, SHOP, TO_TITLE, 
   // level screen buttons
@@ -33,7 +33,7 @@ class Button {
   void display() {
     fill(BUTTON_BG);
     noStroke();
-    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, BUTTON_CURVE);
+    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, BUTTON_CORNER);
     
     fill(TEXT_COLOR);
     textSize(BUTTON_TEXT_SIZE);

@@ -19,15 +19,23 @@ class Drones {
   }
   
   void resetAngles() {
-    drones[LEFT_DRONE].angle = 0;
-    drones[RIGHT_DRONE].angle = PI;
+    if (drones[LEFT_DRONE] != null) {
+      drones[LEFT_DRONE].angle = 0;
+    }
+    if (drones[RIGHT_DRONE] != null) {
+      drones[RIGHT_DRONE].angle = PI;
+    }
   }
   
   void run() {
-     drones[LEFT_DRONE].update();
-     drones[LEFT_DRONE].display();
-     drones[RIGHT_DRONE].update();
-     drones[RIGHT_DRONE].display();
+    if (drones[LEFT_DRONE] != null) {
+      drones[LEFT_DRONE].update();
+      drones[LEFT_DRONE].display();
+    }
+    if (drones[RIGHT_DRONE] != null) {
+      drones[RIGHT_DRONE].update();
+      drones[RIGHT_DRONE].display();
+    }
   }
     
 }

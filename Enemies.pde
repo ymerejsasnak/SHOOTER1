@@ -72,11 +72,11 @@ class Enemies {
       
       // also check if hit drones:
       Drone drone = drones.drones[0];
-      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
+      if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
       drone = drones.drones[1];
-      if (dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
+      if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
       
@@ -144,10 +144,10 @@ class Enemy {
   
   Enemy(float x, float y, EnemyDefinition enemyDef, int levelProgression) {
     
-    speed = enemyDef.speed + levelProgression * 5; // pixels per second
-    hp = enemyDef.hp + levelProgression;
-    maxHP = enemyDef.hp + levelProgression;
-    power = enemyDef.power + levelProgression / 5;
+    speed = enemyDef.speed + levelProgression * ENEMY_SPEED_SCALE; // pixels per second
+    hp = enemyDef.hp + levelProgression / 5;
+    maxHP = enemyDef.hp + levelProgression / 5;
+    power = enemyDef.power + levelProgression / ENEMY_POWER_SCALE;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
     reward = enemyDef.reward * (levelProgression + 1);
@@ -188,7 +188,7 @@ class Enemy {
         break;
       case RANDOM:
         fill = color(150, 10, 30);
-        outerStroke = color(200, 125, 125); 
+        outerStroke = color(150, 125, 125); 
         outerWeight = 1;
         innerStroke = color(0, 50, 50);
         innerWeight = 2;
@@ -202,23 +202,25 @@ class Enemy {
         break;
       case OSCIL:
         fill = color(50, 150, 0);
-        outerStroke = color(0, 200, 50); 
+        outerStroke = color(0, 150, 50); 
         outerWeight = 1;
         innerStroke = color(100, 50, 50);
         innerWeight = 5;
         break;
       case ASTEROID:
-        fill = color(200, 100, 0);
-        outerStroke = color(250, 150, 0); 
+        fill = color(150, 100, 0);
+        outerStroke = color(200, 150, 0); 
         outerWeight = 4;
         innerStroke = color(100, 50, 50);
         innerWeight = 1;
+        break;
       case TELEPORT:
         fill = color(50, 20, 60);
         outerWeight = 2;
         outerStroke = color(20, 50, 60);
         innerStroke = color(10, 30, 50);
         innerWeight = 2;
+        break;
       case CARRIER:
         fill = color(100, 100, 50);
         outerStroke = color(250, 0, 0);

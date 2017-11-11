@@ -36,15 +36,17 @@ class Game {
     
     // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();
-    titleButtons.add(new Button(ButtonID.PLAY, "PLAY", width/3, height * 2/3, BUTTON_SIZE));
-    titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 2/3, height * 2/3, BUTTON_SIZE));
-
+    titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 1/2, height * 4/5, BUTTON_SIZE));
+    titleButtons.add(new Button(ButtonID.NEW, "NEW", width * 1/4, height * 3/5, BUTTON_SIZE));
+    titleButtons.add(new Button(ButtonID.LOAD, "LOAD", width * 3/4, height * 3/5, BUTTON_SIZE));
+    
+    
     selectButtons = new ArrayList<Button>();
     selectButtons.add(new Button(ButtonID.START, "START", 
                                 width * 1/4, height * 7/8, BUTTON_SIZE));
     selectButtons.add(new Button(ButtonID.SHOP, "SHOP",
                                 width * 2/4, height * 7/8, BUTTON_SIZE));
-    selectButtons.add(new Button(ButtonID.TO_TITLE, "TITLE",
+    selectButtons.add(new Button(ButtonID.QUIT, "QUIT",
                                 width * 3/4, height * 7/8, BUTTON_SIZE));
                                            
     levelButtons = new ArrayList<Button>();
@@ -104,9 +106,9 @@ class Game {
           break;
         case DRONE_TWO:
           selectors.get(6).cycle();
-          break;
-        
+          break;        
       }
+      clickedSelector = SelectorID.NONE;
     }
     
     ButtonID pressedButton = ButtonID.NONE;
@@ -120,9 +122,21 @@ class Game {
     switch (pressedButton) {
       case NONE:
         break;
-      case PLAY:
-      case QUIT_LEVEL:
         
+      case LOAD:     
+        player.setStatus();
+        for (Selector s: selectors) {
+          s.update(); 
+        }
+        activeButtons = selectButtons;
+        state = GameState.SELECT; 
+        break;
+      
+      case NEW:
+      case QUIT_LEVEL:
+        for (Selector s: selectors) {
+          s.update(); 
+        }
         activeButtons = selectButtons;
         state = GameState.SELECT;
         break;
@@ -140,16 +154,12 @@ class Game {
       case SHOP:
       
         break;
-      case TO_TITLE:
-        activeButtons = titleButtons;
-        state = GameState.TITLE;
-        break;
       case QUIT:
         exit();     
         
     }
     
-      
+    pressedButton = ButtonID.NONE;
     
   }
   

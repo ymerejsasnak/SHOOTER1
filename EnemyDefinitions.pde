@@ -26,9 +26,9 @@ enum EnemyDefinition {
   
   TELEPORT(MovementType.TELEPORT,  150,  5,   5,  50,  7),
                                                                       // type carried,       number carried
-  REGULAR_CARRIER(MovementType.CARRIER,  50,  10,    10,   150,   5, EnemyDefinition.REGULAR, 4),
-  CIRCLES_CARRIER(MovementType.CARRIER,  50,  10,    10,   150,   5, EnemyDefinition.CIRCLES1, 7),
-  OSCIL_CARRIER(MovementType.CARRIER,  25,  10,    10,   150,   5, EnemyDefinition.OSCIL1,     5),
+  REGULAR_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.REGULAR, 3),
+  CIRCLES_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.CIRCLES1, 3),
+  OSCIL_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.OSCIL1,     3),
   ;
   
   

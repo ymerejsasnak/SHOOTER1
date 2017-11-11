@@ -14,7 +14,7 @@ final int BUTTON_SIZE = 70;
 final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
 final color BUTTON_BG = color(200, 5);
-final int BUTTON_CURVE = 20;
+final int BUTTON_CORNER = 20;
 
 final int SELECTOR_SIZE = 150;
 final int SELECTOR_TEXT_SIZE = 20;
@@ -44,7 +44,7 @@ final color FREEZE_FILL = color(150, 150, 220);
 final color VAPORIZE_FILL = color(240, 230, 210);
 
 
-final int ENEMY_SPEED_SCALE = 5; // multiply danger level by this value then add to base
+final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this value then add to base
 final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add to base
 
 // possible time range in ms for 'random' enemies to time direction switch

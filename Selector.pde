@@ -22,7 +22,8 @@ class Selector {
   
   ArrayList<Level> levelSelections = new ArrayList<Level>();
   ArrayList<BulletDefinition> bulletSelections = new ArrayList<BulletDefinition>();
-  ArrayList<DroneDefinition> droneSelections = new ArrayList<DroneDefinition>();
+  ArrayList<DroneDefinition> drone1Selections = new ArrayList<DroneDefinition>();
+  ArrayList<DroneDefinition> drone2Selections = new ArrayList<DroneDefinition>();
   
   Selector(SelectorID _id, int x, int y) {
     
@@ -31,82 +32,115 @@ class Selector {
     selectorY = y;
     selectorSize = SELECTOR_SIZE;
     
-    if (id == SelectorID.LEVEL) {
-      for (Level level: Level.values()) {
-         
-        levelSelections.add(level);
-        
-      }
-      totalOptions = levelSelections.size();
-      selectorText = levelSelections.get(currentIndex).text;
-    
-    } else if (id == SelectorID.TURRET_ONE || id == SelectorID.TURRET_TWO || 
-               id == SelectorID.TURRET_THREE || id == SelectorID.TURRET_FOUR){
-      for (BulletDefinition bullet: BulletDefinition.values()) {
-        
-          bulletSelections.add(bullet);
-        
-      }
-      totalOptions = bulletSelections.size();
-      selectorText = bulletSelections.get(currentIndex).text;
-    
-    } else {
-      for (DroneDefinition drone: DroneDefinition.values()) {
-        
-          droneSelections.add(drone); 
-        
-      }
-      totalOptions = droneSelections.size();
-      selectorText = droneSelections.get(currentIndex).text;
-    }
     
   
   }
   
   void cycle() {
-    currentIndex = (currentIndex + 1) % totalOptions;
+    if (totalOptions > 0) {
+      currentIndex = (currentIndex + 1) % totalOptions;
+    }
     switch(id) {
       case NONE:
         break;
       case LEVEL:
-        if (currentIndex > player.levelsUnlocked) {
-          currentIndex = 0; 
-        }
         game.currentLevel = levelSelections.get(currentIndex);
         selectorText = levelSelections.get(currentIndex).text;
         break;
       case TURRET_ONE:
-        player.turretTypes[0] = bulletSelections.get(currentIndex);
-        player.turretTimers.set(0, new Timer(player.turretTypes[0].rate));
+        player.selectedBulletType[0] = bulletSelections.get(currentIndex);
+        player.turretTimers.set(0, new Timer(player.selectedBulletType[0].rate));
         selectorText = bulletSelections.get(currentIndex).text;
         break;
       case TURRET_TWO:
-        player.turretTypes[1] = bulletSelections.get(currentIndex);
-        player.turretTimers.set(1, new Timer(player.turretTypes[1].rate));
-        selectorText = bulletSelections.get(currentIndex).text;
+        if (player.turret2) {
+          player.selectedBulletType[1] = bulletSelections.get(currentIndex);
+          player.turretTimers.set(1, new Timer(player.selectedBulletType[1].rate));
+          selectorText = bulletSelections.get(currentIndex).text;
+        }
         break;
       case TURRET_THREE:
-        player.turretTypes[2] = bulletSelections.get(currentIndex);
-        player.turretTimers.set(2, new Timer(player.turretTypes[2].rate));
-        selectorText = bulletSelections.get(currentIndex).text;
+        if (player.turret3) {
+          player.selectedBulletType[2] = bulletSelections.get(currentIndex);
+          player.turretTimers.set(2, new Timer(player.selectedBulletType[2].rate));
+          selectorText = bulletSelections.get(currentIndex).text;
+        }  
         break;
       case TURRET_FOUR:
-        player.turretTypes[3] = bulletSelections.get(currentIndex);
-        player.turretTimers.set(3, new Timer(player.turretTypes[3].rate));
-        selectorText = bulletSelections.get(currentIndex).text;
+        if (player.turret4) {
+          player.selectedBulletType[3] = bulletSelections.get(currentIndex);
+          player.turretTimers.set(3, new Timer(player.selectedBulletType[3].rate));
+          selectorText = bulletSelections.get(currentIndex).text;
+        }
         break;
       case DRONE_ONE:
-        drones.setDroneOne(droneSelections.get(currentIndex));
-        selectorText = droneSelections.get(currentIndex).text;
+        if (player.unlockedDrones1.size() > 0) {
+          drones.setDroneOne(drone1Selections.get(currentIndex));
+          selectorText = drone1Selections.get(currentIndex).text;
+        }
         break;
       case DRONE_TWO:
-        drones.setDroneTwo(droneSelections.get(currentIndex));
-        selectorText = droneSelections.get(currentIndex).text;
+        if (player.unlockedDrones2.size() > 0) {
+          drones.setDroneTwo(drone2Selections.get(currentIndex));
+          selectorText = drone2Selections.get(currentIndex).text;
+        }
         break;
     }
-    
-          
-      
+  }
+  
+  // fill selectors (used whenever going to select screen)
+  void update() {
+       
+    switch(id) {
+      case LEVEL:
+        levelSelections = new ArrayList<Level>();
+        for (int i = 0; i < player.highestLevelUnlocked; i++) {
+          levelSelections.add(Level.values()[i]);
+        }
+        totalOptions = levelSelections.size();
+        selectorText = levelSelections.get(currentIndex).text;
+        break;
+      case TURRET_ONE:
+          loadBullets();
+        break;
+      case TURRET_TWO:
+        if (player.turret2) {
+          loadBullets();
+        }
+        break;
+      case TURRET_THREE:
+        if (player.turret3) {
+          loadBullets();
+        }
+        break;
+      case TURRET_FOUR:
+        if (player.turret4) {
+          loadBullets();
+        } 
+        break;
+      case DRONE_ONE:
+        if (player.unlockedDrones1.size() > 0) {
+          drone1Selections = player.unlockedDrones1;
+          totalOptions = drone1Selections.size();
+          selectorText = drone1Selections.get(currentIndex).text;
+        }
+        break;
+      case DRONE_TWO:
+        if (player.unlockedDrones2.size() > 0) {
+          drone2Selections = player.unlockedDrones2;
+          totalOptions = drone2Selections.size();
+          selectorText = drone2Selections.get(currentIndex).text;
+        }
+        break;
+    }   
+  }
+  
+  void loadBullets() {
+    bulletSelections = new ArrayList<BulletDefinition>();
+    bulletSelections.add(BulletDefinition.BASIC);
+    bulletSelections.addAll(player.unlockedBullets);
+    totalOptions = bulletSelections.size();
+    selectorText = bulletSelections.get(currentIndex).text;
   }
   
   void display() {
@@ -116,7 +150,12 @@ class Selector {
     stroke(255);
     strokeWeight(2);
     rect(selectorX, selectorY, SELECTOR_SIZE, SELECTOR_SIZE, 10);
-    text(selectorText, selectorX, selectorY + SELECTOR_TEXT_OFFSET);
+    
+    String text = "-";
+    if (selectorText != null) {
+      text = selectorText;
+    }
+    text(text, selectorX, selectorY + SELECTOR_TEXT_OFFSET);
   }
 
   // determine if touch/click was in the bounds of the selector

@@ -129,7 +129,7 @@ class Player {
   }
   
   // called from enemy class when it hits the player, reduce HP by enemy power
-  void hit(int ePower) {
+  void hitByEnemy(int ePower) {
     
     hp -= ePower;
     if (hp <= 0) {

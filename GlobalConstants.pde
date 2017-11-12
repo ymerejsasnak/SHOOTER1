@@ -45,8 +45,9 @@ final color VAPORIZE_FILL = color(240, 230, 210);
 
 final int DANGER_LEVEL_TIME = 5; // in seconds
 
-final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed
-final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add to base
+final int ENEMY_HP_SCALE = 2; // divide danger level by this value then add to base (ie every X levels, hp + 1)
+final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed (ie add X to speed per level)
+final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add to base (ie every X levels, power + 1)
 
 // possible time range in ms for 'random' enemies to time direction switch
 final int RANDOM_TIMER_MIN = 300;
@@ -56,6 +57,8 @@ final int CHANCE_TARGET_PLAYER = 30; // the percent chance a random type will ac
 
 final int TELEPORT_TIMER_MIN = 1000;
 final int TELEPORT_TIMER_MAX = 1600;
+final int TELEPORTER_DMZ = 200; // number of 'safe zone' pixels around player where teleporter will not teleport to
+final int TELEPORTER_SPEED_INCREASE = 10; // pps the speed increases after each teleport
 
 // possible time range in ms for 'oscil' enemies to time rotation direction switch
 final int OSCIL_TIMER_MIN = 400;
@@ -63,7 +66,7 @@ final int OSCIL_TIMER_MAX = 700;
 final int ARC_LENGTH = 200; //how far it travels back and forth (maybe not mathematically accurate but it works well enough)
 
 
-final color FREEZE_COLOR = color(0, 0, 255, 100);
+final color FROZEN_COLOR = color(0, 0, 255, 100);
 
 
 final int MILLIS_PER_SECOND = 1000;

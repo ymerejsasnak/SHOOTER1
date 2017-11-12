@@ -1,7 +1,7 @@
 /*
 NEXT TO DO:
 
-CODE EDITS/SIMPLE REFACTOR - done up through Drones (next: Enemies) 
+CODE EDITS/SIMPLE REFACTOR - (next: FileIO) 
 
  -shop screen (button on select screen) to buy upgrades:  (not seperate state, more like pop-up window)
  bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
@@ -22,7 +22,11 @@ CODE EDITS/SIMPLE REFACTOR - done up through Drones (next: Enemies)
  EVENTUALLY:
  -hunt magic numbers! remaining: game button/selector positions (but inevitable?), some stuff in player class? (pos, size)
  
- -overload enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
+ - better collision detection?
+ 
+ -enemy colors based on more variables
+ 
+ -polymorph enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
   (and then can make more variation on those types for enemy defs)
  
  -change select boxes so they show representative picture with labelling beneath it? or something more informative?
@@ -35,7 +39,7 @@ CODE EDITS/SIMPLE REFACTOR - done up through Drones (next: Enemies)
  ----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
  (also these are probably important to make shop/upgrades/player loading easier to implement in long run)
  
- -enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
+ -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
  
  -make gamestates objects themselves? or is this too much work pointlessly?  not sure...
  
@@ -50,15 +54,18 @@ CODE EDITS/SIMPLE REFACTOR - done up through Drones (next: Enemies)
  -refactoring: make getters/setters, private/public stuff,
 
  -some more enemy defs (at least more carrier types, maybe a smaller teleporter? any others?)
+ (actually, should be possible to make carrier of carriers...should I try this or no?)
  -and then, after that, fix level definitions to reflect new enemies
  
+ -enemies and enemy classes/files are still big and could maybe stand to be cleaned up, coded better
+ (maybe with above ideas about enums vs switches and polymorphism)
  
  -fluff stuff (sfx, music, graphics tweaks, etc)
  
  FUTURE:
  --bonus modes? preset weapons and enemies with diff goals--
   -only freeze weapons, how long can you survive?
-  -bomb shots?, how much damage can you take before you kill X enemies?
+  -bomb shots?, how much damage can you take before you kill X enemies (ie, try NOT to kill enemies)?
   -license to kill mode (basic shot but 1 hit kill, you also 1 hit kill...how long/how many kills?)
  
  */

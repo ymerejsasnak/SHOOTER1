@@ -1,51 +1,58 @@
-enum MovementType {
-  STANDARD, RANDOM, ASTEROID, CIRCLES, OSCIL, TELEPORT, CARRIER;
+enum EnemyType {
+  STANDARD,  // moves directly toward player
+  RANDOM,    // changes direction randomly at set intervals, but sometimes moves directly at player
+  ASTEROID,  // shoots across screen
+  CIRCLES,   // circles player, getting closer and closer
+  OSCIL,     // moves toward player in an oscillating sort of motion
+  TELEPORT,  // moves toward player, but also teleports to a random position periodically
+  CARRIER;   // moves toward player, spawns other enemies when killed
 }
 
 enum EnemyDefinition {
   
-            //movement type,    speed(pps), hp,  attack  size,  reward
-  EASY   (MovementType.STANDARD,    75,     2,    1,    80,    1),
-  REGULAR(MovementType.STANDARD,    100,    3,    2,    50,    2),
-  BIGGIE (MovementType.STANDARD,    25,    20,    4,   150,    5),
-  HUGE   (MovementType.STANDARD,    20,    50,   10,   200,   10),
-  FAST   (MovementType.STANDARD,    300,    1,    2,    30,     5),
+      //                 type          speed   hp   attack  size  reward
+  EASY            (EnemyType.STANDARD,   75,    2,    1,     80,    1),
+  REGULAR         (EnemyType.STANDARD,  100,    3,    2,     50,    2),
+  BIGGIE          (EnemyType.STANDARD,   25,   20,    4,    150,    5),
+  HUGE            (EnemyType.STANDARD,   20,   50,   10,    200,   10),
+  FAST            (EnemyType.STANDARD,  300,    1,    2,     30,    5),
   
-  RANDOM1(MovementType.RANDOM,      100,    1,    1,    30,    3),
-  RANDOM2(MovementType.RANDOM,      200,    2,    2,    40,    4),
-  BIGRAND(MovementType.RANDOM,      100,    10,   5,    100,   5),
+  RANDOM1         (  EnemyType.RANDOM,  100,    1,    1,     30,    3),
+  RANDOM2         (  EnemyType.RANDOM,  200,    2,    2,     40,    4),
+  BIGRAND         (  EnemyType.RANDOM,  100,   10,    5,    100,    5),
   
-  ASTEROID(MovementType.ASTEROID,   500,    2,    3,    30,    10),
-  BIGGEROID(MovementType.ASTEROID,  400,    5,    5,    80,   10),
+  ASTEROID        (EnemyType.ASTEROID,  500,    2,    3,     30,   10),
+  BIGGEROID       (EnemyType.ASTEROID,  400,    5,    5,     80,   10),
   
-  CIRCLES1(MovementType.CIRCLES,    50,   1,  1,      50,       2),
-  CIRCLES2(MovementType.CIRCLES,    100,  2,  2,      30,       4),  
+  CIRCLES1        ( EnemyType.CIRCLES,   50,    1,    1,     50,    2),
+  CIRCLES2        ( EnemyType.CIRCLES,  100,    2,    2,     30,    4),  
   
-  OSCIL1( MovementType.OSCIL,    50,   1,   1,   50,           4),
-  OSCIL2(MovementType.OSCIL,     100,  2,   2,   30,           7),
+  OSCIL1          (   EnemyType.OSCIL,   50,    1,    1,     50,    4),
+  OSCIL2          (   EnemyType.OSCIL,  100,    2,    2,     30,    7),
   
-  TELEPORT(MovementType.TELEPORT,  150,  5,   5,  50,  7),
-                                                                      // type carried,       number carried
-  REGULAR_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.REGULAR, 3),
-  CIRCLES_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.CIRCLES1, 3),
-  OSCIL_CARRIER(MovementType.CARRIER,  25,  5,    10,   150,   5, EnemyDefinition.OSCIL1,     3),
+  TELEPORT        (EnemyType.TELEPORT,  150,    5,    5,     50,    7),
+  
+       //                                                                 type carried,            # carried
+  REGULAR_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    5,    EnemyDefinition.REGULAR,     3),
+  CIRCLES_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    5,   EnemyDefinition.CIRCLES1,     3),
+  OSCIL_CARRIER   ( EnemyType.CARRIER,   25,    5,   10,    150,    5,     EnemyDefinition.OSCIL1,     3),
+  
   ;
   
   
-  
-  
-  MovementType movementType;
+  EnemyType enemyType;
   float speed;
   int hp;
   int power;
   int size;
   int reward;
   
-  EnemyDefinition carriedType;
+  EnemyDefinition carriedEnemy;
   int numberCarried;
    
-  private EnemyDefinition(MovementType movementType, float speed, int hp, int power, int size, int reward) {
-    this.movementType = movementType;
+  // constructor for non-carrier types
+  private EnemyDefinition(EnemyType enemyType, float speed, int hp, int power, int size, int reward) {
+    this.enemyType = enemyType;
     this.speed = speed;
     this.hp = hp;
     this.power = power;
@@ -53,15 +60,16 @@ enum EnemyDefinition {
     this.reward = reward;
   }
   
-  // constructor for carrier types (extra last parameter for enemy type that spawns when it dies
-  private EnemyDefinition(MovementType movementType, float speed, int hp, int power, int size, int reward, EnemyDefinition carriedType, int numberCarried) {
-    this.movementType = movementType;
+  // constructor for carrier types (extra last parameters for enemy type and number to spawn when this dies)
+  private EnemyDefinition(EnemyType enemyType, float speed, int hp, int power, int size, int reward,
+                          EnemyDefinition carriedEnemy, int numberCarried) {
+    this.enemyType = enemyType;
     this.speed = speed;
     this.hp = hp;
     this.power = power;
     this.size = size;
     this.reward = reward;
-    this.carriedType = carriedType;
+    this.carriedEnemy = carriedEnemy;
     this.numberCarried = numberCarried;
   }
   

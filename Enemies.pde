@@ -71,11 +71,11 @@ class Enemies {
       
       
       // also check if hit drones:
-      Drone drone = drones.drones[0];
+      Drone drone = drones.drone1;
       if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
-      drone = drones.drones[1];
+      drone = drones.drone2;
       if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }

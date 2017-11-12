@@ -1,96 +1,37 @@
-final int LEFT_DRONE = 0;
-final int RIGHT_DRONE = 1;
+/*
+  CLASS TO CONTROL DRONE OBJECTS
+*/
 
 class Drones {
   
-  Drone[] drones; 
+  Drone drone1;
+  Drone drone2;
    
-  Drones() {
-    drones = new Drone[2];
-        
-  }
-  
-  //first argument makes both start opposite each other
+  //first argument is start angle - makes both start opposite each other
   void setDroneOne(DroneDefinition droneDefinition) {
-    drones[LEFT_DRONE] = new Drone(0, droneDefinition);
+    drone1 = new Drone(0, droneDefinition);
   }
   void setDroneTwo(DroneDefinition droneDefinition) {
-    drones[RIGHT_DRONE] = new Drone(PI, droneDefinition);
+    drone2 = new Drone(PI, droneDefinition);
   }
   
   void resetAngles() {
-    if (drones[LEFT_DRONE] != null) {
-      drones[LEFT_DRONE].angle = 0;
+    if (drone1 != null) {
+      drone1.angle = 0;
     }
-    if (drones[RIGHT_DRONE] != null) {
-      drones[RIGHT_DRONE].angle = PI;
+    if (drone2 != null) {
+      drone2.angle = PI;
     }
   }
   
   void run() {
-    if (drones[LEFT_DRONE] != null) {
-      drones[LEFT_DRONE].update();
-      drones[LEFT_DRONE].display();
+    if (drone1 != null) {
+      drone1.update();
+      drone1.display();
     }
-    if (drones[RIGHT_DRONE] != null) {
-      drones[RIGHT_DRONE].update();
-      drones[RIGHT_DRONE].display();
+    if (drone2 != null) {
+      drone2.update();
+      drone2.display();
     }
-  }
-    
-}
-  
-  
-
-
-
-class Drone {
-  
-  float x, y;
-  float angle;
-  int distance;
-  int size;
-  float rotSpeed;
-  DroneType type;
-  color fill;
-  
-  
-  Drone(float angle, DroneDefinition droneDefinition) {
-    this.angle = angle;
-    distance = droneDefinition.distance;
-    size = int(droneDefinition.size * player.droneSizeMultiplier);
-    rotSpeed = droneDefinition.rotSpeed;
-    type = droneDefinition.type;
-    
-    switch(type){
-      case DAMAGE:
-        fill = DAMAGE_FILL;
-        break;      
-      case FREEZE:
-        fill = FREEZE_FILL;
-        break;
-      case VAPORIZE:
-        fill = VAPORIZE_FILL;
-        break;      
-    }
-  }
-  
-  void update() {
-    angle += rotSpeed;  //what about direction?
-    x = player.x + cos(angle) * distance;
-    y = player.y + sin(angle) * distance;
-  }
-    
-    
-  
-  
-  void display() {
-    stroke(DRONE_STROKE);
-    strokeWeight(DRONE_WEIGHT);
-    fill(fill);
-    ellipse(x, y, size, size);
-    fill(BLACK);
-    ellipse(x, y, size / 2, size / 2);  // half size black circle in center
-  }
-  
+  }   
 }

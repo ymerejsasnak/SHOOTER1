@@ -1,5 +1,8 @@
 /*
 NEXT TO DO:
+
+CODE EDITS/SIMPLE REFACTOR - done up through Drones (next: Enemies) 
+
  -shop screen (button on select screen) to buy upgrades:  (not seperate state, more like pop-up window)
  bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
  (easiest to make all seperate buttons?)

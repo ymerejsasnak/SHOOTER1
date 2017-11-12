@@ -20,6 +20,7 @@ enum ButtonID {
 /*
   CLASS TO BUILD BASIC BUTTONS FOR EACH SCREEN
  */
+ 
 class Button {
 
   int buttonX, buttonY;
@@ -27,9 +28,9 @@ class Button {
   String buttonText;
   ButtonID id;
   
-  Button(ButtonID _id, String text, int x, int y, int size) {
+  Button(ButtonID id, String text, int x, int y, int size) {
 
-    id = _id;
+    this.id = id;
     buttonText = text;
     buttonX = x;
     buttonY = y;

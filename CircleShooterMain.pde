@@ -22,6 +22,10 @@ CODE EDITS/SIMPLE REFACTOR - (next: FileIO)
  EVENTUALLY:
  -hunt magic numbers! remaining: game button/selector positions (but inevitable?), some stuff in player class? (pos, size)
  
+ -more comments in the setstatus method in player class?
+ 
+ -selectors and buttons mess in game class should not be there...other related issues...
+ 
  - better collision detection?
  
  -enemy colors based on more variables
@@ -30,6 +34,11 @@ CODE EDITS/SIMPLE REFACTOR - (next: FileIO)
   (and then can make more variation on those types for enemy defs)
  
  -change select boxes so they show representative picture with labelling beneath it? or something more informative?
+ 
+ -fileIO - implement savedata (after shop) and cleardata(for new games - also if file doesn't exist, create it)
+ also exception checking for load if file not found (in which case it just starts new game/makes new file?)
+ 
+ -repetetive code in selector class switch statement(S)!
  
  -endless refactoring/code cleanup and game balance and bug hunting
  

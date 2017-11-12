@@ -161,6 +161,7 @@ class Enemy {
       y = random(height / 2 + TELEPORTER_DMZ, height);
       if (random(10) > 5) { y = height - y; }
       
+      stroke(outerStroke);
       strokeWeight(25);
       line(oldx, oldy, x, y); // draw a line to help indicate teleportation
       

@@ -43,7 +43,7 @@ class Drone {
  
   void display() {
     stroke(DRONE_STROKE);
-    strokeWeight(DRONE_WEIGHT);
+    strokeWeight(DRONE_STROKE_WEIGHT);
     fill(fill);
     ellipse(x, y, size, size);
     fill(BLACK);

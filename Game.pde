@@ -1,4 +1,4 @@
-// define possible game states: title screen, weapon/level select, actual level, 
+// define possible game states
 enum GameState {
   TITLE, SELECT, LEVEL, SHOP;
 }
@@ -10,7 +10,7 @@ class Game {
   GameState state;
   Level currentLevel;
   int levelProgression = 0; //used to scale up difficulty as level goes on
-  Timer progressionTimer = new Timer(DANGER_LEVEL_TIME * 1000);  // convert to ms
+  Timer progressionTimer = new Timer(DANGER_LEVEL_TIME);
   
   int enemiesKilled;
   
@@ -29,18 +29,16 @@ class Game {
     state = GameState.TITLE;
     drones = new Drones(); 
     player = new Player(); 
-    
-    
-    //TEMP for now hard coded level loading but will eventually have to set this in select screen
     currentLevel = Level.ONE; 
     
     
+    //***BEGIN BIG MESS THAT SHOULD NOT BE HERE***
+        
     // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
     titleButtons = new ArrayList<Button>();
     titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 1/2, height * 4/5, BUTTON_SIZE));
     titleButtons.add(new Button(ButtonID.NEW, "NEW", width * 1/4, height * 3/5, BUTTON_SIZE));
     titleButtons.add(new Button(ButtonID.LOAD, "LOAD", width * 3/4, height * 3/5, BUTTON_SIZE));
-    
     
     selectButtons = new ArrayList<Button>();
     selectButtons.add(new Button(ButtonID.START, "START", 
@@ -53,11 +51,13 @@ class Game {
     levelButtons = new ArrayList<Button>();
     levelButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
                                 width - BUTTON_SIZE, height - BUTTON_SIZE, BUTTON_SIZE));
+        
                                 
     //shopButtons = new ArrayList<Button>(); //note ids begin at index 7
     //for (int i = 0; i < BulletDefinition.values().length; i++) {
     //  shopButtons.add(new Button(ButtonID.values()[i + 7]));
    // }
+        
         
     // by default title screen buttons are active
     activeButtons = titleButtons;
@@ -74,11 +74,13 @@ class Game {
     selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/2 - SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
     selectors.add(new Selector(SelectorID.DRONE_TWO, width * 1/2 + SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
     
+    //***END BIG MESS***
   }
   
-  // process mouse clicks (for title, select, pause, etc  )
+  // process mouse clicks (buttons and selectors)
   void processClick(int _mouseX, int _mouseY) {
     
+    // check for any selectors pressed
     if (state == GameState.SELECT) {
       SelectorID clickedSelector = SelectorID.NONE;
       for (Selector s: selectors) {
@@ -87,7 +89,7 @@ class Game {
         };
       }
       
-      switch (clickedSelector) {
+      switch (clickedSelector) { // feels like a better way exists
         case NONE:
           break;
         case LEVEL:
@@ -115,6 +117,7 @@ class Game {
       clickedSelector = SelectorID.NONE;
     }
     
+    // check for any buttons pressed
     ButtonID pressedButton = ButtonID.NONE;
     for (Button b: activeButtons) {
       if (b.clickCheck(_mouseX, _mouseY)) {
@@ -126,7 +129,6 @@ class Game {
     switch (pressedButton) {
       case NONE:
         break;
-        
       case LOAD:     
         player.setStatus();
         for (Selector s: selectors) {
@@ -135,9 +137,8 @@ class Game {
         activeButtons = selectButtons;
         state = GameState.SELECT; 
         break;
-      
       case NEW:
-       ///kjhkhkhjkjh
+      //cleardata/make new file?
       case QUIT_LEVEL:
         for (Selector s: selectors) {
           s.update(); 
@@ -157,16 +158,13 @@ class Game {
         state = GameState.LEVEL;
         break;
       case SHOP:
-        activeButtons = shopButtons;
-        state = GameState.SHOP;      
+        //activeButtons = shopButtons;
+        //state = GameState.SHOP;      
         break;
       case QUIT:
-        exit();     
-        
+        exit();  
     }
-    
     pressedButton = ButtonID.NONE;
-    
   }
   
   // main 'run' method to choose which state to run
@@ -182,46 +180,49 @@ class Game {
       case LEVEL:
         runLevel();
         break;
+      case SHOP:
+        //runshop
+        break;
     }
   
+    //then display hud, but not on title screen
     if (state != GameState.TITLE) {
       displayHUD();
     }
+    
+    // and display buttons, and selectors if on select screen
     displayButtons();
     if (state == GameState.SELECT) {
       displaySelectors();
-    }
-    
-    
-      
+    }   
   }
     
     
-  // run the title screen
+  // run the title screen (very basic for now, can pretty it up later)
   void runTitle() {
     
     fill(TEXT_COLOR);
     textSize(TITLE_TEXT_SIZE);
     
     // need to set fonts and stuff, right now just default
-    text("CIRCLE SHOOTER", width / 2, height / 3);
-    
-    
+    text("CIRCLE SHOOTER", width / 2, height / 3);   
   }
   
   
   // run the level/upgrade selection screen
   void runSelect() {
-    player.hp = player.maxHP; // just make sure player's hp is full if quit or died
+    player.hp = player.maxHP; // just make sure player's hp is refilled if quit or died
   }
   
   
   // run the actual game level
   void runLevel() {
     
+    // update and display player
     player.update();
     player.display();
     
+    // take care of things if player dies and exit method
     if (player.dead) {
       game.state = GameState.SELECT;
       activeButtons = selectButtons;
@@ -229,28 +230,25 @@ class Game {
       return;
     } 
     
-    bullets.run();
+    // run drones then bullets
     drones.run();
+    bullets.run();
     
+    // progress to next danger level if necessary, then run enemies
     if (progressionTimer.check()) {
       levelProgression += 1;
     }
     enemies.run(levelProgression);
     
-    player.shoot();
-    
+    // finally generate bullets
+    player.shoot(); 
     
   }
   
-  
-  // pause screen
-  void runPause() {  
-        
-  }
-  
-  
+   
   // basic info on top bar
   void displayHUD() {
+    
     textSize(HUD_TEXT_SIZE);
     fill(TEXT_COLOR);
     
@@ -258,20 +256,21 @@ class Game {
     text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, HUD_VERTICAL_POS);
     text("enemies killed: " + enemiesKilled, width * 3/5, HUD_VERTICAL_POS);
     text("danger level: " + levelProgression, width * 4/5, HUD_VERTICAL_POS);
-    
-    
   }
   
+  
+  // show active buttons
   void displayButtons() {
     for (Button b: activeButtons) {
       b.display();
     }
   }
   
+  
+  // show selectors (only runs in SELECT state)
   void displaySelectors() {
     for (Selector s: selectors) {
       s.display();
     }
   }
-  
 }

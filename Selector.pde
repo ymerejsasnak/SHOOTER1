@@ -1,7 +1,6 @@
-// enum to identify button pressed
+// enum to identify selector clicked
 enum SelectorID {
-  // default value
-  NONE, 
+  NONE, // (could have just checked for null?)
   LEVEL,
   TURRET_ONE, TURRET_TWO, TURRET_THREE, TURRET_FOUR,
   DRONE_ONE, DRONE_TWO,
@@ -9,7 +8,7 @@ enum SelectorID {
 }
 
 /*
-  CLASS TO BUILD 'SELECTOR' (cycle through available options on click) BOX FOR SELECTION SCREEN
+  CLASS TO BUILD 'SELECTOR' (cycle through available options on click) BOXES FOR SELECTION SCREEN
  */
 class Selector {
 
@@ -25,21 +24,25 @@ class Selector {
   ArrayList<DroneDefinition> drone1Selections = new ArrayList<DroneDefinition>();
   ArrayList<DroneDefinition> drone2Selections = new ArrayList<DroneDefinition>();
   
+  
   Selector(SelectorID _id, int x, int y) {
     
     id = _id;
     selectorX = x;
     selectorY = y;
     selectorSize = SELECTOR_SIZE;
-    
-    
-  
   }
   
+  
+  // click to go to next available option (IF any options, ie total > 0)
   void cycle() {
+    
     if (totalOptions > 0) {
       currentIndex = (currentIndex + 1) % totalOptions;
     }
+    
+    // act based on which was clicked (better ways to do this!)
+    //ALSO LOTS OF REPEATED CODE HERE! YUCK!!!
     switch(id) {
       case NONE:
         break;
@@ -88,7 +91,8 @@ class Selector {
     }
   }
   
-  // fill selectors (used whenever going to select screen)
+  
+  // fill selectors with available options (used whenever going to select screen)
   void update() {
        
     switch(id) {
@@ -135,6 +139,7 @@ class Selector {
     }   
   }
   
+  // helpful bit to make above switch statement non-repetetive (good example of a method that should be private?)
   void loadBullets() {
     bulletSelections = new ArrayList<BulletDefinition>();
     bulletSelections.add(BulletDefinition.BASIC);
@@ -143,6 +148,8 @@ class Selector {
     selectorText = bulletSelections.get(currentIndex).text;
   }
   
+  
+  // display selectors (these settings will likely change to make it look better eventually)
   void display() {
     fill(TEXT_COLOR);
     textSize(SELECTOR_TEXT_SIZE);
@@ -151,12 +158,14 @@ class Selector {
     strokeWeight(2);
     rect(selectorX, selectorY, SELECTOR_SIZE, SELECTOR_SIZE, 10);
     
+    // set to default text, only change IF there are in fact options available
     String text = "-";
     if (selectorText != null) {
       text = selectorText;
     }
     text(text, selectorX, selectorY + SELECTOR_TEXT_OFFSET);
   }
+
 
   // determine if touch/click was in the bounds of the selector
   boolean clickCheck(int _mouseX, int _mouseY) {

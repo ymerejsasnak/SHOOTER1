@@ -24,14 +24,8 @@ class FileIO {
   
   int[] highScores = new int[Level.values().length];
   
-  
-  
-  FileIO() {
-    
-  }
-  
   void loadData() {
-    String data[] = loadStrings("endplayer"); 
+    String data[] = loadStrings("endplayer"); // will have to change this to default file when game is done
     
     currency = int(data[0].split(",")[0]);  
     maxHP = int(data[0].split(",")[1]);
@@ -76,18 +70,20 @@ class FileIO {
   }
   
   void saveData() {
+    // run after using shop or playing level
+    // outputs all necessary variables to proper places in the data file
     
   }
   
   void clearData() {
-    
+    // overwrites saved player with default values to start new game
   }
   
 }
 
 /* 
 NOTE:
-list of csv values stored:
+legend for how values are stored:
  currency, maxHP, highest level unlocked
  extra turrets unlocked (as 0 or 1, must list all 3) (1st is ALWAYS unlocked) 
  bullettypes unlocked (0 or 1 for each beyond basic, indexes in enum order)

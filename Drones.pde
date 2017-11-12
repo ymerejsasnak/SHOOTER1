@@ -58,7 +58,7 @@ class Drone {
   Drone(float angle, DroneDefinition droneDefinition) {
     this.angle = angle;
     distance = droneDefinition.distance;
-    size = droneDefinition.size;
+    size = int(droneDefinition.size * player.droneSizeMultiplier);
     rotSpeed = droneDefinition.rotSpeed;
     type = droneDefinition.type;
     

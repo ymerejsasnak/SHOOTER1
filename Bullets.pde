@@ -65,9 +65,9 @@ class Bullet {
     y = _y;
     
     this.bulletType = bulletDefinition.bulletType;
-    this.bulletSize = bulletDefinition.size;
+    this.bulletSize = int(bulletDefinition.size * player.bulletSizeMultiplier);
     this.speed = bulletDefinition.speed;
-    this.power = bulletDefinition.power;
+    this.power = int(bulletDefinition.power * player.bulletPowerMultiplier);
     
     // and set color based on type (also add a bit of randomness to gas angle/size)
     switch (bulletType) {

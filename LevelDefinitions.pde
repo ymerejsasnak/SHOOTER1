@@ -2,8 +2,8 @@
 
 enum Level {
   // text description,ms between spawns, max enemies, enemy list
-  ONE("Level 1", 1500, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
-  TWO("Level 2", 1200, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.REGULAR, EnemyDefinition.CIRCLES1}),
+  ONE("Level 1", 1000, 20, new EnemyDefinition[] {EnemyDefinition.EASY}),
+  TWO("Level 2", 1000, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.REGULAR, EnemyDefinition.CIRCLES1}),
   THREE("Level 3", 1000, 20, new EnemyDefinition[] {EnemyDefinition.REGULAR, EnemyDefinition.REGULAR, EnemyDefinition.BIGGIE, EnemyDefinition.BIGRAND}),
   FOUR("Level 4", 900, 30, new EnemyDefinition[] {EnemyDefinition.CIRCLES2, EnemyDefinition.CIRCLES1, EnemyDefinition.ASTEROID}),
   FIVE("Level 5", 800, 30, new EnemyDefinition[] {EnemyDefinition.CIRCLES2, EnemyDefinition.OSCIL2, EnemyDefinition.RANDOM1, EnemyDefinition.BIGGEROID}),

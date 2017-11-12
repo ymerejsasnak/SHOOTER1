@@ -43,8 +43,9 @@ final color DAMAGE_FILL = color(100, 10, 10);
 final color FREEZE_FILL = color(150, 150, 220);
 final color VAPORIZE_FILL = color(240, 230, 210);
 
+final int DANGER_LEVEL_TIME = 5; // in seconds
 
-final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this value then add to base
+final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed
 final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add to base
 
 // possible time range in ms for 'random' enemies to time direction switch

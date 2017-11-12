@@ -1,6 +1,6 @@
 // define possible game states: title screen, weapon/level select, actual level, 
 enum GameState {
-  TITLE, SELECT, LEVEL;
+  TITLE, SELECT, LEVEL, SHOP;
 }
 
 /*
@@ -10,13 +10,14 @@ class Game {
   GameState state;
   Level currentLevel;
   int levelProgression = 0; //used to scale up difficulty as level goes on
-  Timer progressionTimer = new Timer(10000);  // increase every 10 seconds
+  Timer progressionTimer = new Timer(DANGER_LEVEL_TIME * 1000);  // convert to ms
   
   int enemiesKilled;
   
   ArrayList<Button> titleButtons;
   ArrayList<Button> selectButtons;
   ArrayList<Button> levelButtons;
+  ArrayList<Button> shopButtons;
    
   ArrayList<Button> activeButtons;
   
@@ -53,7 +54,10 @@ class Game {
     levelButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
                                 width - BUTTON_SIZE, height - BUTTON_SIZE, BUTTON_SIZE));
                                 
-   
+    //shopButtons = new ArrayList<Button>(); //note ids begin at index 7
+    //for (int i = 0; i < BulletDefinition.values().length; i++) {
+    //  shopButtons.add(new Button(ButtonID.values()[i + 7]));
+   // }
         
     // by default title screen buttons are active
     activeButtons = titleButtons;
@@ -133,6 +137,7 @@ class Game {
         break;
       
       case NEW:
+       ///kjhkhkhjkjh
       case QUIT_LEVEL:
         for (Selector s: selectors) {
           s.update(); 
@@ -152,7 +157,8 @@ class Game {
         state = GameState.LEVEL;
         break;
       case SHOP:
-      
+        activeButtons = shopButtons;
+        state = GameState.SHOP;      
         break;
       case QUIT:
         exit();     

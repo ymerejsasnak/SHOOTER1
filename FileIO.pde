@@ -93,6 +93,6 @@ list of csv values stored:
  bullettypes unlocked (0 or 1 for each beyond basic, indexes in enum order)
  drone1 types unlocked (0 or 1 for each again)
  drone2 types unlocked
- power mult, bSize mult, droneSize mult, freeze time mult, (default is 1 for each)
+ power mult, bSize mult, droneSize mult, freeze time mult, (default is 1.00 for each up to max of 2.00)
  high score each level (default is 0 of course)
  */

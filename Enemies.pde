@@ -144,9 +144,9 @@ class Enemy {
   
   Enemy(float x, float y, EnemyDefinition enemyDef, int levelProgression) {
     
-    speed = enemyDef.speed + levelProgression * ENEMY_SPEED_SCALE; // pixels per second
-    hp = enemyDef.hp + levelProgression / 5;
-    maxHP = enemyDef.hp + levelProgression / 5;
+    speed = enemyDef.speed + ENEMY_SPEED_SCALE * levelProgression; // pixels per second
+    hp = enemyDef.hp + levelProgression / 2;
+    maxHP = enemyDef.hp + levelProgression / 2;
     power = enemyDef.power + levelProgression / ENEMY_POWER_SCALE;
     enemySize = enemyDef.size;
     movementType = enemyDef.movementType;
@@ -307,7 +307,7 @@ class Enemy {
   void hitByBullet(float bPower, BulletType bulletType) {
     if (bulletType == BulletType.FREEZE) {
       frozen = true;
-      freezeTimer = new Timer(FREEZE_DURATION);
+      freezeTimer = new Timer(int(FREEZE_DURATION * player.freezeTimeMultiplier));
     } else if (bulletType == BulletType.GAS) {
       hp -= bPower * deltaTime.getDelta();
     } else {
@@ -319,7 +319,7 @@ class Enemy {
   void hitByDrone(DroneType type) {
     switch(type) {
       case DAMAGE:
-        hp -= DRONE_DPS * deltaTime.getDelta();
+        hp -= DRONE_DPS * player.bulletPowerMultiplier * deltaTime.getDelta();
         break;
       case FREEZE:
         frozen = true;

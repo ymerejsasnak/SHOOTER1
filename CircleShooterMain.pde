@@ -4,12 +4,11 @@ NEXT TO DO:
  bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
  (easiest to make all seperate buttons?)
  
+ have to actually implement the various upgrades to size/power/etc too
+ 
  -start with only level 1, others unlocked upon meeting danger level req in prev level
  
- -player status/upgrades and load/save of 3 separate player files
- 
- 
- 
+  
  plan costs of everything in shop:
  order of weapons (cost-wise)? -- spray + power, bubble + pea + bomb, freeze + spread + drain
  order of drones (cost-wise)? --  attacker, defender + moon, freeze, vaporize+++
@@ -27,17 +26,23 @@ NEXT TO DO:
  
  -endless refactoring/code cleanup and game balance and bug hunting
  
+ 
  ---refactor selector class - selector is parent class, with level/turret/drone as subclasses for cleaner/better code?
+    (and related status loading shit...it's kind of a mess)
  ----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
  (also these are probably important to make shop/upgrades/player loading easier to implement in long run)
  
  -enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
  
+ -make gamestates objects themselves? or is this too much work pointlessly?  not sure...
+ 
+ -think about how to improve code if methods added to enums instead of using switch statements???
  
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
  if (player.dead) there
  
+ -basic/simple death animation (at least for enemies, probably also player)
  
  -refactoring: make getters/setters, private/public stuff,
 

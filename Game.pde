@@ -9,18 +9,13 @@ enum GameState {
 class Game {
   GameState state;
   Level currentLevel;
+  Buttons buttons;
+  
   int levelProgression = 0; //used to scale up difficulty as level goes on
   Timer progressionTimer = new Timer(DANGER_LEVEL_TIME);
   
   int enemiesKilled;
-  
-  ArrayList<Button> titleButtons;
-  ArrayList<Button> selectButtons;
-  ArrayList<Button> levelButtons;
-  ArrayList<Button> shopButtons;
-   
-  ArrayList<Button> activeButtons;
-  
+    
   ArrayList<Selector> selectors;
   
   Game() {
@@ -29,38 +24,9 @@ class Game {
     state = GameState.TITLE;
     drones = new Drones(); 
     player = new Player(); 
+    buttons = new Buttons();
     currentLevel = Level.ONE; 
     
-    
-    //***BEGIN BIG MESS THAT SHOULD NOT BE HERE***
-        
-    // define/load possible buttons for each gamestate (bad way to do this or what -- maybe could use enum??)
-    titleButtons = new ArrayList<Button>();
-    titleButtons.add(new Button(ButtonID.QUIT, "QUIT", width * 1/2, height * 4/5, BUTTON_SIZE));
-    titleButtons.add(new Button(ButtonID.NEW, "NEW", width * 1/4, height * 3/5, BUTTON_SIZE));
-    titleButtons.add(new Button(ButtonID.LOAD, "LOAD", width * 3/4, height * 3/5, BUTTON_SIZE));
-    
-    selectButtons = new ArrayList<Button>();
-    selectButtons.add(new Button(ButtonID.START, "START", 
-                                width * 1/4, height * 7/8, BUTTON_SIZE));
-    selectButtons.add(new Button(ButtonID.SHOP, "SHOP",
-                                width * 2/4, height * 7/8, BUTTON_SIZE));
-    selectButtons.add(new Button(ButtonID.QUIT, "QUIT",
-                                width * 3/4, height * 7/8, BUTTON_SIZE));
-                                           
-    levelButtons = new ArrayList<Button>();
-    levelButtons.add(new Button(ButtonID.QUIT_LEVEL, "QUIT",
-                                width - BUTTON_SIZE, height - BUTTON_SIZE, BUTTON_SIZE));
-        
-                                
-    //shopButtons = new ArrayList<Button>(); //note ids begin at index 7
-    //for (int i = 0; i < BulletDefinition.values().length; i++) {
-    //  shopButtons.add(new Button(ButtonID.values()[i + 7]));
-   // }
-        
-        
-    // by default title screen buttons are active
-    activeButtons = titleButtons;
     
     // selector boxes for selection screen
     selectors = new ArrayList<Selector>();
@@ -117,14 +83,7 @@ class Game {
       clickedSelector = SelectorID.NONE;
     }
     
-    // check for any buttons pressed
-    ButtonID pressedButton = ButtonID.NONE;
-    for (Button b: activeButtons) {
-      if (b.clickCheck(_mouseX, _mouseY)) {
-        pressedButton = b.id; // store button ID to switch on below
-      };
-    }
-    
+    ButtonID pressedButton = buttons.checkButtons(_mouseX, _mouseY);
     // button press actions
     switch (pressedButton) {
       case NONE:
@@ -134,7 +93,6 @@ class Game {
         for (Selector s: selectors) {
           s.update(); 
         }
-        activeButtons = selectButtons;
         state = GameState.SELECT; 
         break;
       case NEW:
@@ -143,7 +101,6 @@ class Game {
         for (Selector s: selectors) {
           s.update(); 
         }
-        activeButtons = selectButtons;
         state = GameState.SELECT;
         break;
       case START: 
@@ -154,7 +111,6 @@ class Game {
         levelProgression = 0;
         bullets = new Bullets();
         enemies = new Enemies();
-        activeButtons = levelButtons;
         state = GameState.LEVEL;
         break;
       case SHOP:
@@ -164,8 +120,12 @@ class Game {
       case QUIT:
         exit();  
     }
+    
+    // set appropriate buttons to 'active' and reset pressedbutton variable
+    buttons.setActive(state);
     pressedButton = ButtonID.NONE;
   }
+  
   
   // main 'run' method to choose which state to run
   void run() {
@@ -191,7 +151,7 @@ class Game {
     }
     
     // and display buttons, and selectors if on select screen
-    displayButtons();
+    buttons.displayButtons();
     if (state == GameState.SELECT) {
       displaySelectors();
     }   
@@ -225,7 +185,7 @@ class Game {
     // take care of things if player dies and exit method
     if (player.dead) {
       game.state = GameState.SELECT;
-      activeButtons = selectButtons;
+      buttons.setActive(state);
       player.dead = false;
       return;
     } 
@@ -259,12 +219,7 @@ class Game {
   }
   
   
-  // show active buttons
-  void displayButtons() {
-    for (Button b: activeButtons) {
-      b.display();
-    }
-  }
+ 
   
   
   // show selectors (only runs in SELECT state)

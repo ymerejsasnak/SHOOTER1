@@ -6,7 +6,7 @@ enum ButtonID {
   QUIT, NEW, LOAD,
   // select screen buttons
   START, SHOP, TO_TITLE, 
-  // shop buttons (begins at index 7)
+  // shop buttons (maybe make separate enum for these for better organization)
   POWER, SPRAY, PEA, BUBBLE, BOMB, FREEZE, SPREAD, DRAIN,
   REAR_TURRET, LEFT_TURRET, RIGHT_TURRET,
   ATTACKER1, DEFENDER1, FREEZER1, MOON1, VAPORIZER1,

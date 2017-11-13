@@ -41,8 +41,7 @@ class Selector {
       currentIndex = (currentIndex + 1) % totalOptions;
     }
     
-    // act based on which was clicked (better ways to do this!)
-    //ALSO LOTS OF REPEATED CODE HERE! YUCK!!!
+    // act based on which was clicked (need to DRY drone bits in this and below)
     switch(id) {
       case NONE:
         break;
@@ -51,29 +50,21 @@ class Selector {
         selectorText = levelSelections.get(currentIndex).text;
         break;
       case TURRET_ONE:
-        player.selectedBulletType[0] = bulletSelections.get(currentIndex);
-        player.turretTimers.set(0, new Timer(player.selectedBulletType[0].rate));
-        selectorText = bulletSelections.get(currentIndex).text;
+        cycleTurret(0);
         break;
       case TURRET_TWO:
         if (player.turret2) {
-          player.selectedBulletType[1] = bulletSelections.get(currentIndex);
-          player.turretTimers.set(1, new Timer(player.selectedBulletType[1].rate));
-          selectorText = bulletSelections.get(currentIndex).text;
+          cycleTurret(1);
         }
         break;
       case TURRET_THREE:
         if (player.turret3) {
-          player.selectedBulletType[2] = bulletSelections.get(currentIndex);
-          player.turretTimers.set(2, new Timer(player.selectedBulletType[2].rate));
-          selectorText = bulletSelections.get(currentIndex).text;
+          cycleTurret(2);
         }  
         break;
       case TURRET_FOUR:
         if (player.turret4) {
-          player.selectedBulletType[3] = bulletSelections.get(currentIndex);
-          player.turretTimers.set(3, new Timer(player.selectedBulletType[3].rate));
-          selectorText = bulletSelections.get(currentIndex).text;
+          cycleTurret(3);
         }
         break;
       case DRONE_ONE:
@@ -89,6 +80,14 @@ class Selector {
         }
         break;
     }
+  }
+  
+  
+  // submethod to make above switch statement non-repetetive
+  void cycleTurret(int turretIndex) {
+    player.selectedBulletType[turretIndex] = bulletSelections.get(currentIndex);
+    player.turretTimers.set(turretIndex, new Timer(player.selectedBulletType[turretIndex].rate));
+    selectorText = bulletSelections.get(currentIndex).text;   
   }
   
   
@@ -138,6 +137,7 @@ class Selector {
         break;
     }   
   }
+  
   
   // helpful bit to make above switch statement non-repetetive (good example of a method that should be private?)
   void loadBullets() {

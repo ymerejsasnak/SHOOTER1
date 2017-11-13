@@ -10,14 +10,13 @@ class Game {
   GameState state;
   Level currentLevel;
   Buttons buttons;
+  Selectors selectors;
   
   int levelProgression = 0; //used to scale up difficulty as level goes on
   Timer progressionTimer = new Timer(DANGER_LEVEL_TIME);
   
   int enemiesKilled;
     
-  ArrayList<Selector> selectors;
-  
   Game() {
     
     // initialize stuff
@@ -25,62 +24,19 @@ class Game {
     drones = new Drones(); 
     player = new Player(); 
     buttons = new Buttons();
-    currentLevel = Level.ONE; 
+    selectors = new Selectors();
     
-    
-    // selector boxes for selection screen
-    selectors = new ArrayList<Selector>();
-    selectors.add(new Selector(SelectorID.LEVEL, SELECTOR_SIZE * 3/2, height - SELECTOR_SIZE * 2));
-       
-    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/2, SELECTOR_SIZE));
-    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 1/2, SELECTOR_SIZE * 2));
-    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 1/2 - SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
-    selectors.add(new Selector(SelectorID.TURRET_FOUR, width * 1/2 + SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
-    
-    selectors.add(new Selector(SelectorID.DRONE_ONE, width * 1/2 - SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
-    selectors.add(new Selector(SelectorID.DRONE_TWO, width * 1/2 + SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
-    
-    //***END BIG MESS***
+    currentLevel = Level.ONE;     
   }
+  
   
   // process mouse clicks (buttons and selectors)
   void processClick(int _mouseX, int _mouseY) {
     
-    // check for any selectors pressed
+    SelectorID clickedSelector = SelectorID.NONE;
     if (state == GameState.SELECT) {
-      SelectorID clickedSelector = SelectorID.NONE;
-      for (Selector s: selectors) {
-        if (s.clickCheck(_mouseX, _mouseY)) {
-          clickedSelector = s.id; // store selector ID to switch on below
-        };
-      }
-      
-      switch (clickedSelector) { // feels like a better way exists
-        case NONE:
-          break;
-        case LEVEL:
-          selectors.get(0).cycle();
-          break;
-        case TURRET_ONE:
-          selectors.get(1).cycle();
-          break;
-        case TURRET_TWO:
-          selectors.get(2).cycle();
-          break;
-        case TURRET_THREE:
-          selectors.get(3).cycle();
-          break;
-        case TURRET_FOUR:
-          selectors.get(4).cycle();
-          break;
-        case DRONE_ONE:
-          selectors.get(5).cycle();
-          break;
-        case DRONE_TWO:
-          selectors.get(6).cycle();
-          break;        
-      }
-      clickedSelector = SelectorID.NONE;
+      clickedSelector = selectors.checkSelectors(_mouseX, _mouseY);
+      selectors.cycle(clickedSelector);
     }
     
     ButtonID pressedButton = buttons.checkButtons(_mouseX, _mouseY);
@@ -90,17 +46,13 @@ class Game {
         break;
       case LOAD:     
         player.setStatus();
-        for (Selector s: selectors) {
-          s.update(); 
-        }
+        selectors.update();
         state = GameState.SELECT; 
         break;
       case NEW:
       //cleardata/make new file?
       case QUIT_LEVEL:
-        for (Selector s: selectors) {
-          s.update(); 
-        }
+        selectors.update();
         state = GameState.SELECT;
         break;
       case START: 
@@ -114,16 +66,15 @@ class Game {
         state = GameState.LEVEL;
         break;
       case SHOP:
-        //activeButtons = shopButtons;
+        
         //state = GameState.SHOP;      
         break;
       case QUIT:
         exit();  
     }
     
-    // set appropriate buttons to 'active' and reset pressedbutton variable
+    // set appropriate buttons to 'active'
     buttons.setActive(state);
-    pressedButton = ButtonID.NONE;
   }
   
   
@@ -153,7 +104,7 @@ class Game {
     // and display buttons, and selectors if on select screen
     buttons.displayButtons();
     if (state == GameState.SELECT) {
-      displaySelectors();
+      selectors.displaySelectors();
     }   
   }
     
@@ -178,10 +129,6 @@ class Game {
   // run the actual game level
   void runLevel() {
     
-    // update and display player
-    player.update();
-    player.display();
-    
     // take care of things if player dies and exit method
     if (player.dead) {
       game.state = GameState.SELECT;
@@ -190,6 +137,10 @@ class Game {
       return;
     } 
     
+    // update and display player
+    player.update();
+    player.display();
+        
     // run drones then bullets
     drones.run();
     bullets.run();
@@ -200,7 +151,7 @@ class Game {
     }
     enemies.run(levelProgression);
     
-    // finally generate bullets
+    // finally generate new bullets
     player.shoot(); 
     
   }
@@ -216,16 +167,5 @@ class Game {
     text("hp: " + player.hp + "/" + player.maxHP, width * 2/5, HUD_VERTICAL_POS);
     text("enemies killed: " + enemiesKilled, width * 3/5, HUD_VERTICAL_POS);
     text("danger level: " + levelProgression, width * 4/5, HUD_VERTICAL_POS);
-  }
-  
-  
- 
-  
-  
-  // show selectors (only runs in SELECT state)
-  void displaySelectors() {
-    for (Selector s: selectors) {
-      s.display();
-    }
-  }
+  } 
 }

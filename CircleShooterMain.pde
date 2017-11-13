@@ -1,86 +1,58 @@
 /*
-NEXT TO DO:
+====NEXT TO DO====
 
-CODE EDITS/SIMPLE REFACTOR - (next: FileIO) 
-
- -shop screen (button on select screen) to buy upgrades:  (not seperate state, more like pop-up window)
+-MAJOR, IMPORTANT-
+ -shop screen/state to buy upgrades:
  bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
- (easiest to make all seperate buttons?)
- 
- have to actually implement the various upgrades to size/power/etc too
- 
- -start with only level 1, others unlocked upon meeting danger level req in prev level
- 
-  
- plan costs of everything in shop:
+ (possibly subclass button to shopbutton to add booleans such as 'can afford' and 'purchased'
+ (also maybe make separate enum for shopbutton IDs)
+ ==plan costs of everything in shop:
  order of weapons (cost-wise)? -- spray + power, bubble + pea + bomb, freeze + spread + drain
  order of drones (cost-wise)? --  attacker, defender + moon, freeze, vaporize+++
  upgrades that start cheaper (but will grow) - hp, power, first turret
  upgrades that start more expensive (and have less upgrades total) - last 2 turrets, bullet size, drone size, freeze time
  
- 
- EVENTUALLY:
- -hunt magic numbers! remaining: game button/selector positions (but inevitable?), some stuff in player class? (pos, size)
- 
- -more comments in the setstatus method in player class?
- 
- -selectors and buttons mess in game class should not be there...other related issues...
- 
- - better collision detection?
- 
- -enemy colors based on more variables
- 
- -polymorph enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
-  (and then can make more variation on those types for enemy defs)
- 
- -change select boxes so they show representative picture with labelling beneath it? or something more informative?
- 
  -fileIO - implement savedata (after shop) and cleardata(for new games - also if file doesn't exist, create it)
  also exception checking for load if file not found (in which case it just starts new game/makes new file?)
  
- -repetetive code in selector class switch statement(S)!
- 
- -endless refactoring/code cleanup and game balance and bug hunting
+ -implement next level unlock upon meeting target danger level in current level
  
  
- ---refactor selector class - selector is parent class, with level/turret/drone as subclasses for cleaner/better code?
-    (and related status loading shit...it's kind of a mess)
- ----?better way to manage/load buttons?  and fix various issues/ugliness w/ buttons/selectors
- (also these are probably important to make shop/upgrades/player loading easier to implement in long run)
- 
- -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
- 
- -make gamestates objects themselves? or is this too much work pointlessly?  not sure...
- 
- -think about how to improve code if methods added to enums instead of using switch statements???
- 
+-MINOR, LESS IMPORTANT-
+ -enemy colors based on more variables
+ -repetetive code in selector class (and drones class?) when dealing with drones!
+ -more comments in the setstatus method in player class?
+ -change select boxes so they show representative picture with labelling beneath it? or something more informative?
+ (should show power/rate and picture? something like that?)
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under
  if (player.dead) there
- 
  -basic/simple death animation (at least for enemies, probably also player)
- 
- -refactoring: make getters/setters, private/public stuff,
-
+ -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
+ -polymorph enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
+  (and then can make more variation on those types for enemy defs)
  -some more enemy defs (at least more carrier types, maybe a smaller teleporter? any others?)
  (actually, should be possible to make carrier of carriers...should I try this or no?)
  -and then, after that, fix level definitions to reflect new enemies
+ -polish: sfx, music, graphics tweaks, game balance, etc
  
- -enemies and enemy classes/files are still big and could maybe stand to be cleaned up, coded better
- (maybe with above ideas about enums vs switches and polymorphism)
+
+ - what about better collision detection?
  
- -fluff stuff (sfx, music, graphics tweaks, etc)
- 
- FUTURE:
+
+POSSIBLE REFACTORING:
+ -selector class as parent class, level/turret/drone each as its own subclass?
+ -make gamestates their own objects?
+ -add methods to various enums instead of all the if/switch statements?
+ -getters/setters, private/public stuff
+
+
+ POSSIBLE FUTURE ADDITION:
  --bonus modes? preset weapons and enemies with diff goals--
   -only freeze weapons, how long can you survive?
   -bomb shots?, how much damage can you take before you kill X enemies (ie, try NOT to kill enemies)?
   -license to kill mode (basic shot but 1 hit kill, you also 1 hit kill...how long/how many kills?)
- 
  */
-
-
-
 
 
 // DECLARATIONS //

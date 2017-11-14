@@ -3,7 +3,7 @@
 
 -MAJOR, IMPORTANT-
  -shop screen/state to buy upgrades:
- bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier?, drone size multiplier, freeze time multiplier
+ bullet types, extra turrets, drones, hp upgrade, power multiplier, bullet size multiplier, drone size multiplier, freeze time multiplier
  (possibly subclass button to shopbutton to add booleans such as 'can afford' and 'purchased'
  (also maybe make separate enum for shopbutton IDs)
  ==plan costs of everything in shop:
@@ -15,10 +15,10 @@
  -fileIO - implement savedata (after shop) and cleardata(for new games - also if file doesn't exist, create it)
  also exception checking for load if file not found (in which case it just starts new game/makes new file?)
  
- -implement next level unlock upon meeting target danger level in current level
- 
+
  
 -MINOR, LESS IMPORTANT-
+ -implement high score showing and saving
  -enemy colors based on more variables
  -repetetive code in selector class (and drones class?) when dealing with drones!
  -more comments in the setstatus method in player class?
@@ -29,7 +29,7 @@
  if (player.dead) there
  -basic/simple death animation (at least for enemies, probably also player)
  -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
- -polymorph enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
+ -more enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
   (and then can make more variation on those types for enemy defs)
  -some more enemy defs (at least more carrier types, maybe a smaller teleporter? any others?)
  (actually, should be possible to make carrier of carriers...should I try this or no?)
@@ -42,17 +42,11 @@
 
 POSSIBLE REFACTORING:
  -selector class as parent class, level/turret/drone each as its own subclass?
- -make gamestates their own objects?
+ -should each 'runstate' method display its own buttons? make gamestates their own objects? 
  -add methods to various enums instead of all the if/switch statements?
- -getters/setters, private/public stuff
-
-
- POSSIBLE FUTURE ADDITION:
- --bonus modes? preset weapons and enemies with diff goals--
-  -only freeze weapons, how long can you survive?
-  -bomb shots?, how much damage can you take before you kill X enemies (ie, try NOT to kill enemies)?
-  -license to kill mode (basic shot but 1 hit kill, you also 1 hit kill...how long/how many kills?)
+ -getters/setters, private/public stuff for proper java-ness
  */
+
 
 
 // DECLARATIONS //
@@ -64,7 +58,6 @@ Player player;
 Bullets bullets;
 Enemies enemies;
 //////////////////
-
 
 
 void setup() {

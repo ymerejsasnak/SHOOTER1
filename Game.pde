@@ -129,8 +129,13 @@ class Game {
   // run the actual game level
   void runLevel() {
     
-    // take care of things if player dies and exit method
+    // take care of things if player dies and exit method (better to put this in player class?)
     if (player.dead) {
+      if (levelProgression >= DANGER_LEVEL_UNLOCK &&
+          player.highestLevelUnlocked < Level.values().length + 1) {
+        player.highestLevelUnlocked += 1;
+        selectors.update();
+      }
       game.state = GameState.SELECT;
       buttons.setActive(state);
       player.dead = false;

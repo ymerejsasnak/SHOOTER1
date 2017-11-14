@@ -91,3 +91,7 @@ final int TELEPORTER_DMZ = 200; // number of 'safe zone' pixels around player wh
 final int TELEPORTER_SPEED_INCREASE = 10; // pps the speed increases after each teleport
 
 final int ARC_LENGTH = 200; //how far oscil travels back and forth (maybe not mathematically accurate but it works well enough)
+
+
+// MISC
+final int DANGER_LEVEL_UNLOCK = 5; // reach this 'danger level' in each level to unlock the next one (5 is temp for testing)

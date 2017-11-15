@@ -32,7 +32,7 @@ final int ENEMY_ALPHA = 150; // how transparent are enemies?
 
 
 // TEXT AND CONTROL OBJECT CONSTANTS
-final int BUTTON_SIZE = 70;
+final int BUTTON_SIZE = 100;
 final int BUTTON_TEXT_SIZE = 20;
 final int BUTTON_TEXT_OFFSET = 7; // needed to move text down a bit so it looks centered
 final color BUTTON_BG = color(200, 5);

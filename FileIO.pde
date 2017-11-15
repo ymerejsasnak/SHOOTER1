@@ -25,7 +25,8 @@ class FileIO {
   int[] highScores = new int[Level.values().length];
   
   void loadData() {
-    String data[] = loadStrings("endplayer"); // will have to change this to default file when game is done
+    String data[] = loadStrings("testplayer"); 
+    // will have to change this to default file when game is done - 2 files right now: endplayer and testplayer
     
     currency = int(data[0].split(",")[0]);  
     maxHP = int(data[0].split(",")[1]);

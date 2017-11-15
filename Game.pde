@@ -39,9 +39,13 @@ class Game {
       selectors.cycle(clickedSelector);
     }
     
-    ButtonID pressedButton = buttons.checkButtons(_mouseX, _mouseY);
+    Button pressedButton = buttons.checkButtons(_mouseX, _mouseY);
+    if (pressedButton == null) {
+      return;
+    }
+      
     // button press actions
-    switch (pressedButton) {
+    switch (pressedButton.id) {
       case NONE:
         break;
       case LOAD:     
@@ -51,7 +55,7 @@ class Game {
         break;
       case NEW:
       //cleardata/make new file?
-      case QUIT_LEVEL:
+      case RETURN_TO_SELECT:
         selectors.update();
         state = GameState.SELECT;
         break;
@@ -66,11 +70,15 @@ class Game {
         state = GameState.LEVEL;
         break;
       case SHOP:
+        state = GameState.SHOP;
         
-        //state = GameState.SHOP;      
         break;
       case QUIT:
         exit();  
+      default:
+        // if none of above, it's a shop button:
+        processShop(pressedButton);
+        buttons.updateShop();
     }
     
     // set appropriate buttons to 'active'
@@ -92,7 +100,7 @@ class Game {
         runLevel();
         break;
       case SHOP:
-        //runshop
+        runShop();
         break;
     }
   
@@ -123,8 +131,109 @@ class Game {
   // run the level/upgrade selection screen
   void runSelect() {
     player.hp = player.maxHP; // just make sure player's hp is refilled if quit or died
+    //see if next level is unlocked
+    if (levelProgression >= DANGER_LEVEL_UNLOCK &&
+          player.highestLevelUnlocked <= Level.values().length) {
+        player.highestLevelUnlocked += 1;
+        selectors.update();
+      
+    }
   }
   
+  
+  void runShop() {
+    buttons.updateShop();
+  }
+  
+  
+  void processShop(Button pressedButton) {
+    if (player.currency >= pressedButton.cost && !pressedButton.purchased && pressedButton.affordable) {
+      player.currency -= pressedButton.cost;
+      pressedButton.purchased = true;
+      switch(pressedButton.id) {
+        case POWER:
+          player.unlockedBullets.add(BulletDefinition.values()[1]);
+          break;
+        case SPRAY:
+          player.unlockedBullets.add(BulletDefinition.values()[2]);
+          break;
+        case PEA:
+          player.unlockedBullets.add(BulletDefinition.values()[3]);
+          break;
+        case BUBBLE:
+          player.unlockedBullets.add(BulletDefinition.values()[4]);
+          break;
+        case BOMB:
+          player.unlockedBullets.add(BulletDefinition.values()[5]);
+          break;
+        case FREEZE:
+          player.unlockedBullets.add(BulletDefinition.values()[6]);
+          break;
+        case SPREAD:
+          player.unlockedBullets.add(BulletDefinition.values()[7]);
+          break;
+        case DRAIN:
+          player.unlockedBullets.add(BulletDefinition.values()[8]);
+          break;
+        case REAR_TURRET:
+         
+          break;
+        case LEFT_TURRET:
+        
+          break;
+        case RIGHT_TURRET:
+        
+          break;
+        case ATTACKER1:
+        
+          break;
+        case DEFENDER1:
+        
+          break;
+        case FREEZER1:
+        
+          break;
+        case MOON1:
+        
+          break;
+        case VAPORIZER1:
+        
+          break;
+        case ATTACKER2:
+        
+          break;
+        case DEFENDER2:
+        
+          break;
+        case FREEZER2:
+        
+          break;
+        case MOON2:
+        
+          break;
+        case VAPORIZER2:
+        
+          break;
+        case MAX_HP:
+        
+          break;
+        case BULLET_POWER:
+        
+          break;
+        case BULLET_SIZE:
+        
+          break;
+        case DRONE_SIZE:
+        
+          break;
+        case FREEZE_TIME:
+        
+          break;
+      }
+    }
+  }
+  
+ 
   
   // run the actual game level
   void runLevel() {
@@ -135,6 +244,7 @@ class Game {
           player.highestLevelUnlocked < Level.values().length + 1) {
         player.highestLevelUnlocked += 1;
         selectors.update();
+      
       }
       game.state = GameState.SELECT;
       buttons.setActive(state);
@@ -153,6 +263,7 @@ class Game {
     // progress to next danger level if necessary, then run enemies
     if (progressionTimer.check()) {
       levelProgression += 1;
+      
     }
     enemies.run(levelProgression);
     

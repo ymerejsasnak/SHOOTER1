@@ -13,7 +13,7 @@ enum ButtonID {
   ATTACKER2, DEFENDER2, FREEZER2, MOON2, VAPORIZER2,
   MAX_HP, BULLET_POWER, BULLET_SIZE, DRONE_SIZE, FREEZE_TIME,
   // level screen buttons
-  QUIT_LEVEL 
+  RETURN_TO_SELECT 
   ;
 }
 
@@ -28,23 +28,49 @@ class Button {
   String buttonText;
   ButtonID id;
   
-  Button(ButtonID id, String text, int x, int y, int size) {
+  // shop only
+  int cost = 0; // if 0, not a shop button
+  boolean affordable = true;
+  boolean purchased = false;
+  
+  // constructor for regular buttons
+  Button(ButtonID id, String text, int x, int y) {
 
     this.id = id;
     buttonText = text;
     buttonX = x;
     buttonY = y;
-    buttonSize = size;
+    buttonSize = BUTTON_SIZE;
   }
   
+  // constructor for shop buttons
+  Button(ButtonID id, String text, int x, int y, int cost) {
+
+    this.id = id;
+    buttonText = text;
+    buttonX = x;
+    buttonY = y;
+    buttonSize = BUTTON_SIZE;
+    this.cost = cost;
+    affordable = false;
+  }
+  
+    
   void display() {
     fill(BUTTON_BG);
     noStroke();
-    rect(buttonX, buttonY, BUTTON_SIZE, BUTTON_SIZE, BUTTON_CORNER);
+    rect(buttonX, buttonY, buttonSize, buttonSize, BUTTON_CORNER);
     
-    fill(TEXT_COLOR);
-    textSize(BUTTON_TEXT_SIZE);
-    text(buttonText, buttonX, buttonY + BUTTON_TEXT_OFFSET);
+    if (cost > 0 && !purchased) {
+      fill(TEXT_COLOR);
+      text("cost: " + cost, buttonX, buttonY + BUTTON_TEXT_SIZE + BUTTON_TEXT_OFFSET);
+    }
+      
+    if (affordable && !purchased) {
+      fill(TEXT_COLOR);
+      textSize(BUTTON_TEXT_SIZE);
+      text(buttonText, buttonX, buttonY + BUTTON_TEXT_OFFSET);   
+    }
     
   }
 

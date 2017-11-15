@@ -43,7 +43,7 @@ class Player {
   Player() {
     
     selectedBulletType[0] = BulletDefinition.BASIC; 
-    turretTimers = new ArrayList<Timer>(4);
+    turretTimers = new ArrayList<Timer>();
     turretTimers.add(new Timer(selectedBulletType[0].rate));
     
   }
@@ -58,7 +58,7 @@ class Player {
     highestLevelUnlocked = file.highestLevel;
     
     selectedBulletType[0] = BulletDefinition.BASIC;
-    turretTimers = new ArrayList<Timer>(4);
+    turretTimers = new ArrayList<Timer>();
     turretTimers.add(new Timer(selectedBulletType[0].rate));  
     
     if (file.turret2) {
@@ -87,14 +87,18 @@ class Player {
       if (file.drones1[i] == 1) {
         unlockedDrones1.add(DroneDefinition.values()[i]);
       }
-      drones.setDroneOne(unlockedDrones1.get(0));
+      if (unlockedDrones1.size() > 0) {
+        drones.setDroneOne(unlockedDrones1.get(0));
+      }
     }
     
     for (int i = 0; i < file.drones2.length; i++) {
       if (file.drones2[i] == 1) {
         unlockedDrones2.add(DroneDefinition.values()[i]);
       }
-      drones.setDroneTwo(unlockedDrones2.get(0));
+      if (unlockedDrones2.size() > 0) {
+        drones.setDroneTwo(unlockedDrones2.get(0));
+      }
     }
     
     bulletPowerMultiplier = file.bulletPowerMultiplier;
@@ -125,9 +129,10 @@ class Player {
   void shoot() {
     
     for(int i = 0; i < selectedBulletType.length; i++){
-       if (selectedBulletType[i] != null && turretTimers.get(i).check()) {
-          
-          bullets.addBullet(turretAngle[i], turretX[i], turretY[i], selectedBulletType[i]);                 
+       if (selectedBulletType[i] != null) {
+         if(turretTimers.get(i).check()) {
+            bullets.addBullet(turretAngle[i], turretX[i], turretY[i], selectedBulletType[i]);                 
+         }
        }      
     } 
   }

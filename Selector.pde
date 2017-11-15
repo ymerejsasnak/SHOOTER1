@@ -46,7 +46,8 @@ class Selector {
       case NONE:
         break;
       case LEVEL:
-        game.currentLevel = levelSelections.get(currentIndex);
+        game.currentLevel = currentIndex + 1;
+        game.currentLevelDefinition = levelSelections.get(currentIndex);
         selectorText = levelSelections.get(currentIndex).text;
         break;
       case TURRET_ONE:

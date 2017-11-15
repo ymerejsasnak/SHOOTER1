@@ -29,37 +29,38 @@ class Buttons {
     levelButtons.add(new Button(ButtonID.RETURN_TO_SELECT, "QUIT", width - BUTTON_SIZE, height - BUTTON_SIZE));
         
                                 
-    shopButtons = new ArrayList<Button>();
-    shopButtons.add(new Button(ButtonID.POWER, "POWER", width * 1/9, height * 1/6, 1));
-    shopButtons.add(new Button(ButtonID.SPRAY, "SPRAY", width * 2/9, height * 1/6, 2));
-    shopButtons.add(new Button(ButtonID.PEA, "PEA", width * 3/9, height * 1/6, 3));
-    shopButtons.add(new Button(ButtonID.BUBBLE, "BUBBLE", width * 4/9, height * 1/6, 4));
-    shopButtons.add(new Button(ButtonID.BOMB, "BOMB", width * 5/9, height * 1/6, 5));
-    shopButtons.add(new Button(ButtonID.FREEZE, "FREEZE", width * 6/9, height * 1/6, 6));
-    shopButtons.add(new Button(ButtonID.SPREAD, "SPREAD", width * 7/9, height * 1/6, 7));
-    shopButtons.add(new Button(ButtonID.DRAIN, "DRAIN", width * 8/9, height * 1/6, 8));
+    shopButtons = new ArrayList<Button>();                   //cost is defined here in last parameter - seems like a bad spot!
+    shopButtons.add(new Button(ButtonID.POWER, "POWER", width * 1/9, height * 1/6, 25));
+    shopButtons.add(new Button(ButtonID.SPRAY, "SPRAY", width * 2/9, height * 1/6, 50));
+    shopButtons.add(new Button(ButtonID.PEA, "PEA", width * 3/9, height * 1/6, 75));
+    shopButtons.add(new Button(ButtonID.BOMB, "BOMB", width * 4/9, height * 1/6, 100));
+    shopButtons.add(new Button(ButtonID.BUBBLE, "BUBBLE", width * 5/9, height * 1/6, 150));
+    shopButtons.add(new Button(ButtonID.FREEZE, "FREEZE", width * 6/9, height * 1/6, 200));
+    shopButtons.add(new Button(ButtonID.DRAIN, "DRAIN", width * 7/9, height * 1/6, 200));
+    shopButtons.add(new Button(ButtonID.SPREAD, "SPREAD", width * 8/9, height * 1/6, 250));
     
-    shopButtons.add(new Button(ButtonID.REAR_TURRET, "REAR", width * 1/9, height * 2/6, 9));
-    shopButtons.add(new Button(ButtonID.LEFT_TURRET, "LEFT", width * 2/9, height * 2/6, 9));
-    shopButtons.add(new Button(ButtonID.RIGHT_TURRET, "RIGHT", width * 3/9, height * 2/6, 9));
     
-    shopButtons.add(new Button(ButtonID.ATTACKER1, "ATTACKER 1", width * 1/9, height * 3/6, 9));
-    shopButtons.add(new Button(ButtonID.DEFENDER1, "DEFENDER 1", width * 2/9, height * 3/6, 9));
-    shopButtons.add(new Button(ButtonID.FREEZER1, "FREEZER 1", width * 3/9, height * 3/6, 9));
-    shopButtons.add(new Button(ButtonID.MOON1, "MOON 1", width * 4/9, height * 3/6, 9));
-    shopButtons.add(new Button(ButtonID.VAPORIZER1, "VAPORIZER 1", width * 5/9, height * 3/6, 9));
+    shopButtons.add(new Button(ButtonID.REAR_TURRET, "REAR", width * 1/9, height * 2/6, 100));
+    shopButtons.add(new Button(ButtonID.LEFT_TURRET, "LEFT", width * 2/9, height * 2/6, 500));
+    shopButtons.add(new Button(ButtonID.RIGHT_TURRET, "RIGHT", width * 3/9, height * 2/6, 500));
     
-    shopButtons.add(new Button(ButtonID.ATTACKER2, "ATTACKER 2", width * 1/9, height * 4/6, 9));
-    shopButtons.add(new Button(ButtonID.DEFENDER2, "DEFENDER 2", width * 2/9, height * 4/6, 9));
-    shopButtons.add(new Button(ButtonID.FREEZER2, "FREEZER 2", width * 3/9, height * 4/6, 9));
-    shopButtons.add(new Button(ButtonID.MOON2, "MOON 2", width * 4/9, height * 4/6, 9));
-    shopButtons.add(new Button(ButtonID.VAPORIZER2, "VAPORIZER 2", width * 5/9, height * 4/6, 9));
+    shopButtons.add(new Button(ButtonID.ATTACKER1, "ATTACKER 1", width * 1/9, height * 3/6, 200));
+    shopButtons.add(new Button(ButtonID.DEFENDER1, "DEFENDER 1", width * 2/9, height * 3/6, 300));
+    shopButtons.add(new Button(ButtonID.FREEZER1, "FREEZER 1", width * 3/9, height * 3/6, 300));
+    shopButtons.add(new Button(ButtonID.MOON1, "MOON 1", width * 4/9, height * 3/6, 300));
+    shopButtons.add(new Button(ButtonID.VAPORIZER1, "VAPORIZER 1", width * 5/9, height * 3/6, 500));
     
-    shopButtons.add(new Button(ButtonID.MAX_HP, "maxhp 2", width * 1/9, height * 5/6, 9));
-    shopButtons.add(new Button(ButtonID.BULLET_POWER, "bulletpower", width * 2/9, height * 5/6, 9));
-    shopButtons.add(new Button(ButtonID.BULLET_SIZE, "bsize", width * 3/9, height * 5/6, 9));
-    shopButtons.add(new Button(ButtonID.DRONE_SIZE, "dronesize", width * 4/9, height * 5/6, 9));
-    shopButtons.add(new Button(ButtonID.FREEZE_TIME, "freezetime", width * 5/9, height * 5/6, 9));
+    shopButtons.add(new Button(ButtonID.ATTACKER2, "ATTACKER 2", width * 1/9, height * 4/6, 400));
+    shopButtons.add(new Button(ButtonID.DEFENDER2, "DEFENDER 2", width * 2/9, height * 4/6, 400));
+    shopButtons.add(new Button(ButtonID.FREEZER2, "FREEZER 2", width * 3/9, height * 4/6, 600));
+    shopButtons.add(new Button(ButtonID.MOON2, "MOON 2", width * 4/9, height * 4/6, 600));
+    shopButtons.add(new Button(ButtonID.VAPORIZER2, "VAPORIZER 2", width * 5/9, height * 4/6, 1000));
+    
+    shopButtons.add(new Button(ButtonID.MAX_HP, "MAX HP x2", width * 1/9, height * 5/6, 500));
+    shopButtons.add(new Button(ButtonID.BULLET_POWER, "POWER x2", width * 2/9, height * 5/6, 1000));
+    shopButtons.add(new Button(ButtonID.BULLET_SIZE, "BULLET SIZE x2", width * 3/9, height * 5/6, 500));
+    shopButtons.add(new Button(ButtonID.DRONE_SIZE, "DRONE SIZE x2", width * 4/9, height * 5/6, 1000));
+    shopButtons.add(new Button(ButtonID.FREEZE_TIME, "FREEZE TIME x2", width * 5/9, height * 5/6, 1000));
     
     shopButtons.add(new Button(ButtonID.RETURN_TO_SELECT, "BACK", width * 8/9, height * 8/9));
         

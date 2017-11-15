@@ -41,12 +41,12 @@ class Enemy {
     this.y = y;
     
     speed = enemyDef.speed + ENEMY_SPEED_SCALE * levelProgression; // pixels per second
-    hp = enemyDef.hp + levelProgression / ENEMY_HP_SCALE;
-    maxHP = enemyDef.hp + levelProgression / ENEMY_HP_SCALE;
-    enemyPower = enemyDef.power + levelProgression / ENEMY_POWER_SCALE;
+    hp = enemyDef.hp; // + levelProgression / ENEMY_HP_SCALE;
+    maxHP = enemyDef.hp; // + levelProgression / ENEMY_HP_SCALE;
+    enemyPower = enemyDef.power; // + levelProgression / ENEMY_POWER_SCALE;
     enemySize = enemyDef.size;
     enemyType = enemyDef.enemyType;
-    reward = enemyDef.reward * (levelProgression + 1);
+    reward = enemyDef.reward + levelProgression;
     
     // various things only used for specific enemies:
     numberCarried = enemyDef.numberCarried;

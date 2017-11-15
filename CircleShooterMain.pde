@@ -15,6 +15,8 @@
  -fileIO - implement savedata (after shop) and cleardata(for new games - also if file doesn't exist, create it)
  also exception checking for load if file not found (in which case it just starts new game/makes new file?)
  
+ 
+ BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
 
  
 -MINOR, LESS IMPORTANT-

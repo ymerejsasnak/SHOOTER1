@@ -13,29 +13,29 @@ enum EnemyDefinition {
       //                 type          speed   hp   attack  size  reward
   EASY            (EnemyType.STANDARD,   75,    2,    1,     80,    1),
   REGULAR         (EnemyType.STANDARD,  100,    3,    2,     50,    2),
-  BIGGIE          (EnemyType.STANDARD,   25,   20,    4,    150,    5),
-  HUGE            (EnemyType.STANDARD,   20,   50,   10,    200,   10),
-  FAST            (EnemyType.STANDARD,  300,    1,    2,     30,    5),
+  BIGGIE          (EnemyType.STANDARD,   25,   20,    4,    150,    3),
+  HUGE            (EnemyType.STANDARD,   20,   50,   10,    200,    5),
+  FAST            (EnemyType.STANDARD,  300,    1,    2,     30,    4),
   
-  RANDOM1         (  EnemyType.RANDOM,  100,    1,    1,     30,    3),
-  RANDOM2         (  EnemyType.RANDOM,  200,    2,    2,     40,    4),
-  BIGRAND         (  EnemyType.RANDOM,  100,   10,    5,    100,    5),
+  RANDOM1         (  EnemyType.RANDOM,  100,    1,    1,     30,    2),
+  RANDOM2         (  EnemyType.RANDOM,  200,    2,    2,     40,    3),
+  BIGRAND         (  EnemyType.RANDOM,  100,   10,    5,    100,    2),
   
   ASTEROID        (EnemyType.ASTEROID,  500,    2,    3,     30,   10),
   BIGGEROID       (EnemyType.ASTEROID,  400,    5,    5,     80,   10),
   
   CIRCLES1        ( EnemyType.CIRCLES,   50,    1,    1,     50,    2),
-  CIRCLES2        ( EnemyType.CIRCLES,  100,    2,    2,     30,    4),  
+  CIRCLES2        ( EnemyType.CIRCLES,  100,    2,    2,     30,    3),  
   
-  OSCIL1          (   EnemyType.OSCIL,   50,    1,    1,     50,    4),
-  OSCIL2          (   EnemyType.OSCIL,  100,    2,    2,     30,    7),
+  OSCIL1          (   EnemyType.OSCIL,   50,    1,    1,     50,    2),
+  OSCIL2          (   EnemyType.OSCIL,  100,    2,    2,     30,    4),
   
-  TELEPORT        (EnemyType.TELEPORT,  150,    5,    5,     50,    7),
+  TELEPORT        (EnemyType.TELEPORT,  150,    5,    5,     50,    3),
   
        //                                                                 type carried,            # carried
-  REGULAR_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    5,    EnemyDefinition.REGULAR,     3),
-  CIRCLES_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    5,   EnemyDefinition.CIRCLES1,     3),
-  OSCIL_CARRIER   ( EnemyType.CARRIER,   25,    5,   10,    150,    5,     EnemyDefinition.OSCIL1,     3),
+  REGULAR_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    2,    EnemyDefinition.REGULAR,     3),
+  CIRCLES_CARRIER ( EnemyType.CARRIER,   25,    5,   10,    150,    2,   EnemyDefinition.CIRCLES1,     3),
+  OSCIL_CARRIER   ( EnemyType.CARRIER,   25,    5,   10,    150,    2,     EnemyDefinition.OSCIL1,     3),
   
   ;
   

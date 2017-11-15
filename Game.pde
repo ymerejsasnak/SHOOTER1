@@ -8,7 +8,8 @@ enum GameState {
 */
 class Game {
   GameState state;
-  Level currentLevel;
+  Level currentLevelDefinition;
+  int currentLevel;
   Buttons buttons;
   Selectors selectors;
   
@@ -26,7 +27,8 @@ class Game {
     buttons = new Buttons();
     selectors = new Selectors();
     
-    currentLevel = Level.ONE;     
+    currentLevel = 1;
+    currentLevelDefinition = Level.ONE;     
   }
   
   
@@ -64,7 +66,7 @@ class Game {
         progressionTimer.restart();
         player.restartTurretTimers();
         enemiesKilled = 0;
-        levelProgression = 0;
+        //levelProgression = 0;
         bullets = new Bullets();
         enemies = new Enemies();
         state = GameState.LEVEL;
@@ -133,11 +135,12 @@ class Game {
     player.hp = player.maxHP; // just make sure player's hp is refilled if quit or died
     //see if next level is unlocked
     if (levelProgression >= DANGER_LEVEL_UNLOCK &&
-          player.highestLevelUnlocked <= Level.values().length) {
-        player.highestLevelUnlocked += 1;
+          player.highestLevelUnlocked < Level.values().length) {
+        player.highestLevelUnlocked = max(currentLevel + 1, player.highestLevelUnlocked);
         selectors.update();
       
     }
+    levelProgression = 0;
   }
   
   
@@ -160,75 +163,82 @@ class Game {
         case PEA:
           player.unlockedBullets.add(BulletDefinition.values()[3]);
           break;
-        case BUBBLE:
+        case BOMB:
           player.unlockedBullets.add(BulletDefinition.values()[4]);
           break;
-        case BOMB:
+        case BUBBLE:
           player.unlockedBullets.add(BulletDefinition.values()[5]);
           break;
         case FREEZE:
           player.unlockedBullets.add(BulletDefinition.values()[6]);
           break;
-        case SPREAD:
+        case DRAIN:
           player.unlockedBullets.add(BulletDefinition.values()[7]);
           break;
-        case DRAIN:
+        case SPREAD:
           player.unlockedBullets.add(BulletDefinition.values()[8]);
           break;
         case REAR_TURRET:
-         
+          player.turret2 = true;
+          player.selectedBulletType[1] = BulletDefinition.BASIC;
+          player.turretTimers.add(new Timer(player.selectedBulletType[1].rate));
           break;
         case LEFT_TURRET:
-        
+          player.turret3 = true;
+          player.selectedBulletType[2] = BulletDefinition.BASIC;
+          player.turretTimers.add(new Timer(player.selectedBulletType[2].rate));
           break;
         case RIGHT_TURRET:
-        
+          player.turret4 = true;
+          player.selectedBulletType[3] = BulletDefinition.BASIC;
+          player.turretTimers.add(new Timer(player.selectedBulletType[3].rate));
           break;
         case ATTACKER1:
-        
+          player.unlockedDrones1.add(DroneDefinition.ATTACKER);
           break;
         case DEFENDER1:
-        
+          player.unlockedDrones1.add(DroneDefinition.DEFENDER);
           break;
         case FREEZER1:
-        
+          player.unlockedDrones1.add(DroneDefinition.FREEZER);
           break;
         case MOON1:
-        
+          player.unlockedDrones1.add(DroneDefinition.MOON);
           break;
         case VAPORIZER1:
-        
+          player.unlockedDrones1.add(DroneDefinition.VAPORIZER);
           break;
         case ATTACKER2:
-        
+          player.unlockedDrones2.add(DroneDefinition.ATTACKER);
           break;
         case DEFENDER2:
-        
+          player.unlockedDrones2.add(DroneDefinition.DEFENDER);
           break;
         case FREEZER2:
-        
+          player.unlockedDrones2.add(DroneDefinition.FREEZER);
           break;
         case MOON2:
-        
+          player.unlockedDrones2.add(DroneDefinition.MOON);
           break;
         case VAPORIZER2:
-        
+          player.unlockedDrones2.add(DroneDefinition.VAPORIZER);
           break;
         case MAX_HP:
-        
+          player.maxHP *= 2;
           break;
         case BULLET_POWER:
-        
+          player.bulletPowerMultiplier = 2;
           break;
         case BULLET_SIZE:
-        
+          player.bulletSizeMultiplier = 2;
           break;
         case DRONE_SIZE:
-        
+          player.droneSizeMultiplier = 2;
           break;
         case FREEZE_TIME:
-        
+          player.freezeTimeMultiplier = 2;
           break;
+   
       }
     }
   }
@@ -240,12 +250,7 @@ class Game {
     
     // take care of things if player dies and exit method (better to put this in player class?)
     if (player.dead) {
-      if (levelProgression >= DANGER_LEVEL_UNLOCK &&
-          player.highestLevelUnlocked < Level.values().length + 1) {
-        player.highestLevelUnlocked += 1;
-        selectors.update();
       
-      }
       game.state = GameState.SELECT;
       buttons.setActive(state);
       player.dead = false;

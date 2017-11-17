@@ -48,7 +48,7 @@ class Selector {
       case LEVEL:
         game.currentLevel = currentIndex + 1;
         game.currentLevelDefinition = levelSelections.get(currentIndex);
-        selectorText = levelSelections.get(currentIndex).text;
+        selectorText = levelSelections.get(currentIndex).text + "\n" + player.highScores[currentIndex];
         break;
       case TURRET_ONE:
         cycleTurret(0);
@@ -102,7 +102,7 @@ class Selector {
           levelSelections.add(Level.values()[i]);
         }
         totalOptions = levelSelections.size();
-        selectorText = levelSelections.get(currentIndex).text;
+        selectorText = levelSelections.get(currentIndex).text  + "\n" + player.highScores[currentIndex];
         break;
       case TURRET_ONE:
           loadBullets();

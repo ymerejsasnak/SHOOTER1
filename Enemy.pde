@@ -40,9 +40,9 @@ class Enemy {
     this.x = x;
     this.y = y;
     
-    speed = enemyDef.speed + ENEMY_SPEED_SCALE * levelProgression; // pixels per second
-    hp = enemyDef.hp; // + levelProgression / ENEMY_HP_SCALE;
-    maxHP = enemyDef.hp; // + levelProgression / ENEMY_HP_SCALE;
+    speed = enemyDef.speed + min(ENEMY_SPEED_SCALE * levelProgression, MAX_ENEMY_SPEEDUP); // pixels per second
+    hp = enemyDef.hp + min(int(levelProgression / ENEMY_HP_SCALE), MAX_ENEMY_HPUP);
+    maxHP = enemyDef.hp + min(int(levelProgression / ENEMY_HP_SCALE), MAX_ENEMY_HPUP);
     enemyPower = enemyDef.power; // + levelProgression / ENEMY_POWER_SCALE;
     enemySize = enemyDef.size;
     enemyType = enemyDef.enemyType;
@@ -83,30 +83,30 @@ class Enemy {
         break;
       case RANDOM:
         fill = color(150, 10, 30);
-        outerStroke = color(150, 125, 125); 
+        outerStroke = color(speed + 50, 125, 125); 
         outerWeight = 1;
-        innerStroke = color(0, 50, 50);
+        innerStroke = color(0, enemySize, 50);
         innerWeight = 2;
         break;
       case CIRCLES:
-        fill = color(20);
-        outerStroke = color(50, 50, 220); 
+        fill = color(enemySize);
+        outerStroke = color(enemySize, enemySize, 220); 
         outerWeight = 4;
-        innerStroke = color(20, 20, 100);
+        innerStroke = color(20, 20, speed);
         innerWeight = 1;
         break;
       case OSCIL:
-        fill = color(50, 150, 0);
-        outerStroke = color(0, 150, 50); 
+        fill = color(50, speed + 100, 0);
+        outerStroke = color(0, speed + 50, 50); 
         outerWeight = 1;
-        innerStroke = color(100, 50, 50);
+        innerStroke = color(100, 50, enemySize);
         innerWeight = 5;
         break;
       case ASTEROID:
-        fill = color(150, 100, 0);
+        fill = color(150, enemySize, 0);
         outerStroke = color(200, 150, 0); 
         outerWeight = 4;
-        innerStroke = color(100, 50, 50);
+        innerStroke = color(100, 50, enemySize);
         innerWeight = 1;
         break;
       case TELEPORT:

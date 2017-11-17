@@ -6,6 +6,7 @@ class Enemies {
   ArrayList<Enemy> enemies;
   Timer spawnTimer;
   int maxEnemies;
+  int spawnIndex = 0;
     
   Enemies() {
     
@@ -25,8 +26,10 @@ class Enemies {
     if (spawnTimer.check() && enemies.size() < maxEnemies) {  
       
       // choose from defined list of enemies for current level
-      int choice = (int) random(0, game.currentLevelDefinition.spawnableEnemies.length);
-      EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[choice];
+      //int choice = (int) random(0, game.currentLevelDefinition.spawnableEnemies.length);
+      
+      EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[spawnIndex];
+      spawnIndex = (spawnIndex + 1) % game.currentLevelDefinition.spawnableEnemies.length;
       
       // randomly choose between the four screen sides to generate enemy (off screen)
       int choice2 = (int) random(0, 4);

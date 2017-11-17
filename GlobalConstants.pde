@@ -81,9 +81,11 @@ final int DRONE_DPS = 10; // damage rate for 'damage' type drones
 
 
 // ENEMY CONSTANTS
-final int ENEMY_HP_SCALE = 2; // divide danger level by this value then add to base (ie every X levels, hp + 1)
-//final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed (ie add X to speed per level)
-//final int ENEMY_POWER_SCALE = 5; // divide danger level by this value then add to base (ie every X levels, power + 1)
+final int ENEMY_HP_SCALE = 5; // divide danger level by this value then add to base (ie every X levels, hp + 1)
+final int MAX_ENEMY_HPUP = 10;
+final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed (ie add X to speed per level)
+final int MAX_ENEMY_SPEEDUP = 200;
+//final int ENEMY_POWER_SCALE = 10; // divide danger level by this value then add to base (ie every X levels, power + 1)
 
 final int CHANCE_TARGET_PLAYER = 30; // the percent chance a random type will actually move toward the player
 

@@ -1,53 +1,62 @@
 enum Level {
   //      text    spawnwait   max#          
   //                                      enemy list
-  ONE  ( "Level 1",   1000,    20, 
+  ONE  ( "Level 1",   500,    2, 
         new EnemyDefinition[] {EnemyDefinition.EASY,
                                EnemyDefinition.REGULAR}),
         
-  TWO  ( "Level 2",   1000,    20, 
+  TWO  ( "Level 2",   1000,    2, 
         new EnemyDefinition[] {EnemyDefinition.REGULAR,
                                EnemyDefinition.CIRCLES1}),
   
-  THREE( "Level 3",   1000,    20,
+  THREE( "Level 3",   1000,    2,
         new EnemyDefinition[] {EnemyDefinition.REGULAR,
                                EnemyDefinition.REGULAR,
+                               EnemyDefinition.REGULAR,
+                               EnemyDefinition.REGULAR,
                                EnemyDefinition.BIGGIE,
-                               EnemyDefinition.BIGRAND}),
+                               EnemyDefinition.RANDOM1,
+                               EnemyDefinition.RANDOM1}),
                                
-  FOUR ( "Level 4",    900,    30, 
+  FOUR ( "Level 4",    500,    4, 
         new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
                                EnemyDefinition.CIRCLES1,
-                               EnemyDefinition.ASTEROID}),
+                               EnemyDefinition.OSCIL1}),
                                
-  FIVE ( "Level 5",    800,    30, 
+  FIVE ( "Level 5",    800,    3, 
         new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
                                EnemyDefinition.OSCIL2, 
-                               EnemyDefinition.RANDOM1, 
-                               EnemyDefinition.BIGGEROID}),
+                               EnemyDefinition.BIGRAND}),
                                
-  SIX  ( "Level 6",   1200,    10, 
+  SIX  ( "Level 6",   100,    3, 
         new EnemyDefinition[] {EnemyDefinition.HUGE,
+                               EnemyDefinition.BIGGEROID,
+                               EnemyDefinition.BIGGIE,
                                EnemyDefinition.ASTEROID}),
                                
-  SEVEN( "Level 7",    600,    40, 
+  SEVEN( "Level 7",    100,    3, 
         new EnemyDefinition[] {EnemyDefinition.RANDOM2,
+                               EnemyDefinition.FAST,
+                               EnemyDefinition.FAST,
                                EnemyDefinition.FAST}),
                                
-  EIGHT( "Level 8",    500,    50, 
+  EIGHT( "Level 8",    200,    3, 
         new EnemyDefinition[] {EnemyDefinition.FAST,
                                EnemyDefinition.ASTEROID,
                                EnemyDefinition.OSCIL2}),
                                
-  NINE ( "Level 9",    900,    10, 
+  NINE ( "Level 9",    500,    5, 
         new EnemyDefinition[] {EnemyDefinition.TELEPORT,
                                EnemyDefinition.TELEPORT,
-                               EnemyDefinition.HUGE}),
+                               EnemyDefinition.HUGE,
+                               EnemyDefinition.REGULAR_CARRIER,
+                               EnemyDefinition.FAST}),
         
-  TEN  ("Level 10",   1000,    30, 
+  TEN  ("Level 10",   1000,    2, 
         new EnemyDefinition[] {EnemyDefinition.REGULAR_CARRIER,
                                EnemyDefinition.CIRCLES_CARRIER,
-                               EnemyDefinition.OSCIL_CARRIER}),
+                               EnemyDefinition.OSCIL_CARRIER,
+                               EnemyDefinition.CARRIER_CARRIER}),
   
   ;
     

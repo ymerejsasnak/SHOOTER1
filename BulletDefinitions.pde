@@ -9,11 +9,11 @@ enum BulletDefinition {
   //           text              type           size  speed  power  rate (ms between bullets)                
   BASIC  ( "BASIC SHOT",  BulletType.STANDARD,    6,   200,     1,   200),        
   
-  POWER  ( "POWER SHOT",  BulletType.STANDARD,   10,   150,    10,   400),     
+  POWER  ( "POWER SHOT",  BulletType.STANDARD,   10,   150,     5,   400),     
   SPRAY  (  "GAS SPRAY",       BulletType.GAS,   15,    75,     5,   200),   
   
   PEA    (   "PEA SHOT",  BulletType.STANDARD,    2,   300,    .5,    40),    
-  BOMB   (  "BOMB SHOT",  BulletType.STANDARD,   20,    75,   100,  2000),    
+  BOMB   (  "BOMB SHOT",  BulletType.STANDARD,   20,    75,    20,  1000),    
   BUBBLE ( "GAS BUBBLE",       BulletType.GAS,   50,    50,    10,  1000),  
   
   FREEZE (     "FREEZE",    BulletType.FREEZE,   10,   300,     0,   200),

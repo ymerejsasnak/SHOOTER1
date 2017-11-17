@@ -248,6 +248,8 @@ class Game {
   // run the actual game level
   void runLevel() {
     
+    player.highScores[currentLevel - 1] = max(enemiesKilled, player.highScores[currentLevel - 1]);
+    
     // take care of things if player dies and exit method (better to put this in player class?)
     if (player.dead) {
       

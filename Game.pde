@@ -132,6 +132,7 @@ class Game {
   
   // run the level/upgrade selection screen
   void runSelect() {
+    file.saveData();
     player.hp = player.maxHP; // just make sure player's hp is refilled if quit or died
     //see if next level is unlocked
     if (levelProgression >= DANGER_LEVEL_UNLOCK &&

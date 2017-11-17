@@ -25,7 +25,7 @@ class FileIO {
   int[] highScores = new int[Level.values().length];
   
   void loadData() {
-    String data[] = loadStrings("testplayer"); 
+    String data[] = loadStrings("savetest"); 
     // will have to change this to default file when game is done - 2 files right now: endplayer and testplayer
     
     currency = int(data[0].split(",")[0]);  
@@ -70,9 +70,57 @@ class FileIO {
     }
   }
   
+   // run after using shop or playing level
+   // outputs all necessary variables to proper places in the data file
   void saveData() {
-    // run after using shop or playing level
-    // outputs all necessary variables to proper places in the data file
+    String general, turrets, bullets, drones1, drones2, multipliers, highScores;
+    bullets = "";
+    drones1 = "";
+    drones2 = "";
+    highScores = "";
+    
+    general = player.currency + "," + player.maxHP + "," + player.highestLevelUnlocked;
+    
+    String turret2 = player.turret2 ? "1" : "0";
+    String turret3 = player.turret3 ? "1" : "0";
+    String turret4 = player.turret4 ? "1" : "0";
+    turrets = turret2 + "," + turret3 + "," + turret4;
+    
+    for (int i = 1; i < BulletDefinition.values().length; i++) {
+      if (player.unlockedBullets.contains(BulletDefinition.values()[i])) {
+        bullets += "1,"; 
+      } else {
+        bullets += "0,";
+      }
+    }
+    bullets = bullets.substring(0, bullets.length() - 1);
+    
+    for (int i = 0; i < DroneDefinition.values().length; i++) {
+      if (player.unlockedDrones1.contains(DroneDefinition.values()[i])) {
+        drones1 += "1,"; 
+      } else {
+        drones1 += "0,";
+      }
+      if (player.unlockedDrones2.contains(DroneDefinition.values()[i])) {
+        drones2 += "1,"; 
+      } else {
+        drones2 += "0,";
+      }
+    }
+    drones1 = drones1.substring(0, drones1.length() - 1);
+    drones2 = drones2.substring(0, drones2.length() - 1);
+    
+    multipliers = player.bulletPowerMultiplier + "," + player.bulletSizeMultiplier + "," +
+                  player.droneSizeMultiplier + "," + player.freezeTimeMultiplier;
+
+    for (int i = 0; i < Level.values().length; i++) {
+      highScores += player.highScores[i] + ",";
+    }
+    highScores = highScores.substring(0, highScores.length() - 1); 
+    
+    String[] dataString = new String[] {general, turrets, bullets, drones1, drones2, multipliers, highScores};
+    
+    saveStrings(dataPath("savetest"), dataString);    
     
   }
   

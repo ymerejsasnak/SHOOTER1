@@ -9,7 +9,7 @@
  BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
  (either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
  BUG?:issue with drones showing up when first purchased? not sure if this really happened, double check...
-
+BUG: shop doesn't reflect loaded game
  
 -MINOR, LESS IMPORTANT-
  -repetetive code in selector class (and drones class?) when dealing with drones!

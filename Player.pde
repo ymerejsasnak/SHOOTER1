@@ -4,13 +4,13 @@
 class Player {
   
   int x = width / 2;
-  int y = height / 2;
+  int y = height;
   int size = PLAYER_SIZE;
   float radius = size/2;
   
-  float[] turretAngle = new float[4];
-  float[] turretX = new float[4];
-  float[] turretY = new float[4];
+  float[] turretAngle = new float[3];
+  float[] turretX = new float[3];
+  float[] turretY = new float[3];
   ArrayList<Timer> turretTimers = new ArrayList<Timer>();
   
   int currency = 0;
@@ -20,11 +20,9 @@ class Player {
   
   boolean turret2 = false;
   boolean turret3 = false;
-  boolean turret4 = false;
-  BulletDefinition[] selectedBulletType = new BulletDefinition[4];
+  BulletDefinition[] selectedBulletType = new BulletDefinition[3];
   ArrayList<BulletDefinition> unlockedBullets = new ArrayList<BulletDefinition>();   
-  ArrayList<DroneDefinition> unlockedDrones1 = new ArrayList<DroneDefinition>();
-  ArrayList<DroneDefinition> unlockedDrones2 = new ArrayList<DroneDefinition>();
+  ArrayList<DroneDefinition> unlockedDrones = new ArrayList<DroneDefinition>();
   
   int highestLevelUnlocked = 1;
   int[] highScores = new int[Level.values().length];
@@ -71,11 +69,7 @@ class Player {
       selectedBulletType[2] = BulletDefinition.BASIC;
       turretTimers.add(new Timer(selectedBulletType[2].rate));
     }
-    if (file.turret4) {
-      turret4 = true;
-      selectedBulletType[3] = BulletDefinition.BASIC;
-      turretTimers.add(new Timer(selectedBulletType[3].rate));
-    }
+    
      
     for (int i = 0; i < file.bullets.length; i++) {
       if (file.bullets[i] == 1) {
@@ -83,23 +77,16 @@ class Player {
       }
     }
     
-    for (int i = 0; i < file.drones1.length; i++) {
-      if (file.drones1[i] == 1) {
-        unlockedDrones1.add(DroneDefinition.values()[i]);
+    for (int i = 0; i < file.drones.length; i++) {
+      if (file.drones[i] == 1) {
+        unlockedDrones.add(DroneDefinition.values()[i]);
       }
-      if (unlockedDrones1.size() > 0) {
-        drones.setDroneOne(unlockedDrones1.get(0));
+      if (unlockedDrones.size() > 0) {
+        drone = new Drone(0, unlockedDrones.get(0));
       }
     }
     
-    for (int i = 0; i < file.drones2.length; i++) {
-      if (file.drones2[i] == 1) {
-        unlockedDrones2.add(DroneDefinition.values()[i]);
-      }
-      if (unlockedDrones2.size() > 0) {
-        drones.setDroneTwo(unlockedDrones2.get(0));
-      }
-    }
+    
     
     bulletPowerMultiplier = file.bulletPowerMultiplier;
     bulletSizeMultiplier = file.bulletSizeMultiplier;
@@ -114,9 +101,10 @@ class Player {
   void update() {
     
     turretAngle[0] = atan2(mouseY - y, mouseX - x);
-    turretAngle[1] = turretAngle[0] + PI;
-    turretAngle[2] = turretAngle[0] - PI/2;
-    turretAngle[3] = turretAngle[0] + PI/2;
+    turretAngle[1] = turretAngle[0] + PI/5;
+    turretAngle[2] = turretAngle[0] - PI/5;
+    
+    
            
     for(int i = 0; i < selectedBulletType.length; i++){
        turretX[i] = x + cos(turretAngle[i]) * (radius + GUN_LENGTH);

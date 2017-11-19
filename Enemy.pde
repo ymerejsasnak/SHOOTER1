@@ -176,11 +176,19 @@ class Enemy {
     if (enemyType == EnemyType.CIRCLES || enemyType == EnemyType.OSCIL) {
       int rotation;
       
+      
+      
       x = player.x + cos(angle) * distance;
       y = player.y + sin(angle) * distance;
       
+      
       if (clockwise) { rotation = 1; } else { rotation = -1; }
        
+      if (y >= height - enemySize && x < player.x) {
+        clockwise = true;
+      } else if ( y >= height - enemySize && x > player.x) {
+        clockwise = false; 
+      }
       //increase angle as distance gets smaller
       angle += ARC_LENGTH / distance * rotation * deltaTime.getDelta();
       distance -= speed * deltaTime.getDelta();
@@ -195,6 +203,7 @@ class Enemy {
     if (enemyType == EnemyType.OSCIL && oscilTimer.check()) {
       clockwise = !clockwise;
     }
+    
     
     // asteroid is only enemy that will go off-screen and not come back, so set to dead if it does
     if (enemyType == EnemyType.ASTEROID) {

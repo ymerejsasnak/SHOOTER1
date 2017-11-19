@@ -2,9 +2,10 @@
 ====NEXT TO DO====
 
 -MAJOR, IMPORTANT-
--fileIO - implement savedata (after shop and level) and cleardata(for new games - also if file doesn't exist, create it)
- also exception checking for load if file not found (in which case it just starts new game/makes new file?)
- 
+!!! consider moving player to bottom of screen!!!
+--will have to adjust some things: enemy spawn location, circles enemies not doing full circle, drones will have to change
+movement style, reduce extra turrets to 2 and put them in front at an angle, etc.
+ !!!! started to work on this, still need to iron out some stuff, esp drones
  
  BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
  (either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
@@ -12,6 +13,7 @@
 BUG: shop doesn't reflect loaded game
  
 -MINOR, LESS IMPORTANT-
+-add bullet speed upgrade also?
  -repetetive code in selector class (and drones class?) when dealing with drones!
  -more comments in the setstatus method in player class?
  -change select boxes so they show representative picture with labelling beneath it? or something more informative?
@@ -24,7 +26,7 @@ BUG: shop doesn't reflect loaded game
  -more enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
   (and then can make more variation on those types for enemy defs)
  -some more carrier types?
- -polish: sfx, music, graphics tweaks, game balance, etc
+ -polish: sfx, music, graphics tweaks, game balance, etc  -add "juiciness"
  
 
  - what about better collision detection?
@@ -43,8 +45,8 @@ POSSIBLE REFACTORING:
 FileIO file;
 Game game;
 DeltaTime deltaTime;
-Drones drones;
 Player player;
+Drone drone;
 Bullets bullets;
 Enemies enemies;
 //////////////////

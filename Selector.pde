@@ -2,8 +2,8 @@
 enum SelectorID {
   NONE, // (could have just checked for null?)
   LEVEL,
-  TURRET_ONE, TURRET_TWO, TURRET_THREE, TURRET_FOUR,
-  DRONE_ONE, DRONE_TWO,
+  TURRET_ONE, TURRET_TWO, TURRET_THREE,
+  DRONE,
   ;
 }
 
@@ -21,9 +21,7 @@ class Selector {
   
   ArrayList<Level> levelSelections = new ArrayList<Level>();
   ArrayList<BulletDefinition> bulletSelections = new ArrayList<BulletDefinition>();
-  ArrayList<DroneDefinition> drone1Selections = new ArrayList<DroneDefinition>();
-  ArrayList<DroneDefinition> drone2Selections = new ArrayList<DroneDefinition>();
-  
+  ArrayList<DroneDefinition> droneSelections = new ArrayList<DroneDefinition>();
   
   Selector(SelectorID _id, int x, int y) {
     
@@ -63,23 +61,14 @@ class Selector {
           cycleTurret(2);
         }  
         break;
-      case TURRET_FOUR:
-        if (player.turret4) {
-          cycleTurret(3);
+      
+      case DRONE:
+        if (player.unlockedDrones.size() > 0) {
+          drone = new Drone(0, droneSelections.get(currentIndex));
+          selectorText = droneSelections.get(currentIndex).text;
         }
         break;
-      case DRONE_ONE:
-        if (player.unlockedDrones1.size() > 0) {
-          drones.setDroneOne(drone1Selections.get(currentIndex));
-          selectorText = drone1Selections.get(currentIndex).text;
-        }
-        break;
-      case DRONE_TWO:
-        if (player.unlockedDrones2.size() > 0) {
-          drones.setDroneTwo(drone2Selections.get(currentIndex));
-          selectorText = drone2Selections.get(currentIndex).text;
-        }
-        break;
+      
     }
   }
   
@@ -117,25 +106,15 @@ class Selector {
           loadBullets();
         }
         break;
-      case TURRET_FOUR:
-        if (player.turret4) {
-          loadBullets();
-        } 
-        break;
-      case DRONE_ONE:
-        if (player.unlockedDrones1.size() > 0) {
-          drone1Selections = player.unlockedDrones1;
-          totalOptions = drone1Selections.size();
-          selectorText = drone1Selections.get(currentIndex).text;
+      
+      case DRONE:
+        if (player.unlockedDrones.size() > 0) {
+          droneSelections = player.unlockedDrones;
+          totalOptions = droneSelections.size();
+          selectorText = droneSelections.get(currentIndex).text;
         }
         break;
-      case DRONE_TWO:
-        if (player.unlockedDrones2.size() > 0) {
-          drone2Selections = player.unlockedDrones2;
-          totalOptions = drone2Selections.size();
-          selectorText = drone2Selections.get(currentIndex).text;
-        }
-        break;
+      
     }   
   }
   

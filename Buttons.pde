@@ -40,21 +40,15 @@ class Buttons {
     shopButtons.add(new Button(ButtonID.SPREAD, "SPREAD", width * 8/9, height * 1/6, 2000));
     
     
-    shopButtons.add(new Button(ButtonID.REAR_TURRET, "REAR", width * 1/9, height * 2/6, 1000));
-    shopButtons.add(new Button(ButtonID.LEFT_TURRET, "LEFT", width * 2/9, height * 2/6, 4000));
-    shopButtons.add(new Button(ButtonID.RIGHT_TURRET, "RIGHT", width * 3/9, height * 2/6, 5000));
+    shopButtons.add(new Button(ButtonID.LEFT_TURRET, "LEFT", width * 1/9, height * 2/6, 1000));
+    shopButtons.add(new Button(ButtonID.RIGHT_TURRET, "RIGHT", width * 2/9, height * 2/6, 4000));
     
-    shopButtons.add(new Button(ButtonID.ATTACKER1, "ATTACKER 1", width * 1/9, height * 3/6, 2000));
-    shopButtons.add(new Button(ButtonID.DEFENDER1, "DEFENDER 1", width * 2/9, height * 3/6, 3000));
-    shopButtons.add(new Button(ButtonID.FREEZER1, "FREEZER 1", width * 3/9, height * 3/6, 3000));
-    shopButtons.add(new Button(ButtonID.MOON1, "MOON 1", width * 4/9, height * 3/6, 3000));
-    shopButtons.add(new Button(ButtonID.VAPORIZER1, "VAPORIZER 1", width * 5/9, height * 3/6, 6000));
+    shopButtons.add(new Button(ButtonID.ATTACKER, "ATTACKER", width * 1/9, height * 3/6, 2000));
+    shopButtons.add(new Button(ButtonID.DEFENDER, "DEFENDER", width * 2/9, height * 3/6, 3000));
+    shopButtons.add(new Button(ButtonID.FREEZER, "FREEZER", width * 3/9, height * 3/6, 3000));
+    shopButtons.add(new Button(ButtonID.MOON, "MOON", width * 4/9, height * 3/6, 3000));
+    shopButtons.add(new Button(ButtonID.VAPORIZER, "VAPORIZER", width * 5/9, height * 3/6, 6000));
     
-    shopButtons.add(new Button(ButtonID.ATTACKER2, "ATTACKER 2", width * 1/9, height * 4/6, 4000));
-    shopButtons.add(new Button(ButtonID.DEFENDER2, "DEFENDER 2", width * 2/9, height * 4/6, 8000));
-    shopButtons.add(new Button(ButtonID.FREEZER2, "FREEZER 2", width * 3/9, height * 4/6, 8000));
-    shopButtons.add(new Button(ButtonID.MOON2, "MOON 2", width * 4/9, height * 4/6, 8000));
-    shopButtons.add(new Button(ButtonID.VAPORIZER2, "VAPORIZER 2", width * 5/9, height * 4/6, 10000));
     
     shopButtons.add(new Button(ButtonID.MAX_HP, "MAX HP x2", width * 1/9, height * 5/6, 15000));
     shopButtons.add(new Button(ButtonID.BULLET_POWER, "POWER x2", width * 2/9, height * 5/6, 15000));

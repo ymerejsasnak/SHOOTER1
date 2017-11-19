@@ -12,6 +12,7 @@ class Game {
   int currentLevel;
   Buttons buttons;
   Selectors selectors;
+
   
   int levelProgression = 0; //used to scale up difficulty as level goes on
   Timer progressionTimer = new Timer(DANGER_LEVEL_TIME);
@@ -21,8 +22,7 @@ class Game {
   Game() {
     
     // initialize stuff
-    state = GameState.TITLE;
-    drones = new Drones(); 
+    state = GameState.TITLE; 
     player = new Player(); 
     buttons = new Buttons();
     selectors = new Selectors();
@@ -62,7 +62,7 @@ class Game {
         state = GameState.SELECT;
         break;
       case START: 
-        drones.resetAngles();
+        drone.resetAngles();
         progressionTimer.restart();
         player.restartTurretTimers();
         enemiesKilled = 0;
@@ -179,51 +179,33 @@ class Game {
         case SPREAD:
           player.unlockedBullets.add(BulletDefinition.values()[8]);
           break;
-        case REAR_TURRET:
+        case LEFT_TURRET:
           player.turret2 = true;
           player.selectedBulletType[1] = BulletDefinition.BASIC;
           player.turretTimers.add(new Timer(player.selectedBulletType[1].rate));
           break;
-        case LEFT_TURRET:
+        case RIGHT_TURRET:
           player.turret3 = true;
           player.selectedBulletType[2] = BulletDefinition.BASIC;
           player.turretTimers.add(new Timer(player.selectedBulletType[2].rate));
           break;
-        case RIGHT_TURRET:
-          player.turret4 = true;
-          player.selectedBulletType[3] = BulletDefinition.BASIC;
-          player.turretTimers.add(new Timer(player.selectedBulletType[3].rate));
+        
+        case ATTACKER:
+          player.unlockedDrones.add(DroneDefinition.ATTACKER);
           break;
-        case ATTACKER1:
-          player.unlockedDrones1.add(DroneDefinition.ATTACKER);
+        case DEFENDER:
+          player.unlockedDrones.add(DroneDefinition.DEFENDER);
           break;
-        case DEFENDER1:
-          player.unlockedDrones1.add(DroneDefinition.DEFENDER);
+        case FREEZER:
+          player.unlockedDrones.add(DroneDefinition.FREEZER);
           break;
-        case FREEZER1:
-          player.unlockedDrones1.add(DroneDefinition.FREEZER);
+        case MOON:
+          player.unlockedDrones.add(DroneDefinition.MOON);
           break;
-        case MOON1:
-          player.unlockedDrones1.add(DroneDefinition.MOON);
+        case VAPORIZER:
+          player.unlockedDrones.add(DroneDefinition.VAPORIZER);
           break;
-        case VAPORIZER1:
-          player.unlockedDrones1.add(DroneDefinition.VAPORIZER);
-          break;
-        case ATTACKER2:
-          player.unlockedDrones2.add(DroneDefinition.ATTACKER);
-          break;
-        case DEFENDER2:
-          player.unlockedDrones2.add(DroneDefinition.DEFENDER);
-          break;
-        case FREEZER2:
-          player.unlockedDrones2.add(DroneDefinition.FREEZER);
-          break;
-        case MOON2:
-          player.unlockedDrones2.add(DroneDefinition.MOON);
-          break;
-        case VAPORIZER2:
-          player.unlockedDrones2.add(DroneDefinition.VAPORIZER);
-          break;
+        
         case MAX_HP:
           player.maxHP *= 2;
           break;
@@ -265,7 +247,8 @@ class Game {
     player.display();
         
     // run drones then bullets
-    drones.run();
+    drone.update();
+    drone.display();
     bullets.run();
     
     // progress to next danger level if necessary, then run enemies

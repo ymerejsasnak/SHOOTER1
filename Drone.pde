@@ -1,5 +1,5 @@
 /*
-  CLASS FOR INDIVIDUAL DRONES
+  CLASS FOR DRONE
 */
 
 class Drone {
@@ -9,6 +9,7 @@ class Drone {
   int distance;
   int size;
   float rotSpeed;
+  int rotDirection;
   DroneType type;
   color fill;
     
@@ -33,9 +34,20 @@ class Drone {
     }
   }
   
+  void resetAngles() {
+    if (drone != null) {
+      drone.angle = 0;
+    }
+  }
+
   
   void update() {
-    angle += rotSpeed;
+    if (y > height - size/2 && x > player.x) {
+      rotDirection = -1;
+    } else if (y > height - size/2 && x < player.x) {
+      rotDirection = 1; 
+    }
+    angle += rotSpeed * rotDirection;
     x = player.x + cos(angle) * distance;
     y = player.y + sin(angle) * distance;
   } 

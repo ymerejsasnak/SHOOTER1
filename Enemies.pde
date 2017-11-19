@@ -31,26 +31,26 @@ class Enemies {
       EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[spawnIndex];
       spawnIndex = (spawnIndex + 1) % game.currentLevelDefinition.spawnableEnemies.length;
       
-      // randomly choose between the four screen sides to generate enemy (off screen)
-      int choice2 = (int) random(0, 4);
+      // randomly choose between the 3 screen sides to generate enemy (off screen)
+      int choice2 = (int) random(0, 3);
       float x = 0, y = 0;
       switch(choice2) {
         case 0:
           x = 0 - enemyToSpawn.size/2;
-          y = random(height);
+          y = random(height/2);
           break;
         case 1:
           x = width + enemyToSpawn.size/2;
-          y = random(height);
+          y = random(height/2);
           break;
         case 2:
           x = random(width);
           y = 0 - enemyToSpawn.size/2;      
           break;
-        case 3:
-          x = random(width);
-          y = height + enemyToSpawn.size/2;      
-          break;
+        //case 3:
+         // x = random(width);
+         // y = height + enemyToSpawn.size/2;      
+         // break;
       }
       enemies.add(new Enemy(x, y, enemyToSpawn, levelProgression));   
     }
@@ -72,14 +72,10 @@ class Enemies {
       }     
       
       // also check if hit drones:
-      Drone drone = drones.drone1;
       if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
         enemy.hitByDrone(drone.type);
       }
-      drone = drones.drone2;
-      if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
-        enemy.hitByDrone(drone.type);
-      }
+      
       
       // if hp reduced to 0, it's dead, get currency and kill score
       if (enemy.hp <= 0) {

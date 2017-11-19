@@ -36,7 +36,7 @@ class Drone {
   
   void resetAngles() {
     if (drone != null) {
-      drone.angle = 0;
+      angle = 0;
     }
   }
 

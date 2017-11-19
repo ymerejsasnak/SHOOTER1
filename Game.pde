@@ -62,7 +62,7 @@ class Game {
         state = GameState.SELECT;
         break;
       case START: 
-        drone.resetAngles();
+        //drone.resetAngles();
         progressionTimer.restart();
         player.restartTurretTimers();
         enemiesKilled = 0;
@@ -247,8 +247,10 @@ class Game {
     player.display();
         
     // run drones then bullets
-    drone.update();
-    drone.display();
+    if (drone != null) {
+      drone.update();
+      drone.display();
+    }
     bullets.run();
     
     // progress to next danger level if necessary, then run enemies

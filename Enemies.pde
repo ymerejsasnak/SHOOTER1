@@ -32,7 +32,7 @@ class Enemies {
       spawnIndex = (spawnIndex + 1) % game.currentLevelDefinition.spawnableEnemies.length;
       
       // randomly choose between the 3 screen sides to generate enemy (off screen)
-      int choice2 = (int) random(0, 3);
+      int choice2 = (int) random(0, 4);
       float x = 0, y = 0;
       switch(choice2) {
         case 0:
@@ -44,6 +44,7 @@ class Enemies {
           y = random(height/2);
           break;
         case 2:
+        case 3:
           x = random(width);
           y = 0 - enemyToSpawn.size/2;      
           break;

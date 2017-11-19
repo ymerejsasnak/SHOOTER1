@@ -11,11 +11,12 @@ enum EnemyType {
 enum EnemyDefinition {
   
       //                 type          speed   hp   attack  size  reward
-  EASY            (EnemyType.STANDARD,   75,    2,    1,     80,    1),
-  REGULAR         (EnemyType.STANDARD,  100,    3,    1,     50,    2),
+  EASY            (EnemyType.STANDARD,   75,    2,    1,     85,    1),
+  REGULAR         (EnemyType.STANDARD,  100,    3,    1,     60,    2),
   BIGGIE          (EnemyType.STANDARD,   25,   15,    4,    150,    5),
   HUGE            (EnemyType.STANDARD,   20,   30,    9,    200,    7),
   FAST            (EnemyType.STANDARD,  300,    1,    2,     30,    4),
+  SWARMER         (EnemyType.STANDARD,   25,    1,    1,     50,    1),
   
   RANDOM1         (  EnemyType.RANDOM,   75,    1,    2,     50,    2),
   RANDOM2         (  EnemyType.RANDOM,  150,    2,    3,     30,    3),

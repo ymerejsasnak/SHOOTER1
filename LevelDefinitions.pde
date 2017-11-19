@@ -18,10 +18,8 @@ enum Level {
                                EnemyDefinition.RANDOM1,
                                EnemyDefinition.RANDOM1}),
                                
-  FOUR ( "Level 4",    500,    4, 
-        new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
-                               EnemyDefinition.CIRCLES1,
-                               EnemyDefinition.OSCIL1}),
+  FOUR ( "Level 4",    100,    25, 
+        new EnemyDefinition[] {EnemyDefinition.SWARMER}),
                                
   FIVE ( "Level 5",    800,    3, 
         new EnemyDefinition[] {EnemyDefinition.CIRCLES2,

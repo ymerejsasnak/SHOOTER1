@@ -2,10 +2,10 @@
 ====NEXT TO DO====
 
 -MAJOR, IMPORTANT-
-!!! consider moving player to bottom of screen!!!
---will have to adjust some things: enemy spawn location, circles enemies not doing full circle, drones will have to change
-movement style, reduce extra turrets to 2 and put them in front at an angle, etc.
- !!!! started to work on this, still need to iron out some stuff, esp drones
+new enemies - swarms of MANY very weak enemies moving slowly?
+different movement types given that gameplay is slightly different now 
+(ie, back and forth across screen, shoot up from beside/behind player then target it, maybe others?
+
  
  BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
  (either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
@@ -37,6 +37,10 @@ POSSIBLE REFACTORING:
  -should each 'runstate' method display its own buttons? make gamestates their own objects? 
  -add methods to various enums instead of all the if/switch statements?
  -getters/setters, private/public stuff for proper java-ness
+ 
+ 
+ 
+ refactor plans: bullet types each as its own subclass of bullet, same with enemies, drones, gamestates
  */
 
 

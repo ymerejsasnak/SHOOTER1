@@ -67,8 +67,7 @@ class Enemies {
       // (eventually find a better way to allow better framerates w/ lots onscreen?)
       for (Bullet b: bullets.bullets){
         if (dist(enemy.x, enemy.y, b.x, b.y) <= (enemy.enemySize / 2 + b.bulletSize / 2)) {   // divide by 2 to get radius
-          enemy.hitByBullet(b.power, b.bulletType); // go to submethod to subtract bullet power from enemy
-          b.hitEnemy(); // also deal with bullet 'hit' condition
+          enemy.hitByBullet(b.damageEnemy(), b.freezeEnemy()); // go to submethod to subtract bullet power from enemy
         }
       }     
       

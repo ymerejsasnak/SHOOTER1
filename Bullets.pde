@@ -15,10 +15,23 @@ class Bullets {
   // create a new bullet
   void addBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
 
-    bullets.add(new Bullet(angle, x, y, bulletDefinition));
-    if (bulletDefinition.bulletType == BulletType.SPREAD) { // add 2 more if spread at opposite angles
-      bullets.add(new Bullet(angle + SPREAD_ANGLE, x, y, bulletDefinition));
-      bullets.add(new Bullet(angle - SPREAD_ANGLE, x, y, bulletDefinition));
+    switch(bulletDefinition.bulletType) {
+      case STANDARD:
+        bullets.add(new Standard(angle, x, y, bulletDefinition));
+        break;
+      case GAS:
+        bullets.add(new Gas(angle, x, y, bulletDefinition));
+        break;
+      case FREEZE:
+        bullets.add(new Freeze(angle, x, y, bulletDefinition));
+        break;
+      case DRAIN:
+        bullets.add(new Drain(angle, x, y, bulletDefinition));
+        break;
+      case SPREAD:
+        bullets.add(new Standard(angle + SPREAD_ANGLE, x, y, bulletDefinition));
+        bullets.add(new Standard(angle - SPREAD_ANGLE, x, y, bulletDefinition));
+        break;
     }
   }
 

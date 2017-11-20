@@ -27,24 +27,6 @@ class Bullet {
     this.speed = bulletDefinition.speed;
     this.power = bulletDefinition.power * player.bulletPowerMultiplier;
     
-    // and set color based on type (also add a bit of randomness to gas angle/size)
-    switch (bulletType) {
-      case STANDARD:
-      case SPREAD:
-        this.bFill = BULLET_WHITE;
-        break;
-      case DRAIN:
-        this.bFill = DRAIN_YELLOW;
-        break;
-      case GAS:
-        this.bFill = GAS_GREEN;
-        this.angle += randomGaussian() * GAS_ANGLE_RANDOMNESS;
-        this.bulletSize += randomGaussian() * GAS_SIZE_RANDOMNESS;
-        break;
-      case FREEZE:
-        this.bFill = FREEZE_BLUE;
-        break;
-    }
   }
 
   // update position of bullet and check if it goes off screen
@@ -59,16 +41,17 @@ class Bullet {
     }
   }
 
-  // called from enemy class if bullet and enemy collide
-  void hitEnemy() {
-    if (bulletType != BulletType.GAS) {  // gas doesn't 'die' upon hitting enemy
-      dead = true;
-    }
-    if (bulletType == BulletType.DRAIN) {
-      player.hp += power;
-      player.hp = min(player.hp, player.maxHP);
-    }
+
+  boolean freezeEnemy() {
+    return false;  
   }
+  
+  
+  float damageEnemy() {
+    dead = true;
+    return power;
+  }
+
 
   // draw the bullet
   void display() {
@@ -77,5 +60,61 @@ class Bullet {
     noStroke();
 
     ellipse(x, y, bulletSize, bulletSize);
+  }
+}
+
+
+class Standard extends Bullet {
+  
+  Standard(float angle, float x, float y, BulletDefinition bulletDefinition) {
+    super(angle, x, y, bulletDefinition);
+    this.bFill = BULLET_WHITE;
+  }
+  
+}
+
+
+class Gas extends Bullet {
+  
+ Gas(float angle, float x, float y, BulletDefinition bulletDefinition){
+   super(angle, x, y, bulletDefinition);
+   this.bFill = GAS_GREEN;
+   this.angle += randomGaussian() * GAS_ANGLE_RANDOMNESS;
+   this.bulletSize += randomGaussian() * GAS_SIZE_RANDOMNESS;
+ }
+ 
+ float damageEnemy() {
+   dead = false; // gas bullet doesn't 'die' upon hitting enemy
+   return super.damageEnemy() * deltaTime.getDelta();
+ }
+ 
+}
+
+
+class Freeze extends Bullet {
+  
+ Freeze(float angle, float x, float y, BulletDefinition bulletDefinition) {
+    super(angle, x, y, bulletDefinition); 
+    this.bFill = FREEZE_BLUE;
+ }
+ 
+ boolean freezeEnemy() {
+   return true;
+ }
+ 
+}
+
+
+class Drain extends Bullet {
+  
+  Drain(float angle, float x, float y, BulletDefinition bulletDefinition) {
+    super(angle, x, y, bulletDefinition);
+    this.bFill = DRAIN_YELLOW;
+  }
+  
+  float damageEnemy() {
+    player.hp += power;
+    player.hp = min(player.hp, player.maxHP);
+    return super.damageEnemy();
   }
 }

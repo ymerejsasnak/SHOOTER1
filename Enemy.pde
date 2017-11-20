@@ -220,15 +220,15 @@ class Enemy {
   
   
   // enemy hit by bullet, lower its hp by bullet power
-  void hitByBullet(float bulletPower, BulletType bulletType) {
-    if (bulletType == BulletType.FREEZE) {
+  void hitByBullet(float damage, boolean freeze) {
+    if (freeze) {
       frozen = true;
       freezeTimer = new Timer(int(FREEZE_DURATION * player.freezeTimeMultiplier));
-    } else if (bulletType == BulletType.GAS) {
-      hp -= bulletPower * deltaTime.getDelta(); // gas is damage per second
-    } else {
-      hp -= bulletPower;
     }
+    println(hp);
+    println(damage);
+    println("---");
+    hp -= damage;
   }
   
   

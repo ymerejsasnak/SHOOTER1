@@ -1,10 +1,19 @@
 /*
 ====NEXT TO DO====
 
+THE BIG REFACTOR:
+redo bullet class - make it parent class, with specific bullet types as subclasses, and fix anything related in other classes(player, game, etc)
+redo button class - again, parent of specific children
+redo selector class - same
+redo drone class - same
+redo enemy class - same
+game class - not sure about this one--??make a gamestate class, where each state is its own object/subclass, controlled by game class?
+
+
 -MAJOR, IMPORTANT-
-new enemies - swarms of MANY very weak enemies moving slowly?
+new enemies - 
 different movement types given that gameplay is slightly different now 
-(ie, back and forth across screen, shoot up from beside/behind player then target it, maybe others?
+(ie, back and forth across screen, up and down across, shoot up from beside/behind player then target it, maybe others?
 
  
  BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
@@ -72,7 +81,7 @@ void setup() {
 
 void draw() {
 
-  //background(BG_COLOR);
+  background(BG_COLOR);
 
   //calculate time (in seconds) since last loop
   deltaTime.calcDelta();
@@ -84,9 +93,9 @@ void draw() {
   text("Framerate: " + (int) frameRate, 100, height - 20);
   
   //temp thing to blur graphics...but should implement something like this
-  fill(0, 100);
-  noStroke();
-  rect(width/2, height/2, width, height);
+  //fill(0, 100);
+  //noStroke();
+  //rect(width/2, height/2, width, height);
   
 }
 

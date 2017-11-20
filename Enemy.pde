@@ -225,27 +225,17 @@ class Enemy {
       frozen = true;
       freezeTimer = new Timer(int(FREEZE_DURATION * player.freezeTimeMultiplier));
     }
-    println(hp);
-    println(damage);
-    println("---");
     hp -= damage;
   }
   
   
   //enemy hit by drone, act accordingly
-  void hitByDrone(DroneType type) {
-    switch(type) {
-      case DAMAGE:
-        hp -= DRONE_DPS * player.bulletPowerMultiplier * deltaTime.getDelta(); // damage type is dps not single hit
-        break;
-      case FREEZE:
-        frozen = true;
-        freezeTimer = new Timer(FREEZE_DURATION);
-        break;
-      case VAPORIZE:
-        hp = 0;
-        break;
+  void hitByDrone(float damage, boolean freeze) {
+    if (freeze) {
+      frozen = true;
+      freezeTimer = new Timer(FREEZE_DURATION);
     }
+    hp -= damage;
   }
   
   

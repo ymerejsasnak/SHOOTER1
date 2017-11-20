@@ -73,7 +73,7 @@ class Enemies {
       
       // also check if hit drones:
       if (drone != null && dist(drone.x, drone.y, enemy.x, enemy.y) <= drone.size / 2 + enemy.enemySize / 2) {
-        enemy.hitByDrone(drone.type);
+        enemy.hitByDrone(drone.damageEnemy(), drone.freezeEnemy());
       }
       
       

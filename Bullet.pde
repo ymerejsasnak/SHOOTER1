@@ -64,9 +64,9 @@ class Bullet {
 }
 
 
-class Standard extends Bullet {
+class StandardBullet extends Bullet {
   
-  Standard(float angle, float x, float y, BulletDefinition bulletDefinition) {
+  StandardBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
     super(angle, x, y, bulletDefinition);
     this.bFill = BULLET_WHITE;
   }
@@ -74,9 +74,9 @@ class Standard extends Bullet {
 }
 
 
-class Gas extends Bullet {
+class GasBullet extends Bullet {
   
- Gas(float angle, float x, float y, BulletDefinition bulletDefinition){
+ GasBullet(float angle, float x, float y, BulletDefinition bulletDefinition){
    super(angle, x, y, bulletDefinition);
    this.bFill = GAS_GREEN;
    this.angle += randomGaussian() * GAS_ANGLE_RANDOMNESS;
@@ -91,9 +91,9 @@ class Gas extends Bullet {
 }
 
 
-class Freeze extends Bullet {
+class FreezeBullet extends Bullet {
   
- Freeze(float angle, float x, float y, BulletDefinition bulletDefinition) {
+ FreezeBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
     super(angle, x, y, bulletDefinition); 
     this.bFill = FREEZE_BLUE;
  }
@@ -105,9 +105,9 @@ class Freeze extends Bullet {
 }
 
 
-class Drain extends Bullet {
+class DrainBullet extends Bullet {
   
-  Drain(float angle, float x, float y, BulletDefinition bulletDefinition) {
+  DrainBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
     super(angle, x, y, bulletDefinition);
     this.bFill = DRAIN_YELLOW;
   }

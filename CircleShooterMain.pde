@@ -2,7 +2,6 @@
 ====NEXT TO DO====
 
 THE BIG REFACTOR:
-redo bullet class - make it parent class, with specific bullet types as subclasses, and fix anything related in other classes(player, game, etc)
 redo button class - again, parent of specific children
 redo selector class - same
 redo drone class - same

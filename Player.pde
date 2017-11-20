@@ -81,9 +81,7 @@ class Player {
       if (file.drones[i] == 1) {
         unlockedDrones.add(DroneDefinition.values()[i]);
       }
-      if (unlockedDrones.size() > 0) {
-        drone = new Drone(0, unlockedDrones.get(0));
-      }
+      //need to load drone too
     }
     
     

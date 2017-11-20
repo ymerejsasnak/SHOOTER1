@@ -16,21 +16,20 @@ class Bullets {
   void addBullet(float angle, float x, float y, BulletDefinition bulletDefinition) {
 
     switch(bulletDefinition.bulletType) {
+      case SPREAD://intentional fallthrough so it draws 2 extra and standard bullet
+        bullets.add(new StandardBullet(angle + SPREAD_ANGLE, x, y, bulletDefinition));
+        bullets.add(new StandardBullet(angle - SPREAD_ANGLE, x, y, bulletDefinition));
       case STANDARD:
-        bullets.add(new Standard(angle, x, y, bulletDefinition));
+        bullets.add(new StandardBullet(angle, x, y, bulletDefinition));
         break;
       case GAS:
-        bullets.add(new Gas(angle, x, y, bulletDefinition));
+        bullets.add(new GasBullet(angle, x, y, bulletDefinition));
         break;
       case FREEZE:
-        bullets.add(new Freeze(angle, x, y, bulletDefinition));
+        bullets.add(new FreezeBullet(angle, x, y, bulletDefinition));
         break;
       case DRAIN:
-        bullets.add(new Drain(angle, x, y, bulletDefinition));
-        break;
-      case SPREAD:
-        bullets.add(new Standard(angle + SPREAD_ANGLE, x, y, bulletDefinition));
-        bullets.add(new Standard(angle - SPREAD_ANGLE, x, y, bulletDefinition));
+        bullets.add(new DrainBullet(angle, x, y, bulletDefinition));
         break;
     }
   }

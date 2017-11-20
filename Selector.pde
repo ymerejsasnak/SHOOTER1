@@ -64,7 +64,20 @@ class Selector {
       
       case DRONE:
         if (player.unlockedDrones.size() > 0) {
-          drone = new Drone(0, droneSelections.get(currentIndex));
+          switch (droneSelections.get(currentIndex)) {
+            case ATTACKER:
+            case DEFENDER:
+              drone = new DamageDrone(droneSelections.get(currentIndex));
+              break;
+            case FREEZER:
+            case MOON:
+              drone = new FreezeDrone(droneSelections.get(currentIndex));
+              break;
+            case VAPORIZER:
+              drone = new VaporizeDrone(droneSelections.get(currentIndex));
+              break;
+          }
+          
           selectorText = droneSelections.get(currentIndex).text;
         }
         break;

@@ -5,7 +5,7 @@
 class Drone {
   
   float x, y;
-  float angle;
+  float angle = 0;
   int distance;
   int size;
   float rotSpeed;
@@ -13,31 +13,24 @@ class Drone {
   DroneType type;
   color fill;
     
-  Drone(float angle, DroneDefinition droneDefinition) {
+  Drone(DroneDefinition droneDefinition) {
     
-    this.angle = angle;
     distance = droneDefinition.distance;
     size = int(droneDefinition.size * player.droneSizeMultiplier);
     rotSpeed = droneDefinition.rotSpeed;
     type = droneDefinition.type;
-    
-    switch(type){
-      case DAMAGE:
-        fill = DAMAGE_FILL;
-        break;      
-      case FREEZE:
-        fill = FREEZE_FILL;
-        break;
-      case VAPORIZE:
-        fill = VAPORIZE_FILL;
-        break;      
-    }
   }
   
-  void resetAngles() {
-    if (drone != null) {
-      angle = 0;
-    }
+  void resetAngle() {
+    angle = 0;
+  }
+  
+  boolean freezeEnemy() {
+    return false;
+  }
+  
+  float damageEnemy() {
+    return 0;
   }
 
   
@@ -61,5 +54,46 @@ class Drone {
     fill(BLACK);
     ellipse(x, y, size / 2, size / 2);  // half size black circle in center
   }
+}
+
+
+class DamageDrone extends Drone {
   
+  DamageDrone(DroneDefinition droneDefinition) {
+    super(droneDefinition);
+    fill = DAMAGE_FILL;
+  }
+  
+  float damageEnemy() {
+    return DRONE_DPS * deltaTime.getDelta(); // damage is dps not single hit
+  }
+  
+}
+
+
+class FreezeDrone extends Drone {
+
+  FreezeDrone(DroneDefinition droneDefinition) {
+    super(droneDefinition);
+    fill = FREEZE_FILL;
+  }
+  
+  boolean freezeEnemy() {
+    return true;
+  }
+
+}
+
+
+class VaporizeDrone extends Drone {
+
+  VaporizeDrone(DroneDefinition droneDefinition) {
+    super(droneDefinition);
+    fill = VAPORIZE_FILL;
+  }
+  
+  float damageEnemy() {
+    return VAPORIZE_DAMAGE; 
+  }
+
 }

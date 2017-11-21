@@ -41,51 +41,10 @@ class Game {
       selectors.cycle(clickedSelector);
     }
     
-    Button pressedButton = buttons.checkButtons(_mouseX, _mouseY);
-    if (pressedButton == null) {
-      return;
-    }
-      
-    // button press actions
-    switch (pressedButton.id) {
-      case NONE:
-        break;
-      case LOAD:     
-        player.setStatus();
-        selectors.update();
-        state = GameState.SELECT; 
-        break;
-      case NEW:
-      //cleardata/make new file?
-      case RETURN_TO_SELECT:
-        selectors.update();
-        state = GameState.SELECT;
-        break;
-      case START: 
-        //drone.resetAngles();
-        progressionTimer.restart();
-        player.restartTurretTimers();
-        enemiesKilled = 0;
-        //levelProgression = 0;
-        bullets = new Bullets();
-        enemies = new Enemies();
-        state = GameState.LEVEL;
-        break;
-      case SHOP:
-        state = GameState.SHOP;
-        
-        break;
-      case QUIT:
-        exit();  
-      default:
-        // if none of above, it's a shop button:
-        processShop(pressedButton);
-        buttons.updateShop();
-    }
-    
-    // set appropriate buttons to 'active'
-    buttons.setActive(state);
+    buttons.buttonAction(_mouseX, _mouseY);
   }
+    
+    
   
   
   // main 'run' method to choose which state to run
@@ -146,85 +105,13 @@ class Game {
   
   
   void runShop() {
+    
+    
     buttons.updateShop();
   }
   
   
-  void processShop(Button pressedButton) {
-    if (player.currency >= pressedButton.cost && !pressedButton.purchased && pressedButton.affordable) {
-      player.currency -= pressedButton.cost;
-      pressedButton.purchased = true;
-      switch(pressedButton.id) {
-        case POWER:
-          player.unlockedBullets.add(BulletDefinition.values()[1]);
-          break;
-        case SPRAY:
-          player.unlockedBullets.add(BulletDefinition.values()[2]);
-          break;
-        case PEA:
-          player.unlockedBullets.add(BulletDefinition.values()[3]);
-          break;
-        case BOMB:
-          player.unlockedBullets.add(BulletDefinition.values()[4]);
-          break;
-        case BUBBLE:
-          player.unlockedBullets.add(BulletDefinition.values()[5]);
-          break;
-        case FREEZE:
-          player.unlockedBullets.add(BulletDefinition.values()[6]);
-          break;
-        case DRAIN:
-          player.unlockedBullets.add(BulletDefinition.values()[7]);
-          break;
-        case SPREAD:
-          player.unlockedBullets.add(BulletDefinition.values()[8]);
-          break;
-        case LEFT_TURRET:
-          player.turret2 = true;
-          player.selectedBulletType[1] = BulletDefinition.BASIC;
-          player.turretTimers.add(new Timer(player.selectedBulletType[1].rate));
-          break;
-        case RIGHT_TURRET:
-          player.turret3 = true;
-          player.selectedBulletType[2] = BulletDefinition.BASIC;
-          player.turretTimers.add(new Timer(player.selectedBulletType[2].rate));
-          break;
-        
-        case ATTACKER:
-          player.unlockedDrones.add(DroneDefinition.ATTACKER);
-          break;
-        case DEFENDER:
-          player.unlockedDrones.add(DroneDefinition.DEFENDER);
-          break;
-        case FREEZER:
-          player.unlockedDrones.add(DroneDefinition.FREEZER);
-          break;
-        case MOON:
-          player.unlockedDrones.add(DroneDefinition.BIG_FREEZER);
-          break;
-        case VAPORIZER:
-          player.unlockedDrones.add(DroneDefinition.VAPORIZER);
-          break;
-        
-        case MAX_HP:
-          player.maxHP *= 2;
-          break;
-        case BULLET_POWER:
-          player.bulletPowerMultiplier = 2;
-          break;
-        case BULLET_SIZE:
-          player.bulletSizeMultiplier = 2;
-          break;
-        case DRONE_SIZE:
-          player.droneSizeMultiplier = 2;
-          break;
-        case FREEZE_TIME:
-          player.freezeTimeMultiplier = 2;
-          break;
-   
-      }
-    }
-  }
+  
   
  
   

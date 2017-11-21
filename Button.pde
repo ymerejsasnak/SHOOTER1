@@ -27,10 +27,7 @@ class Button {
   String buttonText;
   ButtonID id;
   
-  // shop only
-  int cost = 0; // if 0, not a shop button
-  boolean affordable = true;
-  boolean purchased = false;
+ 
   
   // constructor for regular buttons
   Button(ButtonID id, String text, int x, int y) {
@@ -40,37 +37,16 @@ class Button {
     buttonX = x;
     buttonY = y;
     buttonSize = BUTTON_SIZE;
-  }
-  
-  // constructor for shop buttons
-  Button(ButtonID id, String text, int x, int y, int cost) {
-
-    this.id = id;
-    buttonText = text;
-    buttonX = x;
-    buttonY = y;
-    buttonSize = BUTTON_SIZE;
-    this.cost = cost;
-    affordable = false;
-  }
-  
+  } 
     
   void display() {
     fill(BUTTON_BG);
     noStroke();
     rect(buttonX, buttonY, buttonSize, buttonSize, BUTTON_CORNER);
-    
-    if (cost > 0 && !purchased) {
-      fill(TEXT_COLOR);
-      text("cost: " + cost, buttonX, buttonY + BUTTON_TEXT_SIZE + BUTTON_TEXT_OFFSET);
-    }
-      
-    if (affordable && !purchased) {
-      fill(TEXT_COLOR);
-      textSize(BUTTON_TEXT_SIZE);
-      text(buttonText, buttonX, buttonY + BUTTON_TEXT_OFFSET);   
-    }
-    
+       
+    fill(TEXT_COLOR);
+    textSize(BUTTON_TEXT_SIZE);
+    text(buttonText, buttonX, buttonY + BUTTON_TEXT_OFFSET);   
   }
 
   // determine if touch/click was in the bounds of the button
@@ -81,5 +57,37 @@ class Button {
            _mouseX > buttonX - half &&
            _mouseY < buttonY + half &&
            _mouseY > buttonY - half;
+  }
+}
+
+
+class ShopButton extends Button {
+  int cost;
+  boolean affordable = false;
+  boolean purchased = false;
+  
+  ShopButton( ButtonID id, String text, int x, int y, int cost){
+    super(id, text, x, y);
+    this.cost = cost;
+  }
+  
+  void display() {
+    super.display();
+    
+    if (!purchased) {
+      fill(TEXT_COLOR);
+      text("cost: " + cost, buttonX, buttonY + BUTTON_TEXT_SIZE + BUTTON_TEXT_OFFSET);
+    }
+    
+    if (!affordable) {
+      fill(100, 0, 0, 40);
+      rect(buttonX, buttonY, buttonSize, buttonSize, BUTTON_CORNER);
+    }
+      
+    if (affordable && !purchased) {
+      fill(0, 100, 0, 40);
+      rect(buttonX, buttonY, buttonSize, buttonSize, BUTTON_CORNER);
+    }
+    
   }
 }

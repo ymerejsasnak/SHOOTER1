@@ -2,10 +2,14 @@
 ====NEXT TO DO====
 
 THE BIG REFACTOR:
+redid enemy class...need to fix up 'enemies' class tho, 
+
 redo button class - again, parent of specific children
 redo selector class - same
-redo drone class - same
-redo enemy class - same
+
+also cleanup/comments/etc on refactored stuff
+
+
 game class - not sure about this one--??make a gamestate class, where each state is its own object/subclass, controlled by game class?
 
 

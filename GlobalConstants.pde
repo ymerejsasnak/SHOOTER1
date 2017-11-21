@@ -77,7 +77,7 @@ final float SPREAD_ANGLE = .2;
 final float GAS_ANGLE_RANDOMNESS = .5;
 final float GAS_SIZE_RANDOMNESS = 5;
 
-final int DRONE_DPS = 10; // damage rate for 'damage' type drones
+final int DAMAGE_DRONE_DPS = 10; // damage rate for 'damage' type drones
 final int VAPORIZE_DAMAGE = 9999; // basically autokill, but simpler to code if it just acts like damage
 
 

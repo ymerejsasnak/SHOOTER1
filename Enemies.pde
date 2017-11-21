@@ -25,13 +25,11 @@ class Enemies {
     //(note, timer will reset itself, so even if total goes below max, will still have to wait out next time cycle)
     if (spawnTimer.check() && enemies.size() < maxEnemies) {  
       
-      // choose from defined list of enemies for current level
-      //int choice = (int) random(0, game.currentLevelDefinition.spawnableEnemies.length);
-      
+      // spawn enemies in order listed in definition by incrementing index      
       EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[spawnIndex];
       spawnIndex = (spawnIndex + 1) % game.currentLevelDefinition.spawnableEnemies.length;
       
-      // randomly choose between the 3 screen sides to generate enemy (off screen)
+      // randomly choose between the top half of sides or top of screen to generate enemy (off screen)
       int choice2 = (int) random(0, 4);
       float x = 0, y = 0;
       switch(choice2) {
@@ -48,20 +46,17 @@ class Enemies {
           x = random(width);
           y = 0 - enemyToSpawn.size/2;      
           break;
-        //case 3:
-         // x = random(width);
-         // y = height + enemyToSpawn.size/2;      
-         // break;
       }
-      enemies.add(new Enemy(x, y, enemyToSpawn, levelProgression));   
+      
+      addEnemy(x, y, enemyToSpawn, levelProgression);
+      
     }
   
   
     // iterate through all enemies (backwards to allow deletion)
-    for (int e = enemies.size() - 1; e >= 0; e--) {
+    for (int enemyIndex = enemies.size() - 1; enemyIndex >= 0; enemyIndex--) {
       
-      Enemy enemy = enemies.get(e);
-      enemy.update();
+      Enemy enemy = enemies.get(enemyIndex);
       
       // brute force collision detection between enemy and bullets 
       // (eventually find a better way to allow better framerates w/ lots onscreen?)
@@ -84,19 +79,43 @@ class Enemies {
         game.enemiesKilled += 1;
       }
       
+      
+      enemy.update();
+      
       // if dead, remove (and generate carried type if a carrier), then display those not dead
       if (enemy.dead) {
-        if (enemy.enemyType == EnemyType.CARRIER) {
-          for (int i = 0; i < enemy.numberCarried; i++) {
-            enemies.add(new Enemy(enemy.x + random(-enemy.enemySize / 2, enemy.enemySize / 2), 
-                                  enemy.y + random(-enemy.enemySize / 2, enemy.enemySize / 2),
-                                  enemy.carriedType, levelProgression));              
-          }
-        }
-        enemies.remove(e);
+        
+        enemies.remove(enemyIndex);
       } else {
         enemy.display();
       } 
     }    
   }   
+  
+  void addEnemy(float x, float y, EnemyDefinition enemyToSpawn, int levelProgression) {
+    // add the correct enemy subclass to enemies list
+      switch(enemyToSpawn.enemyType) {
+        case STANDARD:
+          enemies.add(new StandardEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case RANDOM:
+          enemies.add(new RandomEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case CIRCLES:
+          enemies.add(new CirclesEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case OSCIL:
+          enemies.add(new OscilEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case ASTEROID:
+          enemies.add(new AsteroidEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case TELEPORT:
+          enemies.add(new TeleportEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+        case CARRIER:
+          enemies.add(new CarrierEnemy(x, y, enemyToSpawn, levelProgression));   
+          break;
+      }
+  }
 } 

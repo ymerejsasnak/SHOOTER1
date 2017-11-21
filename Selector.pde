@@ -70,7 +70,7 @@ class Selector {
               drone = new DamageDrone(droneSelections.get(currentIndex));
               break;
             case FREEZER:
-            case MOON:
+            case BIG_FREEZER:
               drone = new FreezeDrone(droneSelections.get(currentIndex));
               break;
             case VAPORIZER:

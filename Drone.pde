@@ -65,7 +65,7 @@ class DamageDrone extends Drone {
   }
   
   float damageEnemy() {
-    return DRONE_DPS * deltaTime.getDelta(); // damage is dps not single hit
+    return DAMAGE_DRONE_DPS * deltaTime.getDelta(); // damage is dps not single hit
   }
   
 }

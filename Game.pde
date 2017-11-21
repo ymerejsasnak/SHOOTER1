@@ -200,7 +200,7 @@ class Game {
           player.unlockedDrones.add(DroneDefinition.FREEZER);
           break;
         case MOON:
-          player.unlockedDrones.add(DroneDefinition.MOON);
+          player.unlockedDrones.add(DroneDefinition.BIG_FREEZER);
           break;
         case VAPORIZER:
           player.unlockedDrones.add(DroneDefinition.VAPORIZER);

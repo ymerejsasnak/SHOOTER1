@@ -5,12 +5,12 @@ enum DroneType {
 enum DroneDefinition {
   //note: speed here is in radians per second since it's rotational speed
   //            text          attack type      size  speed  distance (from player)      
-  ATTACKER  ( "ATTACKER",    DroneType.DAMAGE,  40,   .01,    300),
-  DEFENDER  ( "DEFENDER",    DroneType.DAMAGE,  50,  .005,     90),
-  FREEZER   (  "FREEZER",    DroneType.FREEZE,  25,   .02,    300),
-  MOON      ("COLD MOON",    DroneType.FREEZE,  75,  .002,    525),
-  VAPORIZER ("VAPORIZER",  DroneType.VAPORIZE,  15,  .008,    550),
-  
+  ATTACKER   (   "ATTACKER",    DroneType.DAMAGE,  40,   .01,    300),
+  DEFENDER   (   "DEFENDER",    DroneType.DAMAGE,  50,  .005,     90),
+  FREEZER    (    "FREEZER",    DroneType.FREEZE,  25,   .02,    300),
+  BIG_FREEZER("BIG FREEZER",    DroneType.FREEZE,  75,  .002,    525),
+  VAPORIZER  (  "VAPORIZER",  DroneType.VAPORIZE,  15,  .008,    550),
+             //can just get enum name with .name() (?) method...but leaving this in case I want different text eventually...
   ;
   
   String text;

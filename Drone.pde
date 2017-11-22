@@ -2,7 +2,7 @@
   CLASS FOR DRONE
 */
 
-class Drone {
+abstract class Drone {
   
   float x, y;
   float angle = 0;

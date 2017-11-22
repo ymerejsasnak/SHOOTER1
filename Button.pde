@@ -27,8 +27,6 @@ class Button {
   String buttonText;
   ButtonID id;
   
- 
-  
   // constructor for regular buttons
   Button(ButtonID id, String text, int x, int y) {
 
@@ -66,7 +64,7 @@ class ShopButton extends Button {
   boolean affordable = false;
   boolean purchased = false;
   
-  ShopButton( ButtonID id, String text, int x, int y, int cost){
+  ShopButton(ButtonID id, String text, int x, int y, int cost){
     super(id, text, x, y);
     this.cost = cost;
   }

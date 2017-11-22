@@ -50,13 +50,30 @@ class Enemy {
     // if frozen, check timer
     if (frozen && freezeTimer.check()) {
         frozen = false;
-    }  
+    }      
     
-    // check for collision with player
+  }
+  
+  
+  void collisionCheck() {
+    // brute force collision detection between enemy and bullets 
+    // (eventually find a better way to allow better framerates w/ lots onscreen?)
+    for (Bullet bullet: bullets.bullets){
+      if (dist(x, y, bullet.x, bullet.y) <= (enemySize / 2 + bullet.bulletSize / 2)) {   // divide by 2 to get radius
+        hitByBullet(bullet.damageEnemy(), bullet.freezeEnemy()); // go to submethod to subtract bullet power from enemy
+      }
+    }     
+    
+    // also check if hit drone:
+    if (drone != null && dist(drone.x, drone.y, x, y) <= drone.size / 2 + enemySize / 2) {
+      hitByDrone(drone.damageEnemy(), drone.freezeEnemy());
+    }
+    
+    // and check for collision with player
     if (dist(x, y, player.x, player.y) < enemySize / 2 + player.size / 2) {
       player.hitByEnemy(enemyPower);
       dead = true;
-      //return false; // exit if dead
+    
     }
   }
   
@@ -80,6 +97,12 @@ class Enemy {
     hp -= damage;
   }
   
+  // run when its hp is 0
+  void death() {
+    dead = true;
+    player.currency += reward; // kill enemy, get some currency
+    game.enemiesKilled += 1;
+  }
   
   // draw enemy
   void display() {
@@ -284,17 +307,16 @@ class CarrierEnemy extends TargettingEnemy {
     innerWeight = 1;
   }
   
-  void update() {
-    super.update();
-    if (dead) {
-      for (int i = 0; i < numberCarried; i++) {
-        enemies.addEnemy(x + random(-enemySize / 2, enemySize / 2), 
-                         y + random(-enemySize / 2, enemySize / 2),
-                         carriedType, game.levelProgression);              
-      }
+  //generate carried enemies
+  void death() {
+    super.death();
+    for (int i = 0; i < numberCarried; i++) {
+      enemies.addEnemy(x + random(-enemySize / 2, enemySize / 2), 
+                       y + random(-enemySize / 2, enemySize / 2),
+                       carriedType, game.levelProgression);              
     }
-    
   }
+  
 }
 
 

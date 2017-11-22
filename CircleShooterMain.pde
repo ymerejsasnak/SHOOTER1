@@ -2,10 +2,8 @@
 ====NEXT TO DO====
 
 THE BIG REFACTOR:
-redid enemy class...need to fix up 'enemies' class tho, 
+files/tabs to fix up:  Buttons, Selector/Selectors, Game
 
-redo button class - again, parent of specific children
-redo selector class - same
 
 also cleanup/comments/etc on refactored stuff
 
@@ -17,7 +15,8 @@ game class - not sure about this one--??make a gamestate class, where each state
 new enemies - 
 different movement types given that gameplay is slightly different now 
 (ie, back and forth across screen, up and down across, shoot up from beside/behind player then target it, maybe others?
-
+ 
+ cleardata method in fileIO?
  
  BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
  (either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
@@ -48,11 +47,8 @@ POSSIBLE REFACTORING:
  -selector class as parent class, level/turret/drone each as its own subclass?
  -should each 'runstate' method display its own buttons? make gamestates their own objects? 
  -add methods to various enums instead of all the if/switch statements?
- -getters/setters, private/public stuff for proper java-ness
- 
- 
- 
- refactor plans: bullet types each as its own subclass of bullet, same with enemies, drones, gamestates
+ -getters/setters, private/public stuff for proper java-ness....also less 'side effects' in methods where possible
+
  */
 
 

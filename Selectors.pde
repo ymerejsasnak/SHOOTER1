@@ -11,11 +11,11 @@ class Selectors {
     selectors = new ArrayList<Selector>();
     selectors.add(new Selector(SelectorID.LEVEL, SELECTOR_SIZE * 3/2, height - SELECTOR_SIZE * 2));
        
-    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/2, SELECTOR_SIZE));
-    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 1/2, SELECTOR_SIZE * 2));
-    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 1/2 - SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
+    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/3, SELECTOR_SIZE));
+    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 1/3 - SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
+    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 1/3 + SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
     
-    selectors.add(new Selector(SelectorID.DRONE, width * 1/2 - SELECTOR_SIZE * 5/2, SELECTOR_SIZE * 3/2));
+    selectors.add(new Selector(SelectorID.DRONE, width * 2/3, SELECTOR_SIZE * 3/2));
     
   }
   

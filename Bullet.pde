@@ -1,8 +1,8 @@
 /*
-  CLASS FOR INDIVIDUAL BULLETS
+  CLASS FOR INDIVIDUAL BULLET
  */
  
-class Bullet {
+abstract class Bullet {
 
   // ingame stats needed to run bullets
   float x, y;
@@ -41,28 +41,27 @@ class Bullet {
     }
   }
 
-
+  // by default, does not freeze
   boolean freezeEnemy() {
     return false;  
   }
   
-  
+  // by default, hitting enemy kills it, this returns attack power to use in enemy class
   float damageEnemy() {
     dead = true;
     return power;
   }
 
-
   // draw the bullet
   void display() {
-    
     fill(bFill);
     noStroke();
-
     ellipse(x, y, bulletSize, bulletSize);
   }
 }
 
+
+/* subclasses for bullet types */
 
 class StandardBullet extends Bullet {
   
@@ -113,7 +112,7 @@ class DrainBullet extends Bullet {
   }
   
   float damageEnemy() {
-    player.hp += power;
+    player.hp += power; // add damage done to enemy to player's hp
     player.hp = min(player.hp, player.maxHP);
     return super.damageEnemy();
   }

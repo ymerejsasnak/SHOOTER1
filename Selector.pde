@@ -181,7 +181,23 @@ class DroneSelector extends Selector {
     super.cycle();
     
     if (player.unlockedDrones.size() > 0) {
-      switch (droneSelections.get(currentIndex)) {
+      setDrone();      
+      selectorText = droneSelections.get(currentIndex).text;
+    }
+  }
+  
+  void update() {
+    if (player.unlockedDrones.size() > 0) {
+      droneSelections = player.unlockedDrones;
+      totalOptions = droneSelections.size();
+      selectorText = droneSelections.get(currentIndex).text;
+      setDrone();
+    } 
+  }
+  
+  
+  void setDrone() {
+    switch (droneSelections.get(currentIndex)) {
         case ATTACKER:
         case DEFENDER:
           drone = new DamageDrone(droneSelections.get(currentIndex));
@@ -194,18 +210,8 @@ class DroneSelector extends Selector {
           drone = new VaporizeDrone(droneSelections.get(currentIndex));
           break;
       }
-      
-      selectorText = droneSelections.get(currentIndex).text;
-    }
   }
   
-  void update() {
-    if (player.unlockedDrones.size() > 0) {
-      droneSelections = player.unlockedDrones;
-      totalOptions = droneSelections.size();
-      selectorText = droneSelections.get(currentIndex).text;
-    } 
-  }
   
 }
 

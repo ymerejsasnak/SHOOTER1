@@ -5,7 +5,8 @@ enum EnemyType {
   CIRCLES,   // circles player, getting closer and closer
   OSCIL,     // moves toward player in an oscillating sort of motion
   TELEPORT,  // moves toward player, but also teleports to a random position periodically
-  CARRIER;   // moves toward player, spawns other enemies when killed
+  CARRIER,   // moves toward player, spawns other enemies when killed
+  BACKFORTH;  // space invader-ish movement
 }
 
 enum EnemyDefinition {
@@ -32,6 +33,8 @@ enum EnemyDefinition {
   OSCIL2          (   EnemyType.OSCIL,  100,    2,    3,     30,    5),
   
   TELEPORT        (EnemyType.TELEPORT,  150,    5,    4,     50,    5),
+  
+  BACKFORTH1      (EnemyType.BACKFORTH, 300,    5,    2,     75,    3),
   
        //                                                                 type carried,            # carried
   REGULAR_CARRIER ( EnemyType.CARRIER,   25,    5,    5,    150,    3,    EnemyDefinition.REGULAR,     3),

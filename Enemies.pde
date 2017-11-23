@@ -39,6 +39,9 @@ class Enemies {
         case CARRIER:
           enemies.add(new CarrierEnemy(x, y, enemyToSpawn, levelProgression));   
           break;
+        case BACKFORTH:
+          enemies.add(new BackAndForthEnemy(x, y, enemyToSpawn, levelProgression));
+          break;
       }
   }
   

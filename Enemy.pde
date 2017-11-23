@@ -186,6 +186,39 @@ class RotationalEnemy extends Enemy {
   } 
 }
 
+class BackAndForthEnemy extends Enemy {
+  
+  int direction = 1; // left or right movement
+  
+  BackAndForthEnemy(float x, float y, EnemyDefinition enemyDef, int levelProgression) {
+    super(x, y, enemyDef, levelProgression);
+    fill = color(100, 200, 100);
+    outerStroke = color(enemySize); 
+    outerWeight = 3;
+    innerStroke = color(255 - enemySize, 255 - enemySize, 0);
+    innerWeight = 15;
+  }
+  
+  void update(){
+    super.update();
+    
+    if (frozen) {
+      return;
+    }
+    
+    if (x > width + enemySize) {
+      direction = -1;
+      y += enemySize;
+    } else if (x < -enemySize) {
+      direction = 1;
+      y += enemySize;
+    }
+    
+    x += direction * speed * deltaTime.getDelta();
+    
+  }
+}
+
 
 
 class StandardEnemy extends TargettingEnemy {
@@ -209,7 +242,7 @@ class RandomEnemy extends TargettingEnemy {
     fill = color(150, 10, 30);
     outerStroke = color(speed + 50, 125, 125); 
     outerWeight = 1;
-    innerStroke = color(0, enemySize, 50);
+    innerStroke = color(enemySize, 50, 50);
     innerWeight = 2;
   }
   
@@ -233,9 +266,9 @@ class AsteroidEnemy extends TargettingEnemy {
     super(x, y, enemyDef, levelProgression);
     fill = color(150, enemySize, 0);
     outerStroke = color(200, 150, 0); 
-    outerWeight = 4;
+    outerWeight = 1;
     innerStroke = color(100, 50, enemySize);
-    innerWeight = 1;
+    innerWeight = 5;
     // also asteroids just pick arbitrary target and move in that direction until off screen
     direction = atan2(random(height) - y, random(width) - x);
   }
@@ -301,10 +334,10 @@ class CarrierEnemy extends TargettingEnemy {
     carriedType = enemyDef.carriedEnemy;
     
     fill = color(100, 100, 50);
-    outerStroke = color(250, 0, 0);
-    innerStroke = color(250, 0, 0);
-    outerWeight = 1;
-    innerWeight = 1;
+    outerStroke = color(100, 50, 50);
+    innerStroke = color(100, 50, 50);
+    outerWeight = 5;
+    innerWeight = 10;
   }
   
   //generate carried enemies

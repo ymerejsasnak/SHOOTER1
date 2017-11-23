@@ -9,37 +9,40 @@ shop doesn't reflect loaded game (ie, shows unlocked stuff as still purchasable)
 
 NEW STUFF -
 
-new enemies - 
-different movement types given that gameplay is slightly different now 
-(ie, back and forth across screen, up and down across, shoot up from beside/behind player then target it, maybe others?
- also some more carrier types?
-  -more enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
-  (and then can make more variation on those types for enemy defs)
-  
- cleardata method in fileIO? (for if player loads game, then exits to title and chooses new game)
+-put enemy spawning back to random rather than sequential?
 
-add bullet speed upgrade? drone damage upgrade? more hp or power upgrades??
- 
+ -more carrier types
+
+- cleardata method in fileIO? (for if player loads game, then exits to title and chooses new game)
+
+-add bullet speed upgrade
+
+-drone speed upgrade? more hp or power upgrades??
+
  -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
 
-
+ -keep working on game balance/level definitions/power levels/etc
+ !!- fewer levels (say 5ish?) so can better balance difficulty curve, and make them more interesting/unique in themselves
+ (and then, given this, make danger level goal higher, and adjust things accordingly)
+ 
  
  GAME POLISH AND 'JUICE":
  -simple music (menus minimal, level adds beat and melody or is different music?)
  -sfx - bullet sound (for diff types), hit enemy sound, enemy killed sound, player hit/killed sound, click button sound
- -keep working on game balance/level definitions/power levels/etc
  -enemy simple 'hit by bullet' animation
  -enemy size pulsing
  -enemy trail? (ie save list of previous positions to draw fading line)
  -bullet trails?
   -basic/simple death animation (at least for enemies, probably also player)
- -particle effects for hit enemy and death animations
+ -particle effects (class) for hit enemy and death animations
+ 
  
  -make death state/screen (simple: you died, currency earned, enemies killed, 
  click to continue, etc) and take care of stuff in run level loop under if (player.dead) there
 
- -change select boxes so they show representative picture with labelling beneath it? or something more informative?
- (should show power/rate and picture? something like that?)
+-better labeling, descriptions of shop items, and levels
+
+-how to play screen, story screen (ie weird 'you are a circle' story)
 
  
  

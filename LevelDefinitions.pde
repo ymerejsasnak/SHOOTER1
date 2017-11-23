@@ -24,7 +24,8 @@ enum Level {
   FIVE ( "Level 5",    800,    3, 
         new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
                                EnemyDefinition.OSCIL2, 
-                               EnemyDefinition.BIGRAND}),
+                               EnemyDefinition.BIGRAND,
+                               EnemyDefinition.BACKFORTH1}),
                                
   SIX  ( "Level 6",   100,    3, 
         new EnemyDefinition[] {EnemyDefinition.HUGE,

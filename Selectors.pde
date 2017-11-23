@@ -9,53 +9,23 @@ class Selectors {
   Selectors() {
     
     selectors = new ArrayList<Selector>();
-    selectors.add(new Selector(SelectorID.LEVEL, SELECTOR_SIZE * 3/2, height - SELECTOR_SIZE * 2));
-       
-    selectors.add(new Selector(SelectorID.TURRET_ONE, width * 1/3, SELECTOR_SIZE));
-    selectors.add(new Selector(SelectorID.TURRET_TWO, width * 1/3 - SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
-    selectors.add(new Selector(SelectorID.TURRET_THREE, width * 1/3 + SELECTOR_SIZE, SELECTOR_SIZE * 3/2));
-    
-    selectors.add(new Selector(SelectorID.DRONE, width * 2/3, SELECTOR_SIZE * 3/2));
+    selectors.add(new LevelSelector());
+    selectors.add(new Turret1Selector());
+    selectors.add(new Turret2Selector());
+    selectors.add(new Turret3Selector());
+    selectors.add(new DroneSelector());
     
   }
   
   
   // check if selector was clicked on
-  SelectorID checkSelectors(int _mouseX, int _mouseY) {
+  void selectorAction(int _mouseX, int _mouseY) {
     
-    SelectorID clickedSelector = SelectorID.NONE;
-      for (Selector s: selectors) {
-        if (s.clickCheck(_mouseX, _mouseY)) {
-          clickedSelector = s.id; // store selector ID to switch on below
-        };
+    for (Selector s: selectors) {
+      if (s.clickCheck(_mouseX, _mouseY)) {
+        s.cycle();
       }
-    return clickedSelector;
-  }
-  
-  
-  // 'cycle' options on appropriate selector based on click
-  void cycle(SelectorID clickedSelector) {
-    switch (clickedSelector) { 
-        case NONE:
-          break;
-        case LEVEL:
-          selectors.get(0).cycle();
-          break;
-        case TURRET_ONE:
-          selectors.get(1).cycle();
-          break;
-        case TURRET_TWO:
-          selectors.get(2).cycle();
-          break;
-        case TURRET_THREE:
-          selectors.get(3).cycle();
-          break;
-        
-        case DRONE:
-          selectors.get(4).cycle();
-          break;
-              
-      }
+    }
   }
   
   

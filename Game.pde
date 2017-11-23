@@ -35,10 +35,8 @@ class Game {
   // process mouse clicks (buttons and selectors)
   void processClick(int _mouseX, int _mouseY) {
     
-    SelectorID clickedSelector = SelectorID.NONE;
     if (state == GameState.SELECT) {
-      clickedSelector = selectors.checkSelectors(_mouseX, _mouseY);
-      selectors.cycle(clickedSelector);
+      selectors.selectorAction(_mouseX, _mouseY);
     }
     
     buttons.buttonAction(_mouseX, _mouseY);

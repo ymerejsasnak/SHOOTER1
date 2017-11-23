@@ -1,12 +1,3 @@
-// enum to identify selector clicked
-enum SelectorID {
-  NONE, // (could have just checked for null?)
-  LEVEL,
-  TURRET_ONE, TURRET_TWO, TURRET_THREE,
-  DRONE,
-  ;
-}
-
 /*
   CLASS TO BUILD 'SELECTOR' (cycle through available options on click) BOXES FOR SELECTION SCREEN
  */
@@ -15,7 +6,6 @@ class Selector {
   int selectorX, selectorY;
   int selectorSize;
   String selectorText;
-  //SelectorID id;
   int currentIndex = 0;
   int totalOptions;
   
@@ -23,7 +13,6 @@ class Selector {
   
   Selector(int x, int y) {
     
-    //id = _id;
     selectorX = x;
     selectorY = y;
     selectorSize = SELECTOR_SIZE;

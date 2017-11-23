@@ -1,53 +1,63 @@
 /*
 ====NEXT TO DO====
 
-THE BIG REFACTOR:
-files/tabs to fix up:  Buttons, Selector/Selectors, Game
+BUGS - 
+
+turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
+(either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
+
+issue with drones showing up when first purchased? not sure if this really happened, double check...
+
+shop doesn't reflect loaded game (ie, shows unlocked stuff as still purchasable)
 
 
-also cleanup/comments/etc on refactored stuff
 
+NEW STUFF -
 
-game class - not sure about this one--??make a gamestate class, where each state is its own object/subclass, controlled by game class?
-
-
--MAJOR, IMPORTANT-
 new enemies - 
 different movement types given that gameplay is slightly different now 
 (ie, back and forth across screen, up and down across, shoot up from beside/behind player then target it, maybe others?
+ also some more carrier types?
+  -more enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
+  (and then can make more variation on those types for enemy defs)
+  
+ cleardata method in fileIO? (for if player loads game, then exits to title and chooses new game)
+
+add bullet speed upgrade? drone damage upgrade? more hp or power upgrades??
  
- cleardata method in fileIO?
+ -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
+
+
  
- BUG: turrets must be purchased in order (not at actual purchase time, but when starting a level) or else causes indexing error
- (either fix the way it's coded, or make it so you can't purchase SPECIFIC turrets, they just get added in same order no matter what)
- BUG?:issue with drones showing up when first purchased? not sure if this really happened, double check...
-BUG: shop doesn't reflect loaded game
+ GAME POLISH AND 'JUICE":
+ -simple music (menus minimal, level adds beat and melody or is different music?)
+ -sfx - bullet sound (for diff types), hit enemy sound, enemy killed sound, player hit/killed sound, click button sound
+ -keep working on game balance/level definitions/power levels/etc
+ -enemy simple 'hit by bullet' animation
+ -enemy size pulsing
+ -enemy trail? (ie save list of previous positions to draw fading line)
+ -bullet trails?
+  -basic/simple death animation (at least for enemies, probably also player)
+ -particle effects for hit enemy and death animations
  
--MINOR, LESS IMPORTANT-
--add bullet speed upgrade also?
- -repetetive code in selector class (and drones class?) when dealing with drones!
- -more comments in the setstatus method in player class?
+ -make death state/screen (simple: you died, currency earned, enemies killed, 
+ click to continue, etc) and take care of stuff in run level loop under if (player.dead) there
+
  -change select boxes so they show representative picture with labelling beneath it? or something more informative?
  (should show power/rate and picture? something like that?)
- -make death state/screen (simple: you died, currency earned, enemies killed, 
- click to continue, etc) and take care of stuff in run level loop under
- if (player.dead) there
- -basic/simple death animation (at least for enemies, probably also player)
- -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
- -more enum constructors for extra variables for certain enemy/bullet types (ie osciltimer, rotation speed, teleport/random time, etc.)
-  (and then can make more variation on those types for enemy defs)
- -some more carrier types?
- -polish: sfx, music, graphics tweaks, game balance, etc  -add "juiciness"
- 
 
+ 
+ 
+POSSIBLE REFACTORING:
+ 
+ -getters/setters, private/public stuff for proper java-ness....also less 'side effects' in methods where possible
+-cleanup/comments/etc on refactored stuff and everything in general(esp buttons class?)
+-game class - not sure about this one--??make a gamestate class, where each state is its own object/subclass, controlled by game class?
+(but seems ok for now, so leave it for now)  
+-and should each 'runstate' method display its own buttons? 
  - what about better collision detection?
  
 
-POSSIBLE REFACTORING:
- -selector class as parent class, level/turret/drone each as its own subclass?
- -should each 'runstate' method display its own buttons? make gamestates their own objects? 
- -add methods to various enums instead of all the if/switch statements?
- -getters/setters, private/public stuff for proper java-ness....also less 'side effects' in methods where possible
 
  */
 

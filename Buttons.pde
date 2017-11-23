@@ -190,12 +190,12 @@ class Buttons {
         case LEFT_TURRET:
           player.turret2 = true;
           player.selectedBulletType[1] = BulletDefinition.BASIC;
-          player.turretTimers.add(new Timer(player.selectedBulletType[1].rate));
+          player.turretTimers[1] = new Timer(player.selectedBulletType[1].rate);
           break;
         case RIGHT_TURRET:
           player.turret3 = true;
           player.selectedBulletType[2] = BulletDefinition.BASIC;
-          player.turretTimers.add(new Timer(player.selectedBulletType[2].rate));
+          player.turretTimers[2] = new Timer(player.selectedBulletType[2].rate);
           break;
         
         case ATTACKER:

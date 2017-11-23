@@ -11,7 +11,7 @@ class Player {
   float[] turretAngle = new float[3];
   float[] turretX = new float[3];
   float[] turretY = new float[3];
-  ArrayList<Timer> turretTimers = new ArrayList<Timer>();
+  Timer[] turretTimers = new Timer[3];
   
   int currency = 0;
   int hp = STARTING_HP;
@@ -41,8 +41,7 @@ class Player {
   Player() {
     
     selectedBulletType[0] = BulletDefinition.BASIC; 
-    turretTimers = new ArrayList<Timer>();
-    turretTimers.add(new Timer(selectedBulletType[0].rate));
+    turretTimers[0] = new Timer(selectedBulletType[0].rate);
     
   }
   
@@ -56,18 +55,18 @@ class Player {
     highestLevelUnlocked = file.highestLevel;
     
     selectedBulletType[0] = BulletDefinition.BASIC;
-    turretTimers = new ArrayList<Timer>();
-    turretTimers.add(new Timer(selectedBulletType[0].rate));  
+    turretTimers = new Timer[3];
+    turretTimers[0] = new Timer(selectedBulletType[0].rate);  
     
     if (file.turret2) {
       turret2 = true;
       selectedBulletType[1] = BulletDefinition.BASIC;
-      turretTimers.add(new Timer(selectedBulletType[1].rate));
+      turretTimers[1] = new Timer(selectedBulletType[1].rate);
     }
     if (file.turret3) {
       turret3 = true;
       selectedBulletType[2] = BulletDefinition.BASIC;
-      turretTimers.add(new Timer(selectedBulletType[2].rate));
+      turretTimers[2] = new Timer(selectedBulletType[2].rate);
     }
     
      
@@ -99,8 +98,8 @@ class Player {
   void update() {
     
     turretAngle[0] = atan2(mouseY - y, mouseX - x);
-    turretAngle[1] = turretAngle[0] + PI/5;
-    turretAngle[2] = turretAngle[0] - PI/5;
+    turretAngle[1] = turretAngle[0] - PI/5;
+    turretAngle[2] = turretAngle[0] + PI/5;
     
     
            
@@ -116,7 +115,7 @@ class Player {
     
     for(int i = 0; i < selectedBulletType.length; i++){
        if (selectedBulletType[i] != null) {
-         if(turretTimers.get(i).check()) {
+         if(turretTimers[i].check()) {
             bullets.addBullet(turretAngle[i], turretX[i], turretY[i], selectedBulletType[i]);                 
          }
        }      
@@ -137,8 +136,10 @@ class Player {
   
   // restart all turret timers in one go, for starting level
   void restartTurretTimers() {
-    for (Timer t: turretTimers) {
-      t.restart();
+    for (int i = 0; i < turretTimers.length; i++) {
+      if (turretTimers[i] != null) {
+        turretTimers[i].restart();
+      }
     }
     
   }

@@ -32,7 +32,7 @@ class Selector {
   // submethod to make above switch statement non-repetetive
   void cycleTurret(int turretIndex, ArrayList<BulletDefinition> bulletSelections) {
     player.selectedBulletType[turretIndex] = bulletSelections.get(currentIndex);
-    player.turretTimers.set(turretIndex, new Timer(player.selectedBulletType[turretIndex].rate));
+    player.turretTimers[turretIndex] = new Timer(player.selectedBulletType[turretIndex].rate);
     selectorText = bulletSelections.get(currentIndex).text;   
   }
   

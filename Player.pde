@@ -30,6 +30,7 @@ class Player {
   // these can go as high as 2, each upgrade raises them by maybe a tenth?
   float bulletPowerMultiplier = 1;
   float bulletSizeMultiplier = 1;
+  float bulletRateMultiplier = 1;
   float droneSizeMultiplier = 1;
   float freezeTimeMultiplier = 1;
   
@@ -87,6 +88,7 @@ class Player {
     
     bulletPowerMultiplier = file.bulletPowerMultiplier;
     bulletSizeMultiplier = file.bulletSizeMultiplier;
+    bulletRateMultiplier = file.bulletRateMultiplier;
     droneSizeMultiplier = file.droneSizeMultiplier;
     freezeTimeMultiplier = file.freezeTimeMultiplier;
     
@@ -115,7 +117,7 @@ class Player {
     
     for(int i = 0; i < selectedBulletType.length; i++){
        if (selectedBulletType[i] != null) {
-         if(turretTimers[i].check()) {
+         if(turretTimers[i].check(bulletRateMultiplier)) {
             bullets.addBullet(turretAngle[i], turretX[i], turretY[i], selectedBulletType[i]);                 
          }
        }      

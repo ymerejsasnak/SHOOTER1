@@ -9,21 +9,14 @@ shop doesn't reflect loaded game (ie, shows unlocked stuff as still purchasable)
 
 NEW STUFF -
 
--put enemy spawning back to random rather than sequential?
-
- -more carrier types
+- set it so you restart level at 1/2 danger level you died at (or make it an option to set danger level up to highest???)
 
 - cleardata method in fileIO? (for if player loads game, then exits to title and chooses new game)
-
--add bullet speed upgrade
-
--drone speed upgrade? more hp or power upgrades??
 
  -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
 
  -keep working on game balance/level definitions/power levels/etc
- !!- fewer levels (say 5ish?) so can better balance difficulty curve, and make them more interesting/unique in themselves
- (and then, given this, make danger level goal higher, and adjust things accordingly)
+  (given new level structure, make danger level goal higher, and adjust things accordingly?)
  
  
  GAME POLISH AND 'JUICE":

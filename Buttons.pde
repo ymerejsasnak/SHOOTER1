@@ -55,8 +55,9 @@ class Buttons {
     shopButtons.add(new ShopButton(ButtonID.MAX_HP, "MAX HP x2", width * 1/9, height * 5/6, 15000));
     shopButtons.add(new ShopButton(ButtonID.BULLET_POWER, "POWER x2", width * 2/9, height * 5/6, 15000));
     shopButtons.add(new ShopButton(ButtonID.BULLET_SIZE, "BULLET SIZE x2", width * 3/9, height * 5/6, 5000));
-    shopButtons.add(new ShopButton(ButtonID.DRONE_SIZE, "DRONE SIZE x2", width * 4/9, height * 5/6, 10000));
-    shopButtons.add(new ShopButton(ButtonID.FREEZE_TIME, "FREEZE TIME x2", width * 5/9, height * 5/6, 10000));
+    shopButtons.add(new ShopButton(ButtonID.BULLET_RATE, "FIRE RATE x2", width * 4/9, height * 5/6, 10000));
+    shopButtons.add(new ShopButton(ButtonID.DRONE_SIZE, "DRONE SIZE x2", width * 5/9, height * 5/6, 10000));
+    shopButtons.add(new ShopButton(ButtonID.FREEZE_TIME, "FREEZE TIME x2", width * 6/9, height * 5/6, 10000));
     
     shopExitButton = new Button(ButtonID.RETURN_TO_SELECT, "BACK", width * 8/9, height * 8/9);
     
@@ -222,6 +223,9 @@ class Buttons {
           break;
         case BULLET_SIZE:
           player.bulletSizeMultiplier = 2;
+          break;
+        case BULLET_RATE:
+          player.bulletRateMultiplier = 2;
           break;
         case DRONE_SIZE:
           player.droneSizeMultiplier = 2;

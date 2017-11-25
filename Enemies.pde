@@ -83,9 +83,9 @@ class Enemies {
     // generate new enemy if enough time has passed and if max number is not reached 
     if (enemies.size() < maxEnemies && spawnTimer.check()) {  
       
-      // spawn enemies in order listed in definition by incrementing index      
-      EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[spawnIndex];
-      spawnIndex = (spawnIndex + 1) % game.currentLevelDefinition.spawnableEnemies.length;
+      // randomly choose enemy from level list to spawn
+      int choice1 = (int) random(0, game.currentLevelDefinition.spawnableEnemies.length);
+      EnemyDefinition enemyToSpawn = game.currentLevelDefinition.spawnableEnemies[choice1];
       
       // randomly choose between the top half of sides or top of screen to generate enemy (off screen)
       int choice2 = (int) random(0, 4);

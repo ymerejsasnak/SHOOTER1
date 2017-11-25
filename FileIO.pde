@@ -17,6 +17,7 @@ class FileIO {
   
   float bulletPowerMultiplier;
   float bulletSizeMultiplier;
+  float bulletRateMultiplier;
   float droneSizeMultiplier;
   float freezeTimeMultiplier;
   
@@ -51,8 +52,9 @@ class FileIO {
     String[] multipliers = data[4].split(",");
     bulletPowerMultiplier = float(multipliers[0]);
     bulletSizeMultiplier = float(multipliers[1]);
-    droneSizeMultiplier = float(multipliers[2]);
-    freezeTimeMultiplier = float(multipliers[3]);
+    bulletRateMultiplier = float(multipliers[2]);
+    droneSizeMultiplier = float(multipliers[3]);
+    freezeTimeMultiplier = float(multipliers[4]);
     
     String[] highScoreData = data[5].split(",");
     for (int i = 0; i < highScoreData.length - 1; i++) {
@@ -93,7 +95,7 @@ class FileIO {
     drones = drones.substring(0, drones.length() - 1);
     
     multipliers = player.bulletPowerMultiplier + "," + player.bulletSizeMultiplier + "," +
-                  player.droneSizeMultiplier + "," + player.freezeTimeMultiplier;
+                  player.bulletRateMultiplier + "," + player.droneSizeMultiplier + "," + player.freezeTimeMultiplier;
 
     for (int i = 0; i < Level.values().length; i++) {
       highScores += player.highScores[i] + ",";
@@ -119,6 +121,6 @@ legend for how values are stored:
  extra turrets unlocked (as 0 or 1, must list both) (main is ALWAYS unlocked) 
  bullettypes unlocked (0 or 1 for each beyond basic, indexes in enum order)
  drone types unlocked (0 or 1 for each again)
- power mult, bSize mult, droneSize mult, freeze time mult, (default is 1.00 for each up to max of 2.00)
+ power mult, bSize mult, bulletSpeed mult, droneSize mult, freeze time mult, (default is 1.00 for each up to max of 2.00)
  high score each level (default is 0 of course)
  */

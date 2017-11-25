@@ -22,6 +22,16 @@ class Timer {
     }
   }
   
+  // separate method for turrets to adjust for rate multiplier
+  boolean check(float bulletRateMultiplier) {
+    if (millis() - timerStart >= waitTime / bulletRateMultiplier){
+      timerStart = millis();
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   // need to be able to restart already loaded timers when restarting the level
   void restart() {
     timerStart = millis();

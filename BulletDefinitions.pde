@@ -18,7 +18,7 @@ enum BulletDefinition {
   
   FREEZE (     "FREEZE",    BulletType.FREEZE,   10,   300,     0,   200),
   DRAIN  ( "DRAIN SHOT",     BulletType.DRAIN,    6,   200,     1,   400),   
-  SPREAD ("SPREAD SHOT",    BulletType.SPREAD,    6,   200,     1,   300),                                              
+  SPREAD ("SPREAD SHOT",    BulletType.SPREAD,    3,   200,    .5,   300),                                              
  
   ;
   

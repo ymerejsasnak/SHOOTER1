@@ -1,61 +1,49 @@
 enum Level {
   //      text    spawnwait   max#          
   //                                      enemy list
-  ONE  ( "Level 1",   500,    2, 
+  ONE  ( "Level 1",   1000,    3, 
         new EnemyDefinition[] {EnemyDefinition.EASY,
-                               EnemyDefinition.REGULAR}),
-        
-  TWO  ( "Level 2",   1000,    2, 
-        new EnemyDefinition[] {EnemyDefinition.REGULAR,
-                               EnemyDefinition.CIRCLES1}),
-  
-  THREE( "Level 3",   1000,    2,
-        new EnemyDefinition[] {EnemyDefinition.REGULAR,
                                EnemyDefinition.REGULAR,
-                               EnemyDefinition.REGULAR,
-                               EnemyDefinition.REGULAR,
-                               EnemyDefinition.BIGGIE,
-                               EnemyDefinition.RANDOM1,
+                               EnemyDefinition.BACKFORTH1,
                                EnemyDefinition.RANDOM1}),
-                               
-  FOUR ( "Level 4",    100,    25, 
-        new EnemyDefinition[] {EnemyDefinition.SWARMER}),
-                               
-  FIVE ( "Level 5",    800,    3, 
-        new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
-                               EnemyDefinition.OSCIL2, 
+        
+  TWO  ( "Level 2",   900,    3, 
+        new EnemyDefinition[] {EnemyDefinition.BIGGIE,
+                               EnemyDefinition.CIRCLES1,
                                EnemyDefinition.BIGRAND,
-                               EnemyDefinition.BACKFORTH1}),
-                               
-  SIX  ( "Level 6",   100,    3, 
-        new EnemyDefinition[] {EnemyDefinition.HUGE,
-                               EnemyDefinition.BIGGEROID,
-                               EnemyDefinition.BIGGIE,
+                               EnemyDefinition.RANDOM2}),
+  
+  THREE( "Level 3",   100,    25,
+        new EnemyDefinition[] {EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.SWARMER,
+                               EnemyDefinition.BACKFORTH1,
                                EnemyDefinition.ASTEROID}),
                                
-  SEVEN( "Level 7",    100,    3, 
-        new EnemyDefinition[] {EnemyDefinition.RANDOM2,
-                               EnemyDefinition.FAST,
-                               EnemyDefinition.FAST,
-                               EnemyDefinition.FAST}),
+  FOUR ( "Level 4",    800,    5, 
+        new EnemyDefinition[] {EnemyDefinition.CIRCLES2,
+                               EnemyDefinition.OSCIL1,
+                               EnemyDefinition.TELEPORT,
+                               EnemyDefinition.RANDOM2}),
                                
-  EIGHT( "Level 8",    200,    3, 
-        new EnemyDefinition[] {EnemyDefinition.FAST,
-                               EnemyDefinition.ASTEROID,
+  FIVE ( "Level 5",    600,    5, 
+        new EnemyDefinition[] {EnemyDefinition.BIGGEROID,
+                               EnemyDefinition.HUGE, 
+                               EnemyDefinition.FAST,
+                               EnemyDefinition.FAST,
+                               EnemyDefinition.FAST,
                                EnemyDefinition.OSCIL2}),
                                
-  NINE ( "Level 9",    500,    5, 
-        new EnemyDefinition[] {EnemyDefinition.TELEPORT,
-                               EnemyDefinition.TELEPORT,
-                               EnemyDefinition.HUGE,
-                               EnemyDefinition.REGULAR_CARRIER,
-                               EnemyDefinition.FAST}),
-        
-  TEN  ("Level 10",   1000,    2, 
+  SIX  ( "Level 6",   700,    3, 
         new EnemyDefinition[] {EnemyDefinition.REGULAR_CARRIER,
                                EnemyDefinition.CIRCLES_CARRIER,
                                EnemyDefinition.OSCIL_CARRIER,
                                EnemyDefinition.CARRIER_CARRIER}),
+                               
   
   ;
     

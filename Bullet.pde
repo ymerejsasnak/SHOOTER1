@@ -83,8 +83,9 @@ class GasBullet extends Bullet {
  }
  
  float damageEnemy() {
+   float damage = super.damageEnemy() * deltaTime.getDelta();
    dead = false; // gas bullet doesn't 'die' upon hitting enemy
-   return super.damageEnemy() * deltaTime.getDelta();
+   return damage;
  }
  
 }

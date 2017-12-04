@@ -1,7 +1,18 @@
 /*
 ====NEXT TO DO====
 
+Enemy Tab, line 115 -- began idea of using perlin noise to make enemies wiggle, but needs work
+
+notes from quick playthrough: -danger level should be much higher to unlock next level
+                              -random enemies should be removed if they go off screen (because they can get behind player - no fair)
+                              -level 6 - cut carrier of carriers, add something non-carrier for variety
+                              -level 7 (new) - carrier of carriers, carrier of asteroids (new), and some others (fast? swarm? oscil/circle/rand2?)
+                              - maybe level 8 (new) - MASSIVE enemy (super slow, super high hp), w/ carriers/swarm/asteroids? to distract-
+                              - maybe change way levels are coded so EACH TYPE of enemy in level list has a max (given by appearances in the list)
+                              - change hp to be one-hit death with 'shield' upgrade(s) to allow a hit
 BUGS - 
+
+teleporters still teleport when frozen
 
 shop doesn't reflect loaded game (ie, shows unlocked stuff as still purchasable)
 
@@ -9,11 +20,7 @@ shop doesn't reflect loaded game (ie, shows unlocked stuff as still purchasable)
 
 NEW STUFF -
 
-- set it so you restart level at 1/2 danger level you died at (or make it an option to set danger level up to highest???)
-
 - cleardata method in fileIO? (for if player loads game, then exits to title and chooses new game)
-
- -?enemy hp and attack based partially off level (and only a little on 'danger level', danger level is mostly speedup)
 
  -keep working on game balance/level definitions/power levels/etc
   (given new level structure, make danger level goal higher, and adjust things accordingly?)
@@ -25,6 +32,7 @@ NEW STUFF -
  -enemy simple 'hit by bullet' animation
  -enemy size pulsing
  -enemy trail? (ie save list of previous positions to draw fading line)
+ -better teleporter 'teleport line'
  -bullet trails?
   -basic/simple death animation (at least for enemies, probably also player)
  -particle effects (class) for hit enemy and death animations

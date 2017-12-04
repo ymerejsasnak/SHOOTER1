@@ -84,11 +84,11 @@ final int VAPORIZE_DAMAGE = 9999; // basically autokill, but simpler to code if 
 // ENEMY CONSTANTS
 final int ENEMY_HP_SCALE = 5; // divide danger level by this value then add to base (ie every X levels, hp + 1)
 final int MAX_ENEMY_HPUP = 10;
-final int ENEMY_SPEED_SCALE = 10; // multiply danger level by this, add to base speed (ie add X to speed per level)
-final int MAX_ENEMY_SPEEDUP = 200;
+final int ENEMY_SPEED_SCALE = 5; // multiply danger level by this, add to base speed (ie add X to speed per level)
+final int MAX_ENEMY_SPEEDUP = 250;
 //final int ENEMY_POWER_SCALE = 10; // divide danger level by this value then add to base (ie every X levels, power + 1)
 
-final int CHANCE_TARGET_PLAYER = 30; // the percent chance a random type will actually move toward the player
+final int CHANCE_TARGET_PLAYER = 50; // the percent chance a random type will actually move toward the player
 
 final int TELEPORTER_DMZ = 200; // number of 'safe zone' pixels around player where teleporter will not teleport to
 final int TELEPORTER_SPEED_INCREASE = 10; // pps the speed increases after each teleport
@@ -97,4 +97,4 @@ final int ARC_LENGTH = 200; //how far oscil travels back and forth (maybe not ma
 
 
 // MISC
-final int DANGER_LEVEL_UNLOCK = 10; // reach this 'danger level' in each level to unlock the next one (5 is temp for testing)
+final int DANGER_LEVEL_UNLOCK = 25; // reach this 'danger level' in each level to unlock the next one (5 is temp for testing)

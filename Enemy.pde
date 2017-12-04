@@ -24,6 +24,7 @@ class Enemy {
   boolean frozen = false;
   Timer freezeTimer;  
   
+  
   Enemy(float x, float y, EnemyDefinition enemyDef, int levelProgression) {
     
     this.x = x;
@@ -111,7 +112,7 @@ class Enemy {
     fill(fill, ENEMY_ALPHA);
     strokeWeight(outerWeight);
     stroke(outerStroke);
-    ellipse(x, y, enemySize, enemySize);
+    ellipse(x, y, enemySize + noise(x * .03, y * .03) * 20 - 10, enemySize + noise(x * .03 + 1000, y *.03 + 1000) * 20 - 10);
     
     // inner hp indicator circle
     strokeWeight(innerWeight * 2);
@@ -125,6 +126,8 @@ class Enemy {
       noStroke();
       ellipse(x, y, enemySize, enemySize);
     }
+    
+    
   }
 }
 
